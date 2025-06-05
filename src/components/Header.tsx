@@ -7,8 +7,12 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-blue-900">Hello Wash</h1>
-            <span className="ml-2 text-sm text-gray-600">Baie de Somme</span>
+            <img 
+              src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
+              alt="Hello Wash Logo" 
+              className="h-12 w-auto"
+            />
+            <span className="ml-3 text-sm text-gray-600">Baie de Somme</span>
           </div>
           
           <nav className="hidden md:flex space-x-8">
