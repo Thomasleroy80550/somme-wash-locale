@@ -239,41 +239,112 @@ const Dashboard = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="bg-gray-100 h-48 rounded-lg relative overflow-hidden border-2">
-                {/* Simulation de rues */}
+              <div className="bg-gradient-to-br from-blue-50 to-green-50 h-48 rounded-lg relative overflow-hidden border-2">
+                {/* Fond de carte avec quartiers */}
                 <div className="absolute inset-0">
-                  <div className="absolute top-1/3 left-0 right-0 h-0.5 bg-gray-300"></div>
-                  <div className="absolute top-2/3 left-0 right-0 h-0.5 bg-gray-300"></div>
-                  <div className="absolute left-1/4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
-                  <div className="absolute left-3/4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                  {/* Zone résidentielle */}
+                  <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-br from-green-100 to-green-50 opacity-60"></div>
+                  {/* Zone commerciale */}
+                  <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-bl from-blue-100 to-blue-50 opacity-60"></div>
+                  {/* Zone eau/rivière */}
+                  <div className="absolute bottom-0 left-1/4 w-1/2 h-6 bg-blue-200 opacity-80 rounded-full"></div>
+                </div>
+                
+                {/* Réseau de rues réaliste */}
+                <div className="absolute inset-0">
+                  {/* Routes principales (horizontales) */}
+                  <div className="absolute top-12 left-0 right-0 h-1 bg-gray-400 shadow-sm"></div>
+                  <div className="absolute top-20 left-0 right-0 h-1 bg-gray-400 shadow-sm"></div>
+                  <div className="absolute top-32 left-0 right-0 h-1 bg-gray-400 shadow-sm"></div>
+                  
+                  {/* Routes principales (verticales) */}
+                  <div className="absolute left-16 top-0 bottom-0 w-1 bg-gray-400 shadow-sm"></div>
+                  <div className="absolute left-32 top-0 bottom-0 w-1 bg-gray-400 shadow-sm"></div>
+                  <div className="absolute left-48 top-0 bottom-0 w-1 bg-gray-400 shadow-sm"></div>
+                  <div className="absolute right-16 top-0 bottom-0 w-1 bg-gray-400 shadow-sm"></div>
+                  
+                  {/* Routes secondaires (plus fines) */}
+                  <div className="absolute top-8 left-0 right-0 h-0.5 bg-gray-300"></div>
+                  <div className="absolute top-24 left-0 right-0 h-0.5 bg-gray-300"></div>
+                  <div className="absolute top-36 left-0 right-0 h-0.5 bg-gray-300"></div>
+                  
+                  <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                  <div className="absolute left-24 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                  <div className="absolute left-40 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                  <div className="absolute right-8 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                  <div className="absolute right-24 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                  
+                  {/* Intersections (points de jonction) */}
+                  <div className="absolute top-11.5 left-15.5 w-2 h-2 bg-gray-500 rounded-full"></div>
+                  <div className="absolute top-11.5 left-31.5 w-2 h-2 bg-gray-500 rounded-full"></div>
+                  <div className="absolute top-11.5 left-47.5 w-2 h-2 bg-gray-500 rounded-full"></div>
+                  <div className="absolute top-19.5 left-15.5 w-2 h-2 bg-gray-500 rounded-full"></div>
+                  <div className="absolute top-19.5 left-31.5 w-2 h-2 bg-gray-500 rounded-full"></div>
+                  <div className="absolute top-31.5 left-15.5 w-2 h-2 bg-gray-500 rounded-full"></div>
+                  
+                  {/* Route courbe (contournement) */}
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                    <path 
+                      d="M 200,20 Q 220,40 200,60 Q 180,80 200,100" 
+                      stroke="#9CA3AF" 
+                      strokeWidth="2" 
+                      fill="none"
+                    />
+                  </svg>
+                </div>
+                
+                {/* Noms de rues */}
+                <div className="absolute inset-0 text-xs text-gray-600 font-medium">
+                  <span className="absolute top-10 left-2">Rue du Port</span>
+                  <span className="absolute top-18 left-2">Avenue de la Baie</span>
+                  <span className="absolute top-30 left-2">Bd des Gîtes</span>
+                  <span className="absolute top-2 left-14 transform -rotate-90 origin-center">Rue Victor Hugo</span>
+                  <span className="absolute top-2 left-30 transform -rotate-90 origin-center">Rue de la Paix</span>
+                  <span className="absolute top-2 right-14 transform -rotate-90 origin-center">Rue des Roses</span>
+                </div>
+                
+                {/* Bâtiments/POI */}
+                <div className="absolute inset-0">
+                  {/* Mairie */}
+                  <div className="absolute top-14 left-18 w-4 h-3 bg-red-300 border border-red-400 rounded-sm"></div>
+                  <span className="absolute top-18 left-17 text-xs text-red-700">Mairie</span>
+                  
+                  {/* Parc */}
+                  <div className="absolute top-26 left-34 w-6 h-4 bg-green-300 border border-green-400 rounded-full"></div>
+                  <span className="absolute top-32 left-34 text-xs text-green-700">Parc</span>
+                  
+                  {/* Centre commercial */}
+                  <div className="absolute top-6 right-20 w-5 h-4 bg-blue-300 border border-blue-400 rounded-sm"></div>
+                  <span className="absolute top-11 right-22 text-xs text-blue-700">Centre</span>
                 </div>
                 
                 {/* Itinéraire tracé */}
                 <svg className="absolute inset-0 w-full h-full">
                   <path 
-                    d="M 10,120 Q 80,100 150,120 T 290,120" 
+                    d="M 10,120 L 60,120 L 130,120 L 130,80 L 200,80 L 240,80 L 290,80" 
                     stroke="#145587" 
                     strokeWidth="3" 
                     fill="none"
                     strokeDasharray="5,5"
+                    className="animate-pulse"
                   />
                 </svg>
                 
                 {/* Point de départ */}
                 <div className="absolute left-2 top-1/2 transform -translate-y-1/2">
                   <div className="w-3 h-3 bg-green-500 rounded-full border-2 border-white shadow-lg"></div>
-                  <span className="absolute top-4 left-0 text-xs text-gray-600 whitespace-nowrap">Départ</span>
+                  <span className="absolute top-4 left-0 text-xs text-gray-700 whitespace-nowrap font-medium">Laverie</span>
                 </div>
                 
                 {/* Point d'arrivée */}
-                <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                <div className="absolute right-2 top-1/3 transform -translate-y-1/2">
                   <div className="w-3 h-3 bg-red-500 rounded-full border-2 border-white shadow-lg"></div>
-                  <span className="absolute top-4 right-0 text-xs text-gray-600 whitespace-nowrap">Gîte</span>
+                  <span className="absolute top-4 right-0 text-xs text-gray-700 whitespace-nowrap font-medium">Gîte Les Roses</span>
                 </div>
                 
                 {/* Livreur en mouvement */}
                 <div 
-                  className="absolute w-6 h-6 bg-[#145587] rounded-full transform -translate-x-1/2 -translate-y-1/2 transition-all duration-2000 ease-linear flex items-center justify-center shadow-lg"
+                  className="absolute w-7 h-7 bg-[#145587] rounded-full transform -translate-x-1/2 -translate-y-1/2 transition-all duration-2000 ease-linear flex items-center justify-center shadow-lg border-2 border-white z-10"
                   style={{ 
                     left: `${driverPosition.x}%`, 
                     top: `${driverPosition.y}%` 
@@ -282,9 +353,9 @@ const Dashboard = () => {
                   <Truck className="h-3 w-3 text-white" />
                 </div>
                 
-                {/* Zones d'intérêt */}
-                <div className="absolute top-4 left-4 text-xs text-gray-600">Le Crotoy</div>
-                <div className="absolute bottom-4 right-4 text-xs text-gray-600">Gîte Les Roses</div>
+                {/* Zones d'intérêt avec labels */}
+                <div className="absolute top-2 left-2 text-xs text-gray-700 font-bold bg-white/80 px-1 rounded">Le Crotoy</div>
+                <div className="absolute bottom-2 right-2 text-xs text-gray-700 font-bold bg-white/80 px-1 rounded">Saint-Valery</div>
               </div>
               
               <div className="space-y-3">
