@@ -125,15 +125,18 @@ const Dashboard = () => {
     }
   ];
 
-  // Réservations étendues pour le calendrier
-  const extendedReservations = [
-    { date: "2024-06-06", guest: "Famille Martin", property: "Gîte Les Roses", status: "occupied", revenue: 120 },
-    { date: "2024-06-07", guest: "Famille Martin", property: "Gîte Les Roses", status: "occupied", revenue: 120 },
-    { date: "2024-06-08", guest: "Couple Dubois", property: "Villa Océan", status: "checkout", revenue: 150 },
-    { date: "2024-06-09", guest: "Groupe d'amis", property: "Maison du Port", status: "checkin", revenue: 95 },
-    { date: "2024-06-10", guest: "Groupe d'amis", property: "Maison du Port", status: "occupied", revenue: 95 },
-    { date: "2024-06-11", guest: "Couple Leroy", property: "Villa Océan", status: "checkin", revenue: 150 },
-    { date: "2024-06-12", guest: "Famille Rousseau", property: "Cottage Baie", status: "checkin", revenue: 180 }
+  // Réservations Airbnb étendues avec synchronisation calendrier
+  const airbnbReservations = [
+    { date: "2024-06-06", guest: "Famille Martin", property: "Gîte Les Roses", status: "checkin", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "Avant 15h" },
+    { date: "2024-06-07", guest: "Famille Martin", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2024-06-08", guest: "Famille Martin", property: "Gîte Les Roses", status: "checkout", platform: "Airbnb", linentStatus: "à-livrer", collectTime: "12h-14h" },
+    { date: "2024-06-09", guest: "Couple Dubois", property: "Villa Océan", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 16h" },
+    { date: "2024-06-10", guest: "Couple Dubois", property: "Villa Océan", status: "occupied", platform: "Airbnb", linentStatus: "propre", collectTime: null },
+    { date: "2024-06-11", guest: "Couple Dubois", property: "Villa Océan", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "11h-13h" },
+    { date: "2024-06-12", guest: "Groupe d'amis", property: "Maison du Port", status: "checkin", platform: "Booking.com", linentStatus: "à-livrer", collectTime: "14h-16h" },
+    { date: "2024-06-13", guest: "Groupe d'amis", property: "Maison du Port", status: "occupied", platform: "Booking.com", linentStatus: "propre", collectTime: null },
+    { date: "2024-06-14", guest: "Famille Rousseau", property: "Cottage Baie", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 17h" },
+    { date: "2024-06-15", guest: "Famille Rousseau", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "propre", collectTime: null }
   ];
 
   const mockOrders = [
@@ -168,12 +171,12 @@ const Dashboard = () => {
 
   const hasReservation = (date: Date) => {
     const dateStr = date.toISOString().split('T')[0];
-    return extendedReservations.some(res => res.date === dateStr);
+    return airbnbReservations.some(res => res.date === dateStr);
   };
 
   const getReservationsForDate = (date: Date) => {
     const dateStr = date.toISOString().split('T')[0];
-    return extendedReservations.filter(res => res.date === dateStr);
+    return airbnbReservations.filter(res => res.date === dateStr);
   };
 
   const getLinenStatusColor = (status: string) => {
@@ -181,6 +184,8 @@ const Dashboard = () => {
       case 'propre': return 'bg-green-100 text-green-800';
       case 'en-cours': return 'bg-blue-100 text-blue-800';
       case 'a-collecter': return 'bg-orange-100 text-orange-800';
+      case 'livré': return 'bg-purple-100 text-purple-800';
+      case 'à-livrer': return 'bg-yellow-100 text-yellow-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -190,7 +195,18 @@ const Dashboard = () => {
       case 'propre': return 'Propre';
       case 'en-cours': return 'En cours';
       case 'a-collecter': return 'À collecter';
+      case 'à-collecter': return 'À collecter';
+      case 'livré': return 'Livré';
+      case 'à-livrer': return 'À livrer';
       default: return status;
+    }
+  };
+
+  const getPlatformBadgeColor = (platform: string) => {
+    switch (platform) {
+      case 'Airbnb': return 'bg-red-100 text-red-800';
+      case 'Booking.com': return 'bg-blue-100 text-blue-800';
+      default: return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -716,17 +732,25 @@ const Dashboard = () => {
             </div>
           </TabsContent>
 
-          {/* Section Calendrier avancé */}
+          {/* Section Calendrier avec réservations Airbnb */}
           <TabsContent value="calendar">
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold">Planning des réservations</h2>
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold">Planning des réservations</h2>
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <span>Synchronisé avec Airbnb</span>
+                  <div className="w-3 h-3 bg-blue-500 rounded-full ml-4"></div>
+                  <span>Booking.com</span>
+                </div>
+              </div>
               
               <div className="grid lg:grid-cols-2 gap-8">
                 <Card className="bg-white">
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <Calendar className="h-6 w-6 mr-2 text-[#145587]" />
-                      Calendrier général
+                      Calendrier synchronisé
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -748,22 +772,40 @@ const Dashboard = () => {
                         <h4 className="font-semibold mb-3">
                           Réservations - {selectedDate.toLocaleDateString('fr-FR')}
                         </h4>
-                        <div className="space-y-2">
+                        <div className="space-y-3">
                           {getReservationsForDate(selectedDate).map((reservation, index) => (
-                            <div key={index} className="p-3 bg-gray-50 rounded-lg border">
-                              <div className="flex justify-between items-start">
+                            <div key={index} className="p-4 bg-gray-50 rounded-lg border">
+                              <div className="flex justify-between items-start mb-2">
                                 <div>
                                   <p className="font-medium text-gray-900">{reservation.property}</p>
                                   <p className="text-sm text-gray-600">{reservation.guest}</p>
-                                  <p className="text-sm text-green-600 font-medium">{reservation.revenue}€</p>
                                 </div>
-                                <Badge variant={
-                                  reservation.status === 'checkin' ? 'default' :
-                                  reservation.status === 'checkout' ? 'secondary' : 'outline'
-                                }>
-                                  {reservation.status === 'checkin' ? 'Arrivée' :
-                                   reservation.status === 'checkout' ? 'Départ' : 'Occupé'}
-                                </Badge>
+                                <div className="flex gap-2">
+                                  <Badge className={getPlatformBadgeColor(reservation.platform)}>
+                                    {reservation.platform}
+                                  </Badge>
+                                  <Badge variant={
+                                    reservation.status === 'checkin' ? 'default' :
+                                    reservation.status === 'checkout' ? 'secondary' : 'outline'
+                                  }>
+                                    {reservation.status === 'checkin' ? 'Arrivée' :
+                                     reservation.status === 'checkout' ? 'Départ' : 'Occupé'}
+                                  </Badge>
+                                </div>
+                              </div>
+                              
+                              <div className="flex justify-between items-center">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-sm text-gray-600">Linge:</span>
+                                  <Badge className={getLinenStatusColor(reservation.linentStatus)}>
+                                    {getLinenStatusText(reservation.linentStatus)}
+                                  </Badge>
+                                </div>
+                                {reservation.collectTime && (
+                                  <span className="text-sm text-blue-600 font-medium">
+                                    📅 {reservation.collectTime}
+                                  </span>
+                                )}
                               </div>
                             </div>
                           )) || (
@@ -782,36 +824,51 @@ const Dashboard = () => {
                   <CardContent>
                     <div className="space-y-4">
                       <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                        <h4 className="font-medium text-blue-800 mb-2">Aujourd'hui</h4>
+                        <h4 className="font-medium text-blue-800 mb-2 flex items-center">
+                          <Clock className="h-4 w-4 mr-2" />
+                          Aujourd'hui
+                        </h4>
                         <div className="space-y-2">
                           <div className="flex justify-between text-sm">
-                            <span>Collecte - Gîte Les Roses</span>
+                            <span>Collecte - Gîte Les Roses (Airbnb)</span>
                             <span className="text-blue-600">10h-12h</span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span>Livraison - Villa Océan</span>
+                            <span>Livraison - Villa Océan (Airbnb)</span>
                             <span className="text-blue-600">16h-18h</span>
                           </div>
                         </div>
                       </div>
                       
                       <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                        <h4 className="font-medium text-green-800 mb-2">Demain</h4>
+                        <h4 className="font-medium text-green-800 mb-2 flex items-center">
+                          <Calendar className="h-4 w-4 mr-2" />
+                          Demain
+                        </h4>
                         <div className="space-y-2">
                           <div className="flex justify-between text-sm">
-                            <span>Collecte - Maison du Port</span>
+                            <span>Collecte - Maison du Port (Booking)</span>
                             <span className="text-green-600">09h-11h</span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span>Livraison - Cottage Baie</span>
+                            <span>Livraison - Cottage Baie (Airbnb)</span>
                             <span className="text-green-600">14h-16h</span>
                           </div>
                         </div>
                       </div>
 
+                      <div className="p-4 bg-orange-50 rounded-lg border border-orange-200">
+                        <h4 className="font-medium text-orange-800 mb-2">Actions automatiques</h4>
+                        <div className="space-y-2 text-sm text-orange-700">
+                          <p>✅ Collecte automatique programmée 2h avant chaque arrivée</p>
+                          <p>✅ Livraison automatique 1h avant check-in</p>
+                          <p>✅ Notifications envoyées aux voyageurs</p>
+                        </div>
+                      </div>
+
                       <Button className="w-full">
-                        <Calendar className="h-4 w-4 mr-2" />
-                        Programmer une collecte
+                        <Package className="h-4 w-4 mr-2" />
+                        Programmer une collecte manuelle
                       </Button>
                     </div>
                   </CardContent>
