@@ -1,31 +1,55 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import MemberRegistration from '@/components/MemberRegistration';
+import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/integrations/supabase/client';
+import AuthGuard from '@/components/AuthGuard';
+import MemberRegistrationSecure from '@/components/MemberRegistrationSecure';
 import MemberDashboard from '@/components/MemberDashboard';
-import { MemberProfile } from '@/types/member';
+import { Database } from '@/types/database';
+
+type MemberProfile = Database['public']['Tables']['member_profiles']['Row'] & {
+  profiles: Database['public']['Tables']['profiles']['Row'];
+};
 
 const Member = () => {
+  const { user, signOut } = useAuth();
   const [memberProfile, setMemberProfile] = useState<MemberProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Charger le profil depuis localStorage
-    const savedProfile = localStorage.getItem('helloWashMemberProfile');
-    if (savedProfile) {
-      try {
-        setMemberProfile(JSON.parse(savedProfile));
-      } catch (error) {
-        console.error('Erreur lors du chargement du profil:', error);
-      }
+    if (user) {
+      loadMemberProfile();
     }
-    setIsLoading(false);
-  }, []);
+  }, [user]);
 
-  const handleRegistrationSuccess = (profile: MemberProfile) => {
-    setMemberProfile(profile);
-    localStorage.setItem('helloWashMemberProfile', JSON.stringify(profile));
+  const loadMemberProfile = async () => {
+    if (!user) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('member_profiles')
+        .select(`
+          *,
+          profiles!inner (*)
+        `)
+        .eq('user_id', user.id)
+        .single();
+
+      if (error && error.code !== 'PGRST116') {
+        throw error;
+      }
+
+      setMemberProfile(data);
+    } catch (error: any) {
+      console.error('Erreur lors du chargement du profil:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRegistrationSuccess = () => {
+    loadMemberProfile();
   };
 
   if (isLoading) {
@@ -40,56 +64,66 @@ const Member = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
-                alt="Hello Wash Logo" 
-                className="h-12 w-auto"
-              />
-              <span className="ml-3 text-sm text-gray-600">Espace Membre</span>
+    <AuthGuard>
+      <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white">
+        <header className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <img 
+                  src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
+                  alt="Hello Wash Logo" 
+                  className="h-12 w-auto"
+                />
+                <span className="ml-3 text-sm text-gray-600">Espace Membre</span>
+              </div>
+              <div className="flex items-center space-x-4">
+                <a href="/" className="text-[#145587] hover:text-[#145587]/80 transition-colors">
+                  ← Retour à l'accueil
+                </a>
+                <button 
+                  onClick={signOut}
+                  className="text-gray-600 hover:text-gray-800 transition-colors"
+                >
+                  Déconnexion
+                </button>
+              </div>
             </div>
-            <a href="/" className="text-[#145587] hover:text-[#145587]/80 transition-colors">
-              ← Retour à l'accueil
-            </a>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {!memberProfile ? (
-          <div>
-            <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                Rejoignez la Liste d'Attente
-              </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Soyez parmi les premiers à bénéficier des services Hello Wash dans la Baie de Somme
-              </p>
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {!memberProfile ? (
+            <div>
+              <div className="text-center mb-8">
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                  Rejoignez la Liste d'Attente
+                </h1>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Soyez parmi les premiers à bénéficier des services Hello Wash dans la Baie de Somme
+                </p>
+              </div>
+              <MemberRegistrationSecure onSuccess={handleRegistrationSuccess} />
             </div>
-            <MemberRegistration onSuccess={handleRegistrationSuccess} />
-          </div>
-        ) : (
-          <div>
-            <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                Bienvenue, {memberProfile.personalInfo.firstName} !
-              </h1>
-              <p className="text-xl text-gray-600">
-                Votre espace membre Hello Wash
-              </p>
+          ) : (
+            <div>
+              <div className="text-center mb-8">
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                  Bienvenue, {memberProfile.profiles.first_name} !
+                </h1>
+                <p className="text-xl text-gray-600">
+                  Votre espace membre Hello Wash
+                </p>
+              </div>
+              <MemberDashboard 
+                profile={memberProfile} 
+                onProfileUpdate={loadMemberProfile}
+              />
             </div>
-            <MemberDashboard 
-              profile={memberProfile} 
-              onProfileUpdate={handleRegistrationSuccess}
-            />
-          </div>
-        )}
-      </main>
-    </div>
+          )}
+        </main>
+      </div>
+    </AuthGuard>
   );
 };
 

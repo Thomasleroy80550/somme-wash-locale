@@ -1,7 +1,11 @@
 
 import { MapPin, Phone, Mail } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
+import { Button } from '@/components/ui/button';
 
 const Header = () => {
+  const { user, isAdmin } = useAuth();
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +22,9 @@ const Header = () => {
           <nav className="hidden md:flex space-x-8">
             <a href="#accueil" className="text-gray-700 hover:text-[#145587] transition-colors">Accueil</a>
             <a href="#services" className="text-gray-700 hover:text-[#145587] transition-colors">Services</a>
-            <a href="/dashboard" className="text-gray-700 hover:text-[#145587] transition-colors">Dashboard</a>
+            {user && isAdmin && (
+              <a href="/admin" className="text-gray-700 hover:text-[#145587] transition-colors">Admin</a>
+            )}
             <a href="#apropos" className="text-gray-700 hover:text-[#145587] transition-colors">À propos</a>
             <a href="#contact" className="text-gray-700 hover:text-[#145587] transition-colors">Contact</a>
           </nav>
@@ -28,12 +34,27 @@ const Header = () => {
               <MapPin className="h-4 w-4 mr-1" />
               <span>Baie de Somme</span>
             </div>
-            <a
-              href="/member"
-              className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors mr-2"
-            >
-              Liste d'attente
-            </a>
+            
+            {user ? (
+              <div className="flex items-center space-x-2">
+                <a
+                  href="/member"
+                  className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+                >
+                  Mon espace
+                </a>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <a
+                  href="/auth"
+                  className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+                >
+                  Connexion
+                </a>
+              </div>
+            )}
+            
             <a
               href="tel:+33000000000"
               className="bg-[#145587] text-white px-4 py-2 rounded-lg hover:bg-[#145587]/90 transition-colors"
