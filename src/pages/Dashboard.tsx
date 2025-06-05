@@ -14,8 +14,8 @@ const Dashboard = () => {
   const [driverPosition, setDriverPosition] = useState({ x: 20, y: 50 });
   const [stats, setStats] = useState({
     orders: 34,
-    guests: 12,
-    revenue: 2450,
+    collections: 28,
+    totalBilled: 1240,
     properties: 5
   });
 
@@ -50,8 +50,8 @@ const Dashboard = () => {
       if (Math.random() < 0.03) {
         setStats(prev => ({
           orders: prev.orders + Math.floor(Math.random() * 2),
-          guests: prev.guests + Math.floor(Math.random() * 1),
-          revenue: prev.revenue + Math.floor(Math.random() * 50),
+          collections: prev.collections + Math.floor(Math.random() * 1),
+          totalBilled: prev.totalBilled + Math.floor(Math.random() * 50),
           properties: prev.properties
         }));
       }
@@ -62,11 +62,11 @@ const Dashboard = () => {
 
   // Mock data pour les nouvelles sections
   const properties = [
-    { id: 1, name: "Gîte Les Roses", address: "12 Rue des Fleurs, Le Crotoy", capacity: "6 personnes", status: "occupied", revenue: 850, bookings: 12 },
-    { id: 2, name: "Villa Océan", address: "45 Avenue de la Mer, Saint-Valery", capacity: "8 personnes", status: "available", revenue: 1200, bookings: 8 },
-    { id: 3, name: "Maison du Port", address: "23 Quai Maritime, Rue", capacity: "4 personnes", status: "cleaning", revenue: 650, bookings: 15 },
-    { id: 4, name: "Cottage Baie", address: "78 Chemin des Dunes, Fort-Mahon", capacity: "10 personnes", status: "occupied", revenue: 980, bookings: 6 },
-    { id: 5, name: "Studio Mer", address: "5 Place du Marché, Berck", capacity: "2 personnes", status: "available", revenue: 420, bookings: 20 }
+    { id: 1, name: "Gîte Les Roses", address: "12 Rue des Fleurs, Le Crotoy", capacity: "6 personnes", linentStatus: "propre", monthlyCost: 145, collectionsPerMonth: 8 },
+    { id: 2, name: "Villa Océan", address: "45 Avenue de la Mer, Saint-Valery", capacity: "8 personnes", linentStatus: "en-cours", monthlyCost: 220, collectionsPerMonth: 12 },
+    { id: 3, name: "Maison du Port", address: "23 Quai Maritime, Rue", capacity: "4 personnes", linentStatus: "a-collecter", monthlyCost: 95, collectionsPerMonth: 6 },
+    { id: 4, name: "Cottage Baie", address: "78 Chemin des Dunes, Fort-Mahon", capacity: "10 personnes", linentStatus: "propre", monthlyCost: 180, collectionsPerMonth: 10 },
+    { id: 5, name: "Studio Mer", address: "5 Place du Marché, Berck", capacity: "2 personnes", linentStatus: "en-cours", monthlyCost: 85, collectionsPerMonth: 4 }
   ];
 
   const invoices = [
@@ -176,20 +176,20 @@ const Dashboard = () => {
     return extendedReservations.filter(res => res.date === dateStr);
   };
 
-  const getStatusColor = (status: string) => {
+  const getLinenStatusColor = (status: string) => {
     switch (status) {
-      case 'occupied': return 'bg-red-100 text-red-800';
-      case 'available': return 'bg-green-100 text-green-800';
-      case 'cleaning': return 'bg-yellow-100 text-yellow-800';
+      case 'propre': return 'bg-green-100 text-green-800';
+      case 'en-cours': return 'bg-blue-100 text-blue-800';
+      case 'a-collecter': return 'bg-orange-100 text-orange-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
-  const getStatusText = (status: string) => {
+  const getLinenStatusText = (status: string) => {
     switch (status) {
-      case 'occupied': return 'Occupé';
-      case 'available': return 'Disponible';
-      case 'cleaning': return 'En nettoyage';
+      case 'propre': return 'Propre';
+      case 'en-cours': return 'En cours';
+      case 'a-collecter': return 'À collecter';
       default: return status;
     }
   };
@@ -282,10 +282,10 @@ const Dashboard = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-green-100">Clients actifs</p>
-                      <p className="text-3xl font-bold animate-pulse">{stats.guests}</p>
+                      <p className="text-green-100">Collectes ce mois</p>
+                      <p className="text-3xl font-bold animate-pulse">{stats.collections}</p>
                     </div>
-                    <User className="h-8 w-8 text-green-200" />
+                    <Truck className="h-8 w-8 text-green-200" />
                   </div>
                 </CardContent>
               </Card>
@@ -293,8 +293,8 @@ const Dashboard = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-purple-100">Revenus ce mois</p>
-                      <p className="text-3xl font-bold animate-pulse">{stats.revenue}€</p>
+                      <p className="text-purple-100">Total facturé</p>
+                      <p className="text-3xl font-bold animate-pulse">{stats.totalBilled}€</p>
                     </div>
                     <CreditCard className="h-8 w-8 text-purple-200" />
                   </div>
@@ -459,10 +459,10 @@ const Dashboard = () => {
                         <p className="text-sm text-gray-600">{property.capacity}</p>
                       </div>
                       <div className="text-right">
-                        <Badge className={getStatusColor(property.status)}>
-                          {getStatusText(property.status)}
+                        <Badge className={getLinenStatusColor(property.linentStatus)}>
+                          {getLinenStatusText(property.linentStatus)}
                         </Badge>
-                        <p className="text-sm text-gray-600 mt-1">{property.revenue}€/mois</p>
+                        <p className="text-sm text-gray-600 mt-1">{property.monthlyCost}€/mois</p>
                       </div>
                     </div>
                   ))}
@@ -534,17 +534,17 @@ const Dashboard = () => {
                           
                           <div className="grid md:grid-cols-3 gap-4">
                             <div className="bg-blue-50 p-4 rounded-lg">
-                              <p className="text-sm text-blue-600 font-medium">Revenus mensuels</p>
-                              <p className="text-2xl font-bold text-blue-800">{property.revenue}€</p>
+                              <p className="text-sm text-blue-600 font-medium">Coût linge/mois</p>
+                              <p className="text-2xl font-bold text-blue-800">{property.monthlyCost}€</p>
                             </div>
                             <div className="bg-green-50 p-4 rounded-lg">
-                              <p className="text-sm text-green-600 font-medium">Réservations</p>
-                              <p className="text-2xl font-bold text-green-800">{property.bookings}</p>
+                              <p className="text-sm text-green-600 font-medium">Collectes/mois</p>
+                              <p className="text-2xl font-bold text-green-800">{property.collectionsPerMonth}</p>
                             </div>
                             <div className="bg-purple-50 p-4 rounded-lg">
-                              <p className="text-sm text-purple-600 font-medium">Statut</p>
-                              <Badge className={getStatusColor(property.status)}>
-                                {getStatusText(property.status)}
+                              <p className="text-sm text-purple-600 font-medium">État du linge</p>
+                              <Badge className={getLinenStatusColor(property.linentStatus)}>
+                                {getLinenStatusText(property.linentStatus)}
                               </Badge>
                             </div>
                           </div>
