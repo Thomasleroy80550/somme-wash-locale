@@ -366,27 +366,40 @@ const ComingSoon = () => {
       {/* Newsletter Signup */}
       <section className="py-16 bg-[#145587]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Restez informés</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">Rejoignez notre Liste d'Attente</h2>
           <p className="text-blue-100 mb-8 text-lg">
             Soyez les premiers à découvrir Hello Wash et profitez d'offres exclusives de lancement
           </p>
           
-          <form onSubmit={handleNewsletterSignup} className="max-w-md mx-auto">
-            <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <form onSubmit={handleNewsletterSignup} className="flex gap-4 flex-1">
               <Input
                 type="email"
                 placeholder="Votre adresse email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-white"
+                className="bg-white flex-1"
                 required
               />
               <Button type="submit" className="bg-white text-[#145587] hover:bg-gray-100 whitespace-nowrap">
                 <Mail className="h-4 w-4 mr-2" />
                 S'inscrire
               </Button>
-            </div>
-          </form>
+            </form>
+          </div>
+          
+          <div className="mt-6">
+            <a 
+              href="/member"
+              className="inline-flex items-center bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold"
+            >
+              <Sparkles className="h-5 w-5 mr-2" />
+              Inscription Complète - Liste d'Attente Prioritaire
+            </a>
+            <p className="text-blue-100 text-sm mt-2">
+              Accès prioritaire aux tests et lancement exclusif
+            </p>
+          </div>
         </div>
       </section>
 

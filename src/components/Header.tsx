@@ -29,6 +29,12 @@ const Header = () => {
               <span>Baie de Somme</span>
             </div>
             <a
+              href="/member"
+              className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors mr-2"
+            >
+              Liste d'attente
+            </a>
+            <a
               href="tel:+33000000000"
               className="bg-[#145587] text-white px-4 py-2 rounded-lg hover:bg-[#145587]/90 transition-colors"
             >
