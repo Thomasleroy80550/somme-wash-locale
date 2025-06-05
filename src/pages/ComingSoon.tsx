@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Shield, Eye, EyeOff, Mail, MapPin, Heart, Droplets, Truck, Activity, Bell, User, Home, Package, Users, Settings, TrendingUp, Calendar, Clock, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -65,11 +66,11 @@ const ComingSoon = () => {
             <img 
               src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
               alt="Hello Wash Logo" 
-              className="h-16 w-auto"
+              className="h-12 sm:h-16 w-auto"
             />
             <div className="ml-4 text-white">
-              <h1 className="text-2xl font-bold">Hello Wash</h1>
-              <p className="text-sm opacity-80">Baie de Somme</p>
+              <h1 className="text-xl sm:text-2xl font-bold">Hello Wash</h1>
+              <p className="text-xs sm:text-sm opacity-80">Baie de Somme</p>
             </div>
           </div>
         </div>
@@ -79,33 +80,33 @@ const ComingSoon = () => {
       <main className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Section */}
-          <div className="mb-12">
-            <div className="inline-flex items-center justify-center w-24 h-24 bg-white/20 backdrop-blur-md rounded-full mb-8 animate-pulse">
-              <Droplets className="w-12 h-12 text-white" />
+          <div className="mb-8 sm:mb-12">
+            <div className="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 bg-white/20 backdrop-blur-md rounded-full mb-6 sm:mb-8 animate-pulse">
+              <Droplets className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
             </div>
             
-            <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 sm:mb-6">
               Coming Soon
             </h2>
             
-            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 leading-relaxed px-4">
               Hello Wash arrive bientôt dans la Baie de Somme
             </p>
             
-            <p className="text-lg text-white/80 mb-12 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-white/80 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
               Nous préparons quelque chose d'extraordinaire pour vous. 
               Un service de blanchisserie premium avec livraison à domicile.
             </p>
           </div>
 
           {/* Progress Section */}
-          <div className="mb-16">
+          <div className="mb-12 sm:mb-16">
             <Card className="bg-white/10 backdrop-blur-md border-white/20 max-w-2xl mx-auto">
-              <CardContent className="p-8">
+              <CardContent className="p-6 sm:p-8">
                 <div className="mb-6">
                   <div className="flex justify-between text-white mb-2">
-                    <span>Progression du projet</span>
-                    <span className="font-bold">65%</span>
+                    <span className="text-sm sm:text-base">Progression du projet</span>
+                    <span className="font-bold text-sm sm:text-base">65%</span>
                   </div>
                   <div className="w-full bg-white/20 rounded-full h-3">
                     <div 
@@ -115,18 +116,18 @@ const ComingSoon = () => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-white/90">
+                <div className="grid grid-cols-3 gap-4 sm:gap-6 text-white/90">
                   <div className="text-center">
-                    <div className="text-2xl font-bold mb-1">📋</div>
-                    <p className="text-sm">Préparation</p>
+                    <div className="text-xl sm:text-2xl font-bold mb-1">📋</div>
+                    <p className="text-xs sm:text-sm">Préparation</p>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold mb-1">🚧</div>
-                    <p className="text-sm">Travaux</p>
+                    <div className="text-xl sm:text-2xl font-bold mb-1">🚧</div>
+                    <p className="text-xs sm:text-sm">Travaux</p>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold mb-1">🚀</div>
-                    <p className="text-sm">Ouverture</p>
+                    <div className="text-xl sm:text-2xl font-bold mb-1">🚀</div>
+                    <p className="text-xs sm:text-sm">Ouverture</p>
                   </div>
                 </div>
               </CardContent>
@@ -145,213 +146,300 @@ const ComingSoon = () => {
         <Offers />
       </div>
 
-      {/* Dashboard Mockup Preview */}
-      <section className="relative z-10 py-20 bg-gray-50">
+      {/* Dashboard Mockup Preview - Mobile Optimized */}
+      <section className="relative z-10 py-12 sm:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-[#145587] mb-4">Aperçu de votre futur dashboard</h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#145587] mb-4">Aperçu de votre futur dashboard</h3>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
               Découvrez l'interface d'administration que vous utiliserez pour gérer vos commandes et suivre vos livraisons
             </p>
           </div>
           
-          {/* Browser Mockup Frame */}
+          {/* Browser Mockup Frame - Mobile Responsive */}
           <div className="max-w-6xl mx-auto">
-            <div className="bg-gray-800 rounded-t-lg p-4 shadow-2xl">
+            <div className="bg-gray-800 rounded-t-lg p-2 sm:p-4 shadow-2xl">
               {/* Browser Bar */}
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="flex space-x-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="flex items-center space-x-2 mb-2 sm:mb-4">
+                <div className="flex space-x-1 sm:space-x-2">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
                 </div>
-                <div className="flex-1 mx-4">
-                  <div className="bg-gray-700 rounded px-3 py-1 text-gray-300 text-sm">
-                    https://admin.hellowash.fr/dashboard
+                <div className="flex-1 mx-2 sm:mx-4">
+                  <div className="bg-gray-700 rounded px-2 sm:px-3 py-1 text-gray-300 text-xs sm:text-sm">
+                    admin.hellowash.fr/dashboard
                   </div>
                 </div>
               </div>
               
-              {/* Dashboard Content */}
+              {/* Dashboard Content - Mobile Optimized */}
               <div className="bg-white rounded-lg overflow-hidden relative">
                 {/* Preview Overlay */}
-                <div className="absolute top-4 right-4 z-20 bg-[#145587] text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-20 bg-[#145587] text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold animate-pulse">
                   APERÇU
                 </div>
                 
-                {/* Top Navigation */}
-                <div className="bg-white border-b border-gray-200 px-6 py-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <img 
-                        src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
-                        alt="Hello Wash" 
-                        className="h-8 w-auto"
-                      />
-                      <h1 className="text-xl font-bold text-[#145587]">Dashboard Admin</h1>
+                {/* Mobile: Simplified Layout */}
+                <div className="block sm:hidden">
+                  {/* Mobile Header */}
+                  <div className="bg-white border-b border-gray-200 px-4 py-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <img 
+                          src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
+                          alt="Hello Wash" 
+                          className="h-6 w-auto"
+                        />
+                        <h1 className="text-sm font-bold text-[#145587]">Dashboard</h1>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Bell className="w-4 h-4 text-gray-400" />
+                        <Avatar className="w-6 h-6">
+                          <AvatarFallback className="bg-[#145587] text-white text-xs">AD</AvatarFallback>
+                        </Avatar>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-4">
-                      <Bell className="w-5 h-5 text-gray-400" />
-                      <Avatar className="w-8 h-8">
-                        <AvatarFallback className="bg-[#145587] text-white text-xs">AD</AvatarFallback>
-                      </Avatar>
-                    </div>
+                  </div>
+
+                  {/* Mobile Stats - Stacked */}
+                  <div className="p-4 bg-gray-50 space-y-3">
+                    <Card className="bg-white shadow-sm">
+                      <CardContent className="p-3">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-xs text-gray-600 mb-1">Commandes aujourd'hui</p>
+                            <p className="text-xl font-bold text-[#145587]">24</p>
+                          </div>
+                          <TrendingUp className="w-6 h-6 text-[#145587]" />
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="bg-white shadow-sm">
+                      <CardContent className="p-3">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-xs text-gray-600 mb-1">Livraisons en cours</p>
+                            <div className="flex items-center gap-1">
+                              <Activity className="w-3 h-3 text-green-600 animate-pulse" />
+                              <p className="text-lg font-bold text-green-600">3</p>
+                            </div>
+                          </div>
+                          <Truck className="w-6 h-6 text-[#145587]" />
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Mobile Recent Orders */}
+                    <Card className="bg-white shadow-sm">
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm">Commandes récentes</CardTitle>
+                      </CardHeader>
+                      <CardContent className="p-3 pt-0">
+                        <div className="space-y-2">
+                          <div className="flex items-center space-x-2 text-xs">
+                            <Avatar className="w-6 h-6">
+                              <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">MC</AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1 min-w-0">
+                              <p className="font-medium text-gray-900">M. Caron</p>
+                              <p className="text-gray-500">Le Crotoy</p>
+                            </div>
+                            <CheckCircle className="w-3 h-3 text-green-500" />
+                          </div>
+                          <div className="flex items-center space-x-2 text-xs">
+                            <Avatar className="w-6 h-6">
+                              <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">PD</AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1 min-w-0">
+                              <p className="font-medium text-gray-900">P. Dubois</p>
+                              <p className="text-gray-500">Fort-Mahon</p>
+                            </div>
+                            <Clock className="w-3 h-3 text-orange-500" />
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
                 </div>
 
-                <div className="flex">
-                  {/* Sidebar */}
-                  <div className="w-64 bg-gray-50 border-r border-gray-200 min-h-[600px]">
-                    <nav className="p-4 space-y-2">
-                      <div className="flex items-center space-x-3 px-3 py-2 bg-[#145587] text-white rounded-lg">
-                        <Home className="w-4 h-4" />
-                        <span className="text-sm font-medium">Dashboard</span>
+                {/* Desktop: Original Layout */}
+                <div className="hidden sm:block">
+                  {/* Top Navigation */}
+                  <div className="bg-white border-b border-gray-200 px-6 py-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <img 
+                          src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
+                          alt="Hello Wash" 
+                          className="h-8 w-auto"
+                        />
+                        <h1 className="text-xl font-bold text-[#145587]">Dashboard Admin</h1>
                       </div>
-                      <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
-                        <Package className="w-4 h-4" />
-                        <span className="text-sm">Commandes</span>
+                      <div className="flex items-center space-x-4">
+                        <Bell className="w-5 h-5 text-gray-400" />
+                        <Avatar className="w-8 h-8">
+                          <AvatarFallback className="bg-[#145587] text-white text-xs">AD</AvatarFallback>
+                        </Avatar>
                       </div>
-                      <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
-                        <Users className="w-4 h-4" />
-                        <span className="text-sm">Clients</span>
-                      </div>
-                      <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
-                        <Truck className="w-4 h-4" />
-                        <span className="text-sm">Livraisons</span>
-                      </div>
-                      <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
-                        <Settings className="w-4 h-4" />
-                        <span className="text-sm">Paramètres</span>
-                      </div>
-                    </nav>
+                    </div>
                   </div>
 
-                  {/* Main Content */}
-                  <div className="flex-1 p-6 bg-gray-50">
-                    {/* Stats Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                      <Card>
-                        <CardHeader className="pb-3">
-                          <CardTitle className="text-lg flex items-center gap-2">
-                            <Shield className="w-5 h-5 text-[#145587]" />
-                            Mode Maintenance
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-gray-600 mb-4">
-                            Statut actuel: <span className="text-green-600 font-medium">Inactif</span>
-                          </p>
-                          <Button className="w-full bg-[#145587] hover:bg-[#145587]/90 text-xs">
-                            Activer la maintenance
-                          </Button>
-                        </CardContent>
-                      </Card>
-
-                      <Card>
-                        <CardHeader className="pb-3">
-                          <CardTitle className="text-lg flex items-center gap-2">
-                            <TrendingUp className="w-5 h-5 text-[#145587]" />
-                            Statistiques
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-3xl font-bold text-[#145587] mb-1">24</p>
-                          <p className="text-sm text-gray-600">Commandes aujourd'hui</p>
-                          <div className="mt-2 text-xs text-green-600">+12% vs hier</div>
-                        </CardContent>
-                      </Card>
-
-                      <Card>
-                        <CardHeader className="pb-3">
-                          <CardTitle className="text-lg flex items-center gap-2">
-                            <Truck className="w-5 h-5 text-[#145587]" />
-                            Suivi livraison
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="flex items-center gap-2 mb-2">
-                            <Activity className="w-4 h-4 text-green-600 animate-pulse" />
-                            <p className="text-2xl font-bold text-green-600">Live</p>
-                          </div>
-                          <p className="text-sm text-gray-600">3 livraisons en cours</p>
-                        </CardContent>
-                      </Card>
+                  <div className="flex">
+                    {/* Sidebar */}
+                    <div className="w-64 bg-gray-50 border-r border-gray-200 min-h-[500px] lg:min-h-[600px]">
+                      <nav className="p-4 space-y-2">
+                        <div className="flex items-center space-x-3 px-3 py-2 bg-[#145587] text-white rounded-lg">
+                          <Home className="w-4 h-4" />
+                          <span className="text-sm font-medium">Dashboard</span>
+                        </div>
+                        <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                          <Package className="w-4 h-4" />
+                          <span className="text-sm">Commandes</span>
+                        </div>
+                        <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                          <Users className="w-4 h-4" />
+                          <span className="text-sm">Clients</span>
+                        </div>
+                        <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                          <Truck className="w-4 h-4" />
+                          <span className="text-sm">Livraisons</span>
+                        </div>
+                        <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                          <Settings className="w-4 h-4" />
+                          <span className="text-sm">Paramètres</span>
+                        </div>
+                      </nav>
                     </div>
 
-                    {/* Recent Activity */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="text-lg">Commandes récentes</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="space-y-4">
-                            <div className="flex items-center space-x-3">
-                              <Avatar className="w-8 h-8">
-                                <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">MC</AvatarFallback>
-                              </Avatar>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Marie Caron</p>
-                                <p className="text-xs text-gray-500">Le Crotoy - 15 pièces</p>
-                              </div>
-                              <CheckCircle className="w-4 h-4 text-green-500" />
-                            </div>
-                            <div className="flex items-center space-x-3">
-                              <Avatar className="w-8 h-8">
-                                <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">PD</AvatarFallback>
-                              </Avatar>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Pierre Dubois</p>
-                                <p className="text-xs text-gray-500">Fort-Mahon - 8 pièces</p>
-                              </div>
-                              <Clock className="w-4 h-4 text-orange-500" />
-                            </div>
-                            <div className="flex items-center space-x-3">
-                              <Avatar className="w-8 h-8">
-                                <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">SL</AvatarFallback>
-                              </Avatar>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900">Sophie Leclerc</p>
-                                <p className="text-xs text-gray-500">Rue - 22 pièces</p>
-                              </div>
-                              <Truck className="w-4 h-4 text-blue-500" />
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
+                    {/* Main Content */}
+                    <div className="flex-1 p-6 bg-gray-50">
+                      {/* Stats Cards */}
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <Card>
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-lg flex items-center gap-2">
+                              <Shield className="w-5 h-5 text-[#145587]" />
+                              Mode Maintenance
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-sm text-gray-600 mb-4">
+                              Statut actuel: <span className="text-green-600 font-medium">Inactif</span>
+                            </p>
+                            <Button className="w-full bg-[#145587] hover:bg-[#145587]/90 text-xs">
+                              Activer la maintenance
+                            </Button>
+                          </CardContent>
+                        </Card>
 
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="text-lg flex items-center gap-2">
-                            <Calendar className="w-5 h-5" />
-                            Planning du jour
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="space-y-3">
-                            <div className="flex items-center space-x-3 text-sm">
-                              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                              <span className="text-gray-500">09:00</span>
-                              <span>Collecte Le Crotoy</span>
+                        <Card>
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-lg flex items-center gap-2">
+                              <TrendingUp className="w-5 h-5 text-[#145587]" />
+                              Statistiques
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-3xl font-bold text-[#145587] mb-1">24</p>
+                            <p className="text-sm text-gray-600">Commandes aujourd'hui</p>
+                            <div className="mt-2 text-xs text-green-600">+12% vs hier</div>
+                          </CardContent>
+                        </Card>
+
+                        <Card>
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-lg flex items-center gap-2">
+                              <Truck className="w-5 h-5 text-[#145587]" />
+                              Suivi livraison
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="flex items-center gap-2 mb-2">
+                              <Activity className="w-4 h-4 text-green-600 animate-pulse" />
+                              <p className="text-2xl font-bold text-green-600">Live</p>
                             </div>
-                            <div className="flex items-center space-x-3 text-sm">
-                              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                              <span className="text-gray-500">11:30</span>
-                              <span>Livraison Fort-Mahon</span>
+                            <p className="text-sm text-gray-600">3 livraisons en cours</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+
+                      {/* Recent Activity */}
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <Card>
+                          <CardHeader>
+                            <CardTitle className="text-lg">Commandes récentes</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="space-y-4">
+                              <div className="flex items-center space-x-3">
+                                <Avatar className="w-8 h-8">
+                                  <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">MC</AvatarFallback>
+                                </Avatar>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium text-gray-900">Marie Caron</p>
+                                  <p className="text-xs text-gray-500">Le Crotoy - 15 pièces</p>
+                                </div>
+                                <CheckCircle className="w-4 h-4 text-green-500" />
+                              </div>
+                              <div className="flex items-center space-x-3">
+                                <Avatar className="w-8 h-8">
+                                  <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">PD</AvatarFallback>
+                                </Avatar>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium text-gray-900">Pierre Dubois</p>
+                                  <p className="text-xs text-gray-500">Fort-Mahon - 8 pièces</p>
+                                </div>
+                                <Clock className="w-4 h-4 text-orange-500" />
+                              </div>
+                              <div className="flex items-center space-x-3">
+                                <Avatar className="w-8 h-8">
+                                  <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">SL</AvatarFallback>
+                                </Avatar>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium text-gray-900">Sophie Leclerc</p>
+                                  <p className="text-xs text-gray-500">Rue - 22 pièces</p>
+                                </div>
+                                <Truck className="w-4 h-4 text-blue-500" />
+                              </div>
                             </div>
-                            <div className="flex items-center space-x-3 text-sm">
-                              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                              <span className="text-gray-500">14:00</span>
-                              <span>Collecte Rue</span>
+                          </CardContent>
+                        </Card>
+
+                        <Card>
+                          <CardHeader>
+                            <CardTitle className="text-lg flex items-center gap-2">
+                              <Calendar className="w-5 h-5" />
+                              Planning du jour
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="space-y-3">
+                              <div className="flex items-center space-x-3 text-sm">
+                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span className="text-gray-500">09:00</span>
+                                <span>Collecte Le Crotoy</span>
+                              </div>
+                              <div className="flex items-center space-x-3 text-sm">
+                                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                <span className="text-gray-500">11:30</span>
+                                <span>Livraison Fort-Mahon</span>
+                              </div>
+                              <div className="flex items-center space-x-3 text-sm">
+                                <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                <span className="text-gray-500">14:00</span>
+                                <span>Collecte Rue</span>
+                              </div>
+                              <div className="flex items-center space-x-3 text-sm">
+                                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                <span className="text-gray-500">16:30</span>
+                                <span>Livraison Saint-Valery</span>
+                              </div>
                             </div>
-                            <div className="flex items-center space-x-3 text-sm">
-                              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                              <span className="text-gray-500">16:30</span>
-                              <span>Livraison Saint-Valery</span>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
+                          </CardContent>
+                        </Card>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -365,21 +453,21 @@ const ComingSoon = () => {
       <footer className="relative z-10 mt-16 py-8 border-t border-white/20 bg-[#145587]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-white/80">
-            <div className="flex items-center space-x-6 mb-4 md:mb-0">
+            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 mb-4 md:mb-0">
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 mr-2" />
-                <span>Baie de Somme</span>
+                <span className="text-sm">Baie de Somme</span>
               </div>
               <div className="flex items-center">
                 <Mail className="h-4 w-4 mr-2" />
-                <span>contact@hellowash.fr</span>
+                <span className="text-sm">contact@hellowash.fr</span>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
               <div className="flex items-center">
                 <Heart className="h-4 w-4 mr-2 text-red-400" />
-                <span>Fait avec passion en Baie de Somme</span>
+                <span className="text-sm">Fait avec passion en Baie de Somme</span>
               </div>
               
               <Dialog open={adminModalOpen} onOpenChange={setAdminModalOpen}>
