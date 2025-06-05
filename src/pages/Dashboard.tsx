@@ -169,7 +169,8 @@ const Dashboard = () => {
     { date: "2025-07-12", guest: "Groupe étudiants", property: "Villa Océan", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "14h-16h" },
     { date: "2025-07-13", guest: "Groupe étudiants", property: "Villa Océan", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
     { date: "2025-07-14", guest: "Groupe étudiants", property: "Villa Océan", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
-    { date: "2025-07-15", guest: "Groupe étudiants", property: "Villa Océan", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "10h-12h" },
+    { date: "2025-07-15", guest: "Groupe étudiants", property: "Villa Océan", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-16", guest: "Groupe étudiants", property: "Villa Océan", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "10h-12h" },
     
     { date: "2025-07-20", guest: "Famille Moreau", property: "Cottage Baie", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 17h" },
     { date: "2025-07-21", guest: "Famille Moreau", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
@@ -711,7 +712,7 @@ const Dashboard = () => {
             <div className="space-y-6">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold">Historique des commandes</h2>
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
                   <Button variant="outline" size="sm">
                     <Filter className="h-4 w-4 mr-2" />
                     Filtrer
