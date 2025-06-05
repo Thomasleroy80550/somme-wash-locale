@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Package, Truck, Clock, MapPin, Bell, Calendar, User, Home, Bed } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
@@ -11,7 +10,7 @@ const Dashboard = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [currentTime, setCurrentTime] = useState(new Date());
   const [notifications, setNotifications] = useState<Array<{id: number, message: string, time: string}>>([]);
-  const [driverPosition, setDriverPosition] = useState({ x: 20, y: 60 });
+  const [driverPosition, setDriverPosition] = useState({ x: 20, y: 50 });
   const [stats, setStats] = useState({
     orders: 34,
     guests: 12
@@ -24,8 +23,8 @@ const Dashboard = () => {
       
       // Animation du livreur sur la carte
       setDriverPosition(prev => ({
-        x: (prev.x + 1.5) % 90,
-        y: 60 + Math.sin(prev.x * 0.1) * 15
+        x: (prev.x + 1.2) % 85,
+        y: 50 + Math.sin(prev.x * 0.08) * 5
       }));
       
       // Notifications aléatoires pour gîtes
@@ -230,132 +229,101 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          {/* Carte livreur style Uber Eats */}
+          {/* Carte style Uber Eats simplifiée */}
           <Card className="bg-white">
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Truck className="h-6 w-6 mr-2 text-[#145587]" />
-                Suivi Livreur - Style Carte
+                Suivi Livraison - Live
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="bg-gradient-to-br from-blue-50 to-green-50 h-48 rounded-lg relative overflow-hidden border-2">
-                {/* Fond de carte avec quartiers */}
+              <div className="bg-gray-100 h-48 rounded-xl relative overflow-hidden shadow-inner">
+                {/* Fond flat style Google Maps */}
+                <div className="absolute inset-0 bg-gray-100"></div>
+                
+                {/* Zones colorées simples */}
+                <div className="absolute top-4 left-4 w-16 h-12 bg-green-200 rounded-lg opacity-60"></div>
+                <div className="absolute bottom-4 right-4 w-20 h-8 bg-blue-200 rounded-lg opacity-60"></div>
+                <div className="absolute top-8 right-8 w-12 h-12 bg-orange-200 rounded-lg opacity-60"></div>
+                
+                {/* Routes principales simplifiées */}
                 <div className="absolute inset-0">
-                  {/* Zone résidentielle */}
-                  <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-br from-green-100 to-green-50 opacity-60"></div>
-                  {/* Zone commerciale */}
-                  <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-bl from-blue-100 to-blue-50 opacity-60"></div>
-                  {/* Zone eau/rivière */}
-                  <div className="absolute bottom-0 left-1/4 w-1/2 h-6 bg-blue-200 opacity-80 rounded-full"></div>
+                  {/* Route principale horizontale */}
+                  <div className="absolute top-1/2 left-0 right-0 h-3 bg-white rounded-full shadow-sm transform -translate-y-1/2 border border-gray-300"></div>
+                  
+                  {/* Route verticale */}
+                  <div className="absolute left-1/3 top-0 bottom-0 w-3 bg-white rounded-full shadow-sm border border-gray-300"></div>
+                  
+                  {/* Route diagonale */}
+                  <div 
+                    className="absolute top-6 left-6 w-32 h-3 bg-white rounded-full shadow-sm border border-gray-300 transform rotate-45 origin-left"
+                  ></div>
                 </div>
                 
-                {/* Réseau de rues réaliste */}
-                <div className="absolute inset-0">
-                  {/* Routes principales (horizontales) */}
-                  <div className="absolute top-12 left-0 right-0 h-1 bg-gray-400 shadow-sm"></div>
-                  <div className="absolute top-20 left-0 right-0 h-1 bg-gray-400 shadow-sm"></div>
-                  <div className="absolute top-32 left-0 right-0 h-1 bg-gray-400 shadow-sm"></div>
-                  
-                  {/* Routes principales (verticales) */}
-                  <div className="absolute left-16 top-0 bottom-0 w-1 bg-gray-400 shadow-sm"></div>
-                  <div className="absolute left-32 top-0 bottom-0 w-1 bg-gray-400 shadow-sm"></div>
-                  <div className="absolute left-48 top-0 bottom-0 w-1 bg-gray-400 shadow-sm"></div>
-                  <div className="absolute right-16 top-0 bottom-0 w-1 bg-gray-400 shadow-sm"></div>
-                  
-                  {/* Routes secondaires (plus fines) */}
-                  <div className="absolute top-8 left-0 right-0 h-0.5 bg-gray-300"></div>
-                  <div className="absolute top-24 left-0 right-0 h-0.5 bg-gray-300"></div>
-                  <div className="absolute top-36 left-0 right-0 h-0.5 bg-gray-300"></div>
-                  
-                  <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-300"></div>
-                  <div className="absolute left-24 top-0 bottom-0 w-0.5 bg-gray-300"></div>
-                  <div className="absolute left-40 top-0 bottom-0 w-0.5 bg-gray-300"></div>
-                  <div className="absolute right-8 top-0 bottom-0 w-0.5 bg-gray-300"></div>
-                  <div className="absolute right-24 top-0 bottom-0 w-0.5 bg-gray-300"></div>
-                  
-                  {/* Intersections (points de jonction) */}
-                  <div className="absolute top-11.5 left-15.5 w-2 h-2 bg-gray-500 rounded-full"></div>
-                  <div className="absolute top-11.5 left-31.5 w-2 h-2 bg-gray-500 rounded-full"></div>
-                  <div className="absolute top-11.5 left-47.5 w-2 h-2 bg-gray-500 rounded-full"></div>
-                  <div className="absolute top-19.5 left-15.5 w-2 h-2 bg-gray-500 rounded-full"></div>
-                  <div className="absolute top-19.5 left-31.5 w-2 h-2 bg-gray-500 rounded-full"></div>
-                  <div className="absolute top-31.5 left-15.5 w-2 h-2 bg-gray-500 rounded-full"></div>
-                  
-                  {/* Route courbe (contournement) */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                    <path 
-                      d="M 200,20 Q 220,40 200,60 Q 180,80 200,100" 
-                      stroke="#9CA3AF" 
-                      strokeWidth="2" 
-                      fill="none"
-                    />
-                  </svg>
-                </div>
-                
-                {/* Noms de rues */}
-                <div className="absolute inset-0 text-xs text-gray-600 font-medium">
-                  <span className="absolute top-10 left-2">Rue du Port</span>
-                  <span className="absolute top-18 left-2">Avenue de la Baie</span>
-                  <span className="absolute top-30 left-2">Bd des Gîtes</span>
-                  <span className="absolute top-2 left-14 transform -rotate-90 origin-center">Rue Victor Hugo</span>
-                  <span className="absolute top-2 left-30 transform -rotate-90 origin-center">Rue de la Paix</span>
-                  <span className="absolute top-2 right-14 transform -rotate-90 origin-center">Rue des Roses</span>
-                </div>
-                
-                {/* Bâtiments/POI */}
-                <div className="absolute inset-0">
-                  {/* Mairie */}
-                  <div className="absolute top-14 left-18 w-4 h-3 bg-red-300 border border-red-400 rounded-sm"></div>
-                  <span className="absolute top-18 left-17 text-xs text-red-700">Mairie</span>
-                  
-                  {/* Parc */}
-                  <div className="absolute top-26 left-34 w-6 h-4 bg-green-300 border border-green-400 rounded-full"></div>
-                  <span className="absolute top-32 left-34 text-xs text-green-700">Parc</span>
-                  
-                  {/* Centre commercial */}
-                  <div className="absolute top-6 right-20 w-5 h-4 bg-blue-300 border border-blue-400 rounded-sm"></div>
-                  <span className="absolute top-11 right-22 text-xs text-blue-700">Centre</span>
-                </div>
-                
-                {/* Itinéraire tracé */}
+                {/* Itinéraire principal en bleu */}
                 <svg className="absolute inset-0 w-full h-full">
                   <path 
-                    d="M 10,120 L 60,120 L 130,120 L 130,80 L 200,80 L 240,80 L 290,80" 
-                    stroke="#145587" 
-                    strokeWidth="3" 
+                    d="M 10,96 L 80,96 L 160,96 L 280,96" 
+                    stroke="#2563eb" 
+                    strokeWidth="4" 
                     fill="none"
-                    strokeDasharray="5,5"
-                    className="animate-pulse"
+                    strokeLinecap="round"
+                    className="drop-shadow-sm"
                   />
                 </svg>
                 
-                {/* Point de départ */}
+                {/* Point de départ moderne */}
                 <div className="absolute left-2 top-1/2 transform -translate-y-1/2">
-                  <div className="w-3 h-3 bg-green-500 rounded-full border-2 border-white shadow-lg"></div>
-                  <span className="absolute top-4 left-0 text-xs text-gray-700 whitespace-nowrap font-medium">Laverie</span>
+                  <div className="w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg"></div>
+                  <span className="absolute top-6 left-0 text-xs text-gray-700 whitespace-nowrap font-medium bg-white px-2 py-1 rounded shadow-sm">
+                    Laverie Hello Wash
+                  </span>
                 </div>
                 
-                {/* Point d'arrivée */}
-                <div className="absolute right-2 top-1/3 transform -translate-y-1/2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full border-2 border-white shadow-lg"></div>
-                  <span className="absolute top-4 right-0 text-xs text-gray-700 whitespace-nowrap font-medium">Gîte Les Roses</span>
+                {/* Point d'arrivée moderne */}
+                <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                  <div className="w-4 h-4 bg-red-500 rounded-full border-2 border-white shadow-lg"></div>
+                  <span className="absolute top-6 right-0 text-xs text-gray-700 whitespace-nowrap font-medium bg-white px-2 py-1 rounded shadow-sm">
+                    Gîte Les Roses
+                  </span>
                 </div>
                 
-                {/* Livreur en mouvement */}
+                {/* Truck moderne style Uber Eats */}
                 <div 
-                  className="absolute w-7 h-7 bg-[#145587] rounded-full transform -translate-x-1/2 -translate-y-1/2 transition-all duration-2000 ease-linear flex items-center justify-center shadow-lg border-2 border-white z-10"
+                  className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-2000 ease-linear z-10"
                   style={{ 
-                    left: `${driverPosition.x}%`, 
+                    left: `${15 + (driverPosition.x * 0.7)}%`, 
                     top: `${driverPosition.y}%` 
                   }}
                 >
-                  <Truck className="h-3 w-3 text-white" />
+                  {/* Ombre du truck */}
+                  <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-black/20 rounded-full blur-sm"></div>
+                  
+                  {/* Truck container */}
+                  <div className="relative">
+                    {/* Corps du truck */}
+                    <div className="w-8 h-5 bg-[#145587] rounded-lg shadow-lg border border-white/20">
+                      <div className="absolute inset-1 bg-gradient-to-b from-white/20 to-transparent rounded"></div>
+                    </div>
+                    
+                    {/* Cabine */}
+                    <div className="absolute -left-1 top-0 w-3 h-4 bg-[#145587] rounded-l-lg border border-white/20"></div>
+                    
+                    {/* Roues */}
+                    <div className="absolute -bottom-1 left-1 w-2 h-2 bg-gray-800 rounded-full"></div>
+                    <div className="absolute -bottom-1 right-1 w-2 h-2 bg-gray-800 rounded-full"></div>
+                    
+                    {/* Icône truck */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Truck className="h-3 w-3 text-white" />
+                    </div>
+                  </div>
                 </div>
                 
-                {/* Zones d'intérêt avec labels */}
-                <div className="absolute top-2 left-2 text-xs text-gray-700 font-bold bg-white/80 px-1 rounded">Le Crotoy</div>
-                <div className="absolute bottom-2 right-2 text-xs text-gray-700 font-bold bg-white/80 px-1 rounded">Saint-Valery</div>
+                {/* Labels des zones */}
+                <div className="absolute top-2 left-2 text-xs text-gray-600 font-medium bg-white/80 px-2 py-1 rounded">Le Crotoy</div>
+                <div className="absolute bottom-2 right-2 text-xs text-gray-600 font-medium bg-white/80 px-2 py-1 rounded">Saint-Valery</div>
               </div>
               
               <div className="space-y-3">
@@ -363,26 +331,26 @@ const Dashboard = () => {
                   <span className="text-sm text-gray-600">Progression</span>
                   <span className="text-sm font-medium">{Math.round(driverPosition.x)}%</span>
                 </div>
-                <Progress value={driverPosition.x} className="h-2" />
+                <Progress value={driverPosition.x} className="h-3" />
                 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-blue-50 p-3 rounded-lg">
+                  <div className="bg-blue-50 p-3 rounded-xl border border-blue-100">
                     <p className="text-sm text-blue-800 font-medium">
                       <MapPin className="h-4 w-4 inline mr-1" />
                       Position
                     </p>
                     <p className="text-xs text-blue-600 mt-1">
-                      Rue de la Paix, Le Crotoy
+                      En route vers le gîte
                     </p>
                   </div>
                   
-                  <div className="bg-green-50 p-3 rounded-lg">
+                  <div className="bg-green-50 p-3 rounded-xl border border-green-100">
                     <p className="text-sm text-green-800 font-medium">
                       <Clock className="h-4 w-4 inline mr-1" />
                       ETA
                     </p>
                     <p className="text-xs text-green-600 mt-1">
-                      {Math.max(3, Math.round((100 - driverPosition.x) / 8))} min
+                      {Math.max(2, Math.round((100 - driverPosition.x) / 10))} min
                     </p>
                   </div>
                 </div>
@@ -441,7 +409,7 @@ const Dashboard = () => {
                         🧺 Linge propre en route vers votre gîte !
                       </p>
                       <p className="text-xs text-blue-600 mt-1">
-                        Arrivée prévue dans {Math.max(3, Math.round((100 - driverPosition.x) / 8))} minutes
+                        Arrivée prévue dans {Math.max(2, Math.round((100 - driverPosition.x) / 10))} minutes
                       </p>
                     </div>
                   )}
