@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Sparkles, MapPin, Calendar, Building2, Users, TrendingUp, Clock, Mail, Bed, Bath, UtensilsCrossed } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -131,7 +130,7 @@ const ComingSoon = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8 border-4 border-dashed border-gray-200">
+          <div className="bg-white rounded-2xl shadow-xl p-8">
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <Card className="bg-gradient-to-br from-blue-50 to-blue-100">
                 <CardHeader className="pb-3">
@@ -196,14 +195,6 @@ const ComingSoon = () => {
                 </div>
               </CardContent>
             </Card>
-
-            <div className="absolute inset-0 bg-white/50 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-6xl mb-4">🚀</div>
-                <div className="text-2xl font-bold text-gray-900 mb-2">Bientôt disponible</div>
-                <p className="text-gray-600">Dashboard complet en cours de développement</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
