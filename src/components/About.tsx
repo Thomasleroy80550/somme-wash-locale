@@ -8,11 +8,16 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-4xl font-bold text-gray-900 mb-6">À propos de Hello Wash</h2>
+            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+              Hello Wash est née de l'expérience de <strong>HelloKeys.fr</strong>, spécialiste de la conciergerie 
+              Airbnb dans la Baie de Somme. Face à la nécessité d'internaliser la gestion du linge 
+              pour nos clients propriétaires, nous avons développé une expertise pointue en blanchisserie 
+              professionnelle.
+            </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Implantée au cœur de la magnifique Baie de Somme, Hello Wash est votre 
-              partenaire de confiance pour tous vos besoins en linge professionnel. 
-              Forte de notre expertise en blanchisserie et de notre connaissance du territoire, 
-              nous vous proposons des services de location de linge de qualité supérieure.
+              Forte de cette expérience terrain et de notre connaissance du territoire, Hello Wash 
+              vous propose aujourd'hui des services de location de linge de qualité supérieure, 
+              étendus à tous les professionnels de la région.
             </p>
             
             <div className="grid sm:grid-cols-2 gap-6 mb-8">
@@ -61,27 +66,30 @@ const About = () => {
           <div className="relative">
             <div className="bg-gradient-to-br from-[#145587]/10 via-[#145587]/5 to-white rounded-3xl p-8 shadow-xl">
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">La Baie de Somme</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">HelloKeys.fr & Hello Wash</h3>
                 <p className="text-gray-600 mb-8">
-                  Notre région d'exception nous inspire chaque jour. La pureté de l'air marin 
-                  et la beauté des paysages se reflètent dans la qualité de nos services.
+                  Notre expérience dans la conciergerie Airbnb nous a menés naturellement vers 
+                  l'excellence en gestion du linge professionnel.
                 </p>
                 
                 <div className="bg-white rounded-2xl p-6 shadow-md">
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
-                      <div className="text-3xl font-bold text-[#145587]">15+</div>
+                      <div className="text-3xl font-bold text-[#145587]">4</div>
                       <div className="text-sm text-gray-600">Années d'expérience</div>
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-green-600">500+</div>
-                      <div className="text-sm text-gray-600">Clients satisfaits</div>
+                      <div className="text-3xl font-bold text-green-600">+150</div>
+                      <div className="text-sm text-gray-600">Propriétaires</div>
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-purple-600">24h</div>
-                      <div className="text-sm text-gray-600">Service rapide</div>
+                      <div className="text-3xl font-bold text-purple-600">30k</div>
+                      <div className="text-sm text-gray-600">Voyageurs</div>
                     </div>
                   </div>
+                  <p className="text-sm text-gray-500 mt-4">
+                    + de 150 propriétaires et 30 000 voyageurs font confiance à Hello Keys !
+                  </p>
                 </div>
               </div>
             </div>
