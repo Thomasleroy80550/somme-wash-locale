@@ -91,8 +91,8 @@ const Services = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-20">
           {services.map((service, index) => (
             <div key={index} className={`bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 ${!service.available ? 'opacity-75' : ''}`}>
-              <div className={`flex items-center justify-center w-16 h-16 ${service.available ? 'bg-[#0052CC]/10' : 'bg-gray-200'} rounded-2xl mb-6 relative`}>
-                <service.icon className={`h-8 w-8 ${service.available ? 'text-[#0052CC]' : 'text-gray-400'}`} />
+              <div className={`flex items-center justify-center w-16 h-16 ${service.available ? 'bg-[#145587]/10' : 'bg-gray-200'} rounded-2xl mb-6 relative`}>
+                <service.icon className={`h-8 w-8 ${service.available ? 'text-[#145587]' : 'text-gray-400'}`} />
                 {!service.available && (
                   <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
                     Bientôt
@@ -106,7 +106,7 @@ const Services = () => {
               <ul className="space-y-3 mb-6">
                 {service.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center text-gray-700">
-                    <div className={`w-2 h-2 ${service.available ? 'bg-[#0052CC]' : 'bg-gray-400'} rounded-full mr-3`}></div>
+                    <div className={`w-2 h-2 ${service.available ? 'bg-[#145587]' : 'bg-gray-400'} rounded-full mr-3`}></div>
                     {feature}
                   </li>
                 ))}
@@ -115,7 +115,7 @@ const Services = () => {
               <button 
                 onClick={() => setOpenModal(service.id)}
                 className={`w-full ${service.available 
-                  ? 'bg-white border-2 border-[#0052CC] text-[#0052CC] hover:bg-[#0052CC] hover:text-white' 
+                  ? 'bg-white border-2 border-[#145587] text-[#145587] hover:bg-[#145587] hover:text-white' 
                   : 'bg-gray-100 border-2 border-gray-300 text-gray-500 cursor-not-allowed'
                 } py-3 rounded-lg transition-colors font-semibold`}
                 disabled={!service.available}
@@ -132,8 +132,8 @@ const Services = () => {
             <DialogContent className="max-w-2xl">
               <DialogHeader>
                 <DialogTitle className="flex items-center text-2xl">
-                  <div className={`flex items-center justify-center w-12 h-12 ${service.available ? 'bg-[#0052CC]/10' : 'bg-gray-200'} rounded-xl mr-4`}>
-                    <service.icon className={`h-6 w-6 ${service.available ? 'text-[#0052CC]' : 'text-gray-400'}`} />
+                  <div className={`flex items-center justify-center w-12 h-12 ${service.available ? 'bg-[#145587]/10' : 'bg-gray-200'} rounded-xl mr-4`}>
+                    <service.icon className={`h-6 w-6 ${service.available ? 'text-[#145587]' : 'text-gray-400'}`} />
                   </div>
                   {service.title}
                   {!service.available && (
@@ -152,18 +152,18 @@ const Services = () => {
                 <ul className="space-y-3">
                   {service.additionalFeatures.map((feature, idx) => (
                     <li key={idx} className="flex items-start">
-                      <div className={`w-2 h-2 ${service.available ? 'bg-[#0052CC]' : 'bg-gray-400'} rounded-full mr-3 mt-2 flex-shrink-0`}></div>
+                      <div className={`w-2 h-2 ${service.available ? 'bg-[#145587]' : 'bg-gray-400'} rounded-full mr-3 mt-2 flex-shrink-0`}></div>
                       <span className="text-gray-700">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
               
-              <div className={`mt-8 p-6 ${service.available ? 'bg-[#0052CC]/5' : 'bg-orange-50'} rounded-lg`}>
-                <h4 className={`font-semibold ${service.available ? 'text-[#0052CC]' : 'text-orange-900'} mb-2`}>
+              <div className={`mt-8 p-6 ${service.available ? 'bg-[#145587]/5' : 'bg-orange-50'} rounded-lg`}>
+                <h4 className={`font-semibold ${service.available ? 'text-[#145587]' : 'text-orange-900'} mb-2`}>
                   {service.available ? 'Contactez-nous pour un devis personnalisé' : 'Service bientôt disponible'}
                 </h4>
-                <p className={service.available ? 'text-[#0052CC]/80' : 'text-orange-700'}>
+                <p className={service.available ? 'text-[#145587]/80' : 'text-orange-700'}>
                   {service.available 
                     ? 'Nos équipes sont à votre disposition pour établir une offre adaptée à vos besoins spécifiques.'
                     : 'Ce service sera lancé très prochainement. Contactez-nous pour être informé de la date de lancement.'
@@ -174,7 +174,7 @@ const Services = () => {
           </Dialog>
         ))}
 
-        <div className="bg-gradient-to-r from-[#0052CC] to-[#0052CC]/90 rounded-3xl p-12 text-white">
+        <div className="bg-gradient-to-r from-[#145587] to-[#145587]/90 rounded-3xl p-12 text-white">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold mb-4">Pourquoi choisir Hello Wash ?</h3>
             <p className="text-blue-100 text-lg">L'excellence au service de votre confort</p>

@@ -16,10 +16,10 @@ const Header = () => {
           </div>
           
           <nav className="hidden md:flex space-x-8">
-            <a href="#accueil" className="text-gray-700 hover:text-[#0052CC] transition-colors">Accueil</a>
-            <a href="#services" className="text-gray-700 hover:text-[#0052CC] transition-colors">Services</a>
-            <a href="#apropos" className="text-gray-700 hover:text-[#0052CC] transition-colors">À propos</a>
-            <a href="#contact" className="text-gray-700 hover:text-[#0052CC] transition-colors">Contact</a>
+            <a href="#accueil" className="text-gray-700 hover:text-[#145587] transition-colors">Accueil</a>
+            <a href="#services" className="text-gray-700 hover:text-[#145587] transition-colors">Services</a>
+            <a href="#apropos" className="text-gray-700 hover:text-[#145587] transition-colors">À propos</a>
+            <a href="#contact" className="text-gray-700 hover:text-[#145587] transition-colors">Contact</a>
           </nav>
 
           <div className="flex items-center space-x-4">
@@ -29,7 +29,7 @@ const Header = () => {
             </div>
             <a
               href="tel:+33000000000"
-              className="bg-[#0052CC] text-white px-4 py-2 rounded-lg hover:bg-[#0052CC]/90 transition-colors"
+              className="bg-[#145587] text-white px-4 py-2 rounded-lg hover:bg-[#145587]/90 transition-colors"
             >
               Nous contacter
             </a>

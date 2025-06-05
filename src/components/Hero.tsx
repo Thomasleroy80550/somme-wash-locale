@@ -3,18 +3,18 @@ import { Sparkles, MapPin } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section id="accueil" className="relative bg-gradient-to-br from-[#0052CC]/5 to-white py-20">
+    <section id="accueil" className="relative bg-gradient-to-br from-[#145587]/5 to-white py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <div className="flex items-center mb-4">
-              <Sparkles className="h-6 w-6 text-[#0052CC] mr-2" />
-              <span className="text-[#0052CC] font-semibold">Blanchisserie professionnelle</span>
+              <Sparkles className="h-6 w-6 text-[#145587] mr-2" />
+              <span className="text-[#145587] font-semibold">Blanchisserie professionnelle</span>
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Hello Wash
-              <span className="block text-[#0052CC]">Baie de Somme</span>
+              <span className="block text-[#145587]">Baie de Somme</span>
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -24,10 +24,10 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <button className="bg-[#0052CC] text-white px-8 py-4 rounded-lg hover:bg-[#0052CC]/90 transition-colors font-semibold">
+              <button className="bg-[#145587] text-white px-8 py-4 rounded-lg hover:bg-[#145587]/90 transition-colors font-semibold">
                 Découvrir nos services
               </button>
-              <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg hover:border-[#0052CC] hover:text-[#0052CC] transition-colors font-semibold">
+              <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg hover:border-[#145587] hover:text-[#145587] transition-colors font-semibold">
                 Demander un devis
               </button>
             </div>
@@ -39,11 +39,11 @@ const Hero = () => {
           </div>
           
           <div className="relative">
-            <div className="bg-gradient-to-br from-[#0052CC]/10 to-[#0052CC]/20 rounded-3xl p-8 shadow-xl">
+            <div className="bg-gradient-to-br from-[#145587]/10 to-[#145587]/20 rounded-3xl p-8 shadow-xl">
               <div className="bg-white rounded-2xl p-6 shadow-lg">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-[#0052CC]/5 rounded-lg p-4 text-center">
-                    <div className="text-2xl font-bold text-[#0052CC]">100%</div>
+                  <div className="bg-[#145587]/5 rounded-lg p-4 text-center">
+                    <div className="text-2xl font-bold text-[#145587]">100%</div>
                     <div className="text-sm text-gray-600">Qualité</div>
                   </div>
                   <div className="bg-green-50 rounded-lg p-4 text-center">

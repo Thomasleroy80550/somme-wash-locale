@@ -18,8 +18,8 @@ const Contact = () => {
             
             <div className="space-y-6">
               <div className="flex items-start">
-                <div className="flex items-center justify-center w-12 h-12 bg-[#0052CC]/10 rounded-lg mr-4 flex-shrink-0">
-                  <Phone className="h-6 w-6 text-[#0052CC]" />
+                <div className="flex items-center justify-center w-12 h-12 bg-[#145587]/10 rounded-lg mr-4 flex-shrink-0">
+                  <Phone className="h-6 w-6 text-[#145587]" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">Téléphone</h4>
@@ -74,7 +74,7 @@ const Contact = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0052CC] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent"
                       placeholder="Votre prénom"
                     />
                   </div>
@@ -82,7 +82,7 @@ const Contact = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Nom</label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0052CC] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent"
                       placeholder="Votre nom"
                     />
                   </div>
@@ -92,14 +92,14 @@ const Contact = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                   <input
                     type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0052CC] focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent"
                     placeholder="votre@email.com"
                   />
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Service souhaité</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0052CC] focus:border-transparent">
+                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent">
                     <option>Linge de lit</option>
                     <option>Linge de toilette</option>
                     <option>Linge de table</option>
@@ -111,14 +111,14 @@ const Contact = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
                   <textarea
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0052CC] focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent"
                     placeholder="Décrivez vos besoins..."
                   ></textarea>
                 </div>
                 
                 <button
                   type="submit"
-                  className="w-full bg-[#0052CC] text-white py-4 rounded-lg hover:bg-[#0052CC]/90 transition-colors font-semibold"
+                  className="w-full bg-[#145587] text-white py-4 rounded-lg hover:bg-[#145587]/90 transition-colors font-semibold"
                 >
                   Envoyer ma demande
                 </button>
