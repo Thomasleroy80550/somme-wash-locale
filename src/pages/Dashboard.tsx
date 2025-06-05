@@ -1,3 +1,7 @@
+<think>
+
+</think>
+
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Package, Truck, Clock, MapPin, Bell, Calendar, User, Home, Bed, CreditCard, FileText, Download, Star, Filter, Eye } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
@@ -79,7 +83,7 @@ const Dashboard = () => {
   const detailedOrders = [
     { 
       id: "CMD-001", 
-      date: "2024-06-06",
+      date: "2025-06-06",
       property: "Gîte Les Roses",
       status: "Collecte programmée", 
       progress: 25, 
@@ -94,7 +98,7 @@ const Dashboard = () => {
     },
     { 
       id: "CMD-002", 
-      date: "2024-06-05",
+      date: "2025-06-05",
       property: "Villa Océan",
       status: "En livraison", 
       progress: 75, 
@@ -110,7 +114,7 @@ const Dashboard = () => {
     },
     { 
       id: "CMD-003", 
-      date: "2024-06-03",
+      date: "2025-06-03",
       property: "Maison du Port",
       status: "Livré", 
       progress: 100, 
@@ -125,18 +129,135 @@ const Dashboard = () => {
     }
   ];
 
-  // Réservations Airbnb étendues avec synchronisation calendrier
+  // Réservations Airbnb étendues avec beaucoup plus de dates de juin à novembre 2025
   const airbnbReservations = [
-    { date: "2024-06-06", guest: "Famille Martin", property: "Gîte Les Roses", status: "checkin", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "Avant 15h" },
-    { date: "2024-06-07", guest: "Famille Martin", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
-    { date: "2024-06-08", guest: "Famille Martin", property: "Gîte Les Roses", status: "checkout", platform: "Airbnb", linentStatus: "à-livrer", collectTime: "12h-14h" },
-    { date: "2024-06-09", guest: "Couple Dubois", property: "Villa Océan", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 16h" },
-    { date: "2024-06-10", guest: "Couple Dubois", property: "Villa Océan", status: "occupied", platform: "Airbnb", linentStatus: "propre", collectTime: null },
-    { date: "2024-06-11", guest: "Couple Dubois", property: "Villa Océan", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "11h-13h" },
-    { date: "2024-06-12", guest: "Groupe d'amis", property: "Maison du Port", status: "checkin", platform: "Booking.com", linentStatus: "à-livrer", collectTime: "14h-16h" },
-    { date: "2024-06-13", guest: "Groupe d'amis", property: "Maison du Port", status: "occupied", platform: "Booking.com", linentStatus: "propre", collectTime: null },
-    { date: "2024-06-14", guest: "Famille Rousseau", property: "Cottage Baie", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 17h" },
-    { date: "2024-06-15", guest: "Famille Rousseau", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "propre", collectTime: null }
+    // Juin 2025
+    { date: "2025-06-07", guest: "Famille Martin", property: "Gîte Les Roses", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 15h" },
+    { date: "2025-06-08", guest: "Famille Martin", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-06-09", guest: "Famille Martin", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-06-10", guest: "Famille Martin", property: "Gîte Les Roses", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "12h-14h" },
+    
+    { date: "2025-06-12", guest: "Couple Dubois", property: "Villa Océan", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "Avant 16h" },
+    { date: "2025-06-13", guest: "Couple Dubois", property: "Villa Océan", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-06-14", guest: "Couple Dubois", property: "Villa Océan", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-06-15", guest: "Couple Dubois", property: "Villa Océan", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-06-16", guest: "Couple Dubois", property: "Villa Océan", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "11h-13h" },
+    
+    { date: "2025-06-18", guest: "Famille Rousseau", property: "Cottage Baie", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 17h" },
+    { date: "2025-06-19", guest: "Famille Rousseau", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-06-20", guest: "Famille Rousseau", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-06-21", guest: "Famille Rousseau", property: "Cottage Baie", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "10h-12h" },
+    
+    { date: "2025-06-25", guest: "Groupe d'amis", property: "Maison du Port", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "14h-16h" },
+    { date: "2025-06-26", guest: "Groupe d'amis", property: "Maison du Port", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-06-27", guest: "Groupe d'amis", property: "Maison du Port", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-06-28", guest: "Groupe d'amis", property: "Maison du Port", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "11h-13h" },
+    
+    { date: "2025-06-30", guest: "Couple Bernard", property: "Studio Mer", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "Avant 15h" },
+    
+    // Juillet 2025
+    { date: "2025-07-01", guest: "Couple Bernard", property: "Studio Mer", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-02", guest: "Couple Bernard", property: "Studio Mer", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "12h-14h" },
+    
+    { date: "2025-07-05", guest: "Famille Lefebvre", property: "Gîte Les Roses", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 16h" },
+    { date: "2025-07-06", guest: "Famille Lefebvre", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-07", guest: "Famille Lefebvre", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-08", guest: "Famille Lefebvre", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-09", guest: "Famille Lefebvre", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-10", guest: "Famille Lefebvre", property: "Gîte Les Roses", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "11h-13h" },
+    
+    { date: "2025-07-12", guest: "Groupe étudiants", property: "Villa Océan", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "14h-16h" },
+    { date: "2025-07-13", guest: "Groupe étudiants", property: "Villa Océan", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-14", guest: "Groupe étudiants", property: "Villa Océan", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-15", guest: "Groupe étudiants", property: "Villa Océan", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "10h-12h" },
+    
+    { date: "2025-07-20", guest: "Famille Moreau", property: "Cottage Baie", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 17h" },
+    { date: "2025-07-21", guest: "Famille Moreau", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-22", guest: "Famille Moreau", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-23", guest: "Famille Moreau", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-24", guest: "Famille Moreau", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-25", guest: "Famille Moreau", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-07-26", guest: "Famille Moreau", property: "Cottage Baie", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "12h-14h" },
+    
+    // Août 2025 (haute saison)
+    { date: "2025-08-01", guest: "Famille Petit", property: "Gîte Les Roses", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 15h" },
+    { date: "2025-08-02", guest: "Famille Petit", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-03", guest: "Famille Petit", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-04", guest: "Famille Petit", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-05", guest: "Famille Petit", property: "Gîte Les Roses", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "11h-13h" },
+    
+    { date: "2025-08-06", guest: "Couple Girard", property: "Studio Mer", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "Avant 16h" },
+    { date: "2025-08-07", guest: "Couple Girard", property: "Studio Mer", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-08", guest: "Couple Girard", property: "Studio Mer", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-09", guest: "Couple Girard", property: "Studio Mer", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "12h-14h" },
+    
+    { date: "2025-08-15", guest: "Famille Durand", property: "Villa Océan", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "14h-16h" },
+    { date: "2025-08-16", guest: "Famille Durand", property: "Villa Océan", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-17", guest: "Famille Durand", property: "Villa Océan", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-18", guest: "Famille Durand", property: "Villa Océan", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-19", guest: "Famille Durand", property: "Villa Océan", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-20", guest: "Famille Durand", property: "Villa Océan", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-21", guest: "Famille Durand", property: "Villa Océan", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "10h-12h" },
+    
+    { date: "2025-08-25", guest: "Groupe amis", property: "Maison du Port", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "Avant 17h" },
+    { date: "2025-08-26", guest: "Groupe amis", property: "Maison du Port", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-27", guest: "Groupe amis", property: "Maison du Port", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-08-28", guest: "Groupe amis", property: "Maison du Port", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "11h-13h" },
+    
+    // Septembre 2025
+    { date: "2025-09-05", guest: "Famille Thomas", property: "Cottage Baie", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 15h" },
+    { date: "2025-09-06", guest: "Famille Thomas", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-09-07", guest: "Famille Thomas", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-09-08", guest: "Famille Thomas", property: "Cottage Baie", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "12h-14h" },
+    
+    { date: "2025-09-12", guest: "Couple Roux", property: "Studio Mer", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "Avant 16h" },
+    { date: "2025-09-13", guest: "Couple Roux", property: "Studio Mer", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-09-14", guest: "Couple Roux", property: "Studio Mer", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "11h-13h" },
+    
+    { date: "2025-09-20", guest: "Famille Garcia", property: "Gîte Les Roses", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "14h-16h" },
+    { date: "2025-09-21", guest: "Famille Garcia", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-09-22", guest: "Famille Garcia", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-09-23", guest: "Famille Garcia", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-09-24", guest: "Famille Garcia", property: "Gîte Les Roses", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "10h-12h" },
+    
+    // Octobre 2025
+    { date: "2025-10-10", guest: "Couple Laurent", property: "Villa Océan", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "Avant 17h" },
+    { date: "2025-10-11", guest: "Couple Laurent", property: "Villa Océan", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-10-12", guest: "Couple Laurent", property: "Villa Océan", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-10-13", guest: "Couple Laurent", property: "Villa Océan", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "12h-14h" },
+    
+    { date: "2025-10-18", guest: "Famille Simon", property: "Cottage Baie", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 15h" },
+    { date: "2025-10-19", guest: "Famille Simon", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-10-20", guest: "Famille Simon", property: "Cottage Baie", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-10-21", guest: "Famille Simon", property: "Cottage Baie", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "11h-13h" },
+    
+    { date: "2025-10-25", guest: "Groupe collègues", property: "Maison du Port", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "14h-16h" },
+    { date: "2025-10-26", guest: "Groupe collègues", property: "Maison du Port", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-10-27", guest: "Groupe collègues", property: "Maison du Port", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "10h-12h" },
+    
+    // Novembre 2025
+    { date: "2025-11-01", guest: "Famille Blanc", property: "Gîte Les Roses", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 16h" },
+    { date: "2025-11-02", guest: "Famille Blanc", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-11-03", guest: "Famille Blanc", property: "Gîte Les Roses", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-11-04", guest: "Famille Blanc", property: "Gîte Les Roses", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "12h-14h" },
+    
+    { date: "2025-11-08", guest: "Couple Mercier", property: "Studio Mer", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "Avant 15h" },
+    { date: "2025-11-09", guest: "Couple Mercier", property: "Studio Mer", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-11-10", guest: "Couple Mercier", property: "Studio Mer", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "11h-13h" },
+    
+    { date: "2025-11-15", guest: "Famille Leroy", property: "Villa Océan", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "14h-16h" },
+    { date: "2025-11-16", guest: "Famille Leroy", property: "Villa Océan", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-11-17", guest: "Famille Leroy", property: "Villa Océan", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-11-18", guest: "Famille Leroy", property: "Villa Océan", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "10h-12h" },
+    
+    { date: "2025-11-22", guest: "Groupe famille", property: "Cottage Baie", status: "checkin", platform: "Booking.com", linentStatus: "livré", collectTime: "Avant 17h" },
+    { date: "2025-11-23", guest: "Groupe famille", property: "Cottage Baie", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-11-24", guest: "Groupe famille", property: "Cottage Baie", status: "occupied", platform: "Booking.com", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-11-25", guest: "Groupe famille", property: "Cottage Baie", status: "checkout", platform: "Booking.com", linentStatus: "à-collecter", collectTime: "12h-14h" },
+    
+    { date: "2025-11-28", guest: "Couple Fabre", property: "Maison du Port", status: "checkin", platform: "Airbnb", linentStatus: "livré", collectTime: "Avant 15h" },
+    { date: "2025-11-29", guest: "Couple Fabre", property: "Maison du Port", status: "occupied", platform: "Airbnb", linentStatus: "en-cours", collectTime: null },
+    { date: "2025-11-30", guest: "Couple Fabre", property: "Maison du Port", status: "checkout", platform: "Airbnb", linentStatus: "à-collecter", collectTime: "11h-13h" }
   ];
 
   const mockOrders = [
@@ -186,6 +307,7 @@ const Dashboard = () => {
       case 'a-collecter': return 'bg-orange-100 text-orange-800';
       case 'livré': return 'bg-purple-100 text-purple-800';
       case 'à-livrer': return 'bg-yellow-100 text-yellow-800';
+      case 'à-collecter': return 'bg-orange-100 text-orange-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -204,8 +326,8 @@ const Dashboard = () => {
 
   const getPlatformBadgeColor = (platform: string) => {
     switch (platform) {
-      case 'Airbnb': return 'bg-red-100 text-red-800';
-      case 'Booking.com': return 'bg-blue-100 text-blue-800';
+      case 'Airbnb': return 'bg-red-100 text-red-800 border border-red-200';
+      case 'Booking.com': return 'bg-blue-100 text-blue-800 border border-blue-200';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -732,16 +854,20 @@ const Dashboard = () => {
             </div>
           </TabsContent>
 
-          {/* Section Calendrier avec réservations Airbnb */}
+          {/* Section Calendrier avec style Airbnb amélioré */}
           <TabsContent value="calendar">
             <div className="space-y-6">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold">Planning des réservations</h2>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <span>Synchronisé avec Airbnb</span>
-                  <div className="w-3 h-3 bg-blue-500 rounded-full ml-4"></div>
-                  <span>Booking.com</span>
+                <div className="flex items-center gap-4 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-[#FF5A5F] rounded-md border border-red-300"></div>
+                    <span>Airbnb</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-[#003580] rounded-md border border-blue-300"></div>
+                    <span>Booking.com</span>
+                  </div>
                 </div>
               </div>
               
@@ -762,7 +888,12 @@ const Dashboard = () => {
                         reservation: hasReservation
                       }}
                       modifiersStyles={{
-                        reservation: { backgroundColor: '#145587', color: 'white', borderRadius: '4px' }
+                        reservation: { 
+                          backgroundColor: '#FF5A5F', 
+                          color: 'white', 
+                          borderRadius: '8px',
+                          fontWeight: '600'
+                        }
                       }}
                       className="rounded-md border"
                     />
@@ -774,20 +905,23 @@ const Dashboard = () => {
                         </h4>
                         <div className="space-y-3">
                           {getReservationsForDate(selectedDate).map((reservation, index) => (
-                            <div key={index} className="p-4 bg-gray-50 rounded-lg border">
-                              <div className="flex justify-between items-start mb-2">
+                            <div key={index} className="p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm">
+                              <div className="flex justify-between items-start mb-3">
                                 <div>
-                                  <p className="font-medium text-gray-900">{reservation.property}</p>
+                                  <p className="font-semibold text-gray-900">{reservation.property}</p>
                                   <p className="text-sm text-gray-600">{reservation.guest}</p>
                                 </div>
                                 <div className="flex gap-2">
-                                  <Badge className={getPlatformBadgeColor(reservation.platform)}>
+                                  <Badge className={`${getPlatformBadgeColor(reservation.platform)} rounded-full px-3 py-1 font-medium`}>
                                     {reservation.platform}
                                   </Badge>
-                                  <Badge variant={
-                                    reservation.status === 'checkin' ? 'default' :
-                                    reservation.status === 'checkout' ? 'secondary' : 'outline'
-                                  }>
+                                  <Badge 
+                                    className={`rounded-full px-3 py-1 font-medium ${
+                                      reservation.status === 'checkin' ? 'bg-green-100 text-green-800 border border-green-200' :
+                                      reservation.status === 'checkout' ? 'bg-orange-100 text-orange-800 border border-orange-200' : 
+                                      'bg-blue-100 text-blue-800 border border-blue-200'
+                                    }`}
+                                  >
                                     {reservation.status === 'checkin' ? 'Arrivée' :
                                      reservation.status === 'checkout' ? 'Départ' : 'Occupé'}
                                   </Badge>
@@ -796,20 +930,20 @@ const Dashboard = () => {
                               
                               <div className="flex justify-between items-center">
                                 <div className="flex items-center gap-2">
-                                  <span className="text-sm text-gray-600">Linge:</span>
-                                  <Badge className={getLinenStatusColor(reservation.linentStatus)}>
+                                  <span className="text-sm text-gray-600 font-medium">Linge:</span>
+                                  <Badge className={`${getLinenStatusColor(reservation.linentStatus)} rounded-full px-3 py-1`}>
                                     {getLinenStatusText(reservation.linentStatus)}
                                   </Badge>
                                 </div>
                                 {reservation.collectTime && (
-                                  <span className="text-sm text-blue-600 font-medium">
+                                  <span className="text-sm text-blue-600 font-medium bg-blue-50 px-3 py-1 rounded-full">
                                     📅 {reservation.collectTime}
                                   </span>
                                 )}
                               </div>
                             </div>
                           )) || (
-                            <p className="text-gray-500 text-sm">Aucune réservation ce jour</p>
+                            <p className="text-gray-500 text-sm text-center py-8">Aucune réservation ce jour</p>
                           )}
                         </div>
                       </div>
