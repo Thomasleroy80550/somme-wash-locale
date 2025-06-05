@@ -2,14 +2,13 @@
 import { useState } from "react";
 import { 
   Home, 
-  Package, 
-  FileText, 
+  Calendar, 
+  Building2, 
   Users, 
-  BarChart3, 
-  Settings,
-  Truck,
   Euro,
-  Calendar
+  Settings,
+  BarChart3,
+  BedDouble
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -25,19 +24,20 @@ const DashboardSidebar = ({ activeSection, onSectionChange }: DashboardSidebarPr
 
   const menuItems = [
     { id: 'overview', label: 'Vue d\'ensemble', icon: Home },
-    { id: 'orders', label: 'Commandes', icon: Package },
-    { id: 'invoices', label: 'Factures', icon: FileText },
-    { id: 'clients', label: 'Clients', icon: Users },
-    { id: 'deliveries', label: 'Livraisons', icon: Truck },
+    { id: 'reservations', label: 'Réservations', icon: Calendar },
+    { id: 'properties', label: 'Mes Gîtes', icon: Building2 },
+    { id: 'guests', label: 'Voyageurs', icon: Users },
+    { id: 'calendar', label: 'Planning', icon: BedDouble },
+    { id: 'finance', label: 'Finances', icon: Euro },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
-    { id: 'calendar', label: 'Planning', icon: Calendar },
     { id: 'settings', label: 'Paramètres', icon: Settings },
   ];
 
   return (
     <div className="w-64 bg-white border-r border-gray-200 h-full flex flex-col">
       <div className="p-6 border-b border-gray-200">
-        <h2 className="text-xl font-bold text-[#145587]">Dashboard Admin</h2>
+        <h2 className="text-xl font-bold text-[#145587]">Gestion Gîtes</h2>
+        <p className="text-sm text-gray-600">Baie de Somme</p>
       </div>
       
       <nav className="flex-1 p-4 space-y-2">

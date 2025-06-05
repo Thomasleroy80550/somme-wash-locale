@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Shield, Eye, EyeOff, Mail, MapPin, Heart, Droplets, Truck, Activity, Bell, User, Home, Package, Users, Settings, TrendingUp, Calendar, Clock, CheckCircle } from 'lucide-react';
+import { Shield, Eye, EyeOff, Mail, MapPin, Heart, Droplets, Truck, Activity, Bell, User, Home, Package, Users, Settings, TrendingUp, Calendar, Clock, CheckCircle, Building2, Euro } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -146,13 +145,13 @@ const ComingSoon = () => {
         <Offers />
       </div>
 
-      {/* Dashboard Mockup Preview - Mobile Optimized */}
+      {/* Dashboard Mockup Preview - Updated for Gîtes Management */}
       <section className="relative z-10 py-12 sm:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#145587] mb-4">Aperçu de votre futur tableau de bord</h3>
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#145587] mb-4">Gérez vos gîtes en toute simplicité</h3>
             <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
-              Découvrez l'interface d'administration que vous utiliserez pour gérer vos commandes et suivre vos livraisons
+              Découvrez notre plateforme de gestion complète pour propriétaires de gîtes et hébergements touristiques
             </p>
           </div>
           
@@ -168,12 +167,12 @@ const ComingSoon = () => {
                 </div>
                 <div className="flex-1 mx-2 sm:mx-4">
                   <div className="bg-gray-700 rounded px-2 sm:px-3 py-1 text-gray-300 text-xs sm:text-sm">
-                    admin.hellowash.fr/tableau-de-bord
+                    gestion.hellowash.fr/dashboard
                   </div>
                 </div>
               </div>
               
-              {/* Dashboard Content - Mobile Optimized */}
+              {/* Dashboard Content - Updated for Gîtes */}
               <div className="bg-white rounded-lg overflow-hidden relative">
                 {/* Preview Overlay */}
                 <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-20 bg-[#145587] text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold animate-pulse">
@@ -191,27 +190,30 @@ const ComingSoon = () => {
                           alt="Hello Wash" 
                           className="h-6 w-auto"
                         />
-                        <h1 className="text-sm font-bold text-[#145587]">Tableau de bord</h1>
+                        <div>
+                          <h1 className="text-sm font-bold text-[#145587]">Gestion Gîtes</h1>
+                          <p className="text-xs text-gray-500">Baie de Somme</p>
+                        </div>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Bell className="w-4 h-4 text-gray-400" />
                         <Avatar className="w-6 h-6">
-                          <AvatarFallback className="bg-[#145587] text-white text-xs">AD</AvatarFallback>
+                          <AvatarFallback className="bg-[#145587] text-white text-xs">PG</AvatarFallback>
                         </Avatar>
                       </div>
                     </div>
                   </div>
 
-                  {/* Mobile Stats - Stacked */}
+                  {/* Mobile Stats - Updated for Gîtes */}
                   <div className="p-4 bg-gray-50 space-y-3">
                     <Card className="bg-white shadow-sm">
                       <CardContent className="p-3">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-xs text-gray-600 mb-1">Commandes aujourd'hui</p>
-                            <p className="text-xl font-bold text-[#145587]">24</p>
+                            <p className="text-xs text-gray-600 mb-1">Réservations ce mois</p>
+                            <p className="text-xl font-bold text-[#145587]">47</p>
                           </div>
-                          <TrendingUp className="w-6 h-6 text-[#145587]" />
+                          <Calendar className="w-6 h-6 text-[#145587]" />
                         </div>
                       </CardContent>
                     </Card>
@@ -220,43 +222,43 @@ const ComingSoon = () => {
                       <CardContent className="p-3">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-xs text-gray-600 mb-1">Livraisons en cours</p>
+                            <p className="text-xs text-gray-600 mb-1">Taux d'occupation</p>
                             <div className="flex items-center gap-1">
                               <Activity className="w-3 h-3 text-green-600 animate-pulse" />
-                              <p className="text-lg font-bold text-green-600">3</p>
+                              <p className="text-lg font-bold text-green-600">86%</p>
                             </div>
                           </div>
-                          <Truck className="w-6 h-6 text-[#145587]" />
+                          <Building2 className="w-6 h-6 text-[#145587]" />
                         </div>
                       </CardContent>
                     </Card>
 
-                    {/* Mobile Recent Orders */}
+                    {/* Mobile Recent Reservations */}
                     <Card className="bg-white shadow-sm">
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-sm">Commandes récentes</CardTitle>
+                        <CardTitle className="text-sm">Prochaines arrivées</CardTitle>
                       </CardHeader>
                       <CardContent className="p-3 pt-0">
                         <div className="space-y-2">
                           <div className="flex items-center space-x-2 text-xs">
                             <Avatar className="w-6 h-6">
-                              <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">MC</AvatarFallback>
+                              <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">FM</AvatarFallback>
                             </Avatar>
                             <div className="flex-1 min-w-0">
-                              <p className="font-medium text-gray-900">M. Caron</p>
-                              <p className="text-gray-500">Le Crotoy</p>
+                              <p className="font-medium text-gray-900">Famille Martin</p>
+                              <p className="text-gray-500">Les Mouettes</p>
                             </div>
-                            <CheckCircle className="w-3 h-3 text-green-500" />
+                            <Clock className="w-3 h-3 text-blue-500" />
                           </div>
                           <div className="flex items-center space-x-2 text-xs">
                             <Avatar className="w-6 h-6">
-                              <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">PD</AvatarFallback>
+                              <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">PL</AvatarFallback>
                             </Avatar>
                             <div className="flex-1 min-w-0">
-                              <p className="font-medium text-gray-900">P. Dubois</p>
-                              <p className="text-gray-500">Fort-Mahon</p>
+                              <p className="font-medium text-gray-900">Pierre Leclerc</p>
+                              <p className="text-gray-500">Maison du Phare</p>
                             </div>
-                            <Clock className="w-3 h-3 text-orange-500" />
+                            <CheckCircle className="w-3 h-3 text-green-500" />
                           </div>
                         </div>
                       </CardContent>
@@ -264,7 +266,7 @@ const ComingSoon = () => {
                   </div>
                 </div>
 
-                {/* Desktop: Original Layout */}
+                {/* Desktop: Updated Layout for Gîtes */}
                 <div className="hidden sm:block">
                   {/* Top Navigation */}
                   <div className="bg-white border-b border-gray-200 px-6 py-4">
@@ -275,36 +277,43 @@ const ComingSoon = () => {
                           alt="Hello Wash" 
                           className="h-8 w-auto"
                         />
-                        <h1 className="text-xl font-bold text-[#145587]">Interface d'administration</h1>
+                        <div>
+                          <h1 className="text-xl font-bold text-[#145587]">Gestion des Gîtes</h1>
+                          <p className="text-sm text-gray-600">Baie de Somme</p>
+                        </div>
                       </div>
                       <div className="flex items-center space-x-4">
                         <Bell className="w-5 h-5 text-gray-400" />
                         <Avatar className="w-8 h-8">
-                          <AvatarFallback className="bg-[#145587] text-white text-xs">AD</AvatarFallback>
+                          <AvatarFallback className="bg-[#145587] text-white text-xs">PG</AvatarFallback>
                         </Avatar>
                       </div>
                     </div>
                   </div>
 
                   <div className="flex">
-                    {/* Sidebar */}
+                    {/* Sidebar - Updated for Gîtes */}
                     <div className="w-64 bg-gray-50 border-r border-gray-200 min-h-[500px] lg:min-h-[600px]">
                       <nav className="p-4 space-y-2">
                         <div className="flex items-center space-x-3 px-3 py-2 bg-[#145587] text-white rounded-lg">
                           <Home className="w-4 h-4" />
-                          <span className="text-sm font-medium">Tableau de bord</span>
+                          <span className="text-sm font-medium">Vue d'ensemble</span>
                         </div>
                         <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
-                          <Package className="w-4 h-4" />
-                          <span className="text-sm">Commandes</span>
+                          <Calendar className="w-4 h-4" />
+                          <span className="text-sm">Réservations</span>
+                        </div>
+                        <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                          <Building2 className="w-4 h-4" />
+                          <span className="text-sm">Mes Gîtes</span>
                         </div>
                         <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
                           <Users className="w-4 h-4" />
-                          <span className="text-sm">Clients</span>
+                          <span className="text-sm">Voyageurs</span>
                         </div>
                         <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
-                          <Truck className="w-4 h-4" />
-                          <span className="text-sm">Livraisons</span>
+                          <Euro className="w-4 h-4" />
+                          <span className="text-sm">Finances</span>
                         </div>
                         <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
                           <Settings className="w-4 h-4" />
@@ -313,95 +322,101 @@ const ComingSoon = () => {
                       </nav>
                     </div>
 
-                    {/* Main Content */}
+                    {/* Main Content - Updated for Gîtes */}
                     <div className="flex-1 p-6 bg-gray-50">
-                      {/* Stats Cards */}
+                      {/* Stats Cards - Updated for Gîtes */}
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                         <Card>
                           <CardHeader className="pb-3">
                             <CardTitle className="text-lg flex items-center gap-2">
-                              <Shield className="w-5 h-5 text-[#145587]" />
-                              Mode Maintenance
+                              <Calendar className="w-5 h-5 text-[#145587]" />
+                              Réservations
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <p className="text-sm text-gray-600 mb-4">
-                              Statut actuel: <span className="text-green-600 font-medium">Inactif</span>
-                            </p>
-                            <Button className="w-full bg-[#145587] hover:bg-[#145587]/90 text-xs">
-                              Activer la maintenance
-                            </Button>
+                            <p className="text-3xl font-bold text-[#145587] mb-1">47</p>
+                            <p className="text-sm text-gray-600">Ce mois-ci</p>
+                            <div className="mt-2 text-xs text-green-600">+12% vs mois dernier</div>
                           </CardContent>
                         </Card>
 
                         <Card>
                           <CardHeader className="pb-3">
                             <CardTitle className="text-lg flex items-center gap-2">
-                              <TrendingUp className="w-5 h-5 text-[#145587]" />
-                              Statistiques
+                              <Building2 className="w-5 h-5 text-[#145587]" />
+                              Occupation
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <p className="text-3xl font-bold text-[#145587] mb-1">24</p>
-                            <p className="text-sm text-gray-600">Commandes aujourd'hui</p>
-                            <div className="mt-2 text-xs text-green-600">+12% vs hier</div>
-                          </CardContent>
-                        </Card>
-
-                        <Card>
-                          <CardHeader className="pb-3">
-                            <CardTitle className="text-lg flex items-center gap-2">
-                              <Truck className="w-5 h-5 text-[#145587]" />
-                              Suivi des livraisons
-                            </CardTitle>
-                          </CardHeader>
-                          <CardContent>
-                            <div className="flex items-center gap-2 mb-2">
+                            <div className="flex items-center gap-2 mb-1">
                               <Activity className="w-4 h-4 text-green-600 animate-pulse" />
-                              <p className="text-2xl font-bold text-green-600">Live</p>
+                              <p className="text-2xl font-bold text-green-600">86%</p>
                             </div>
-                            <p className="text-sm text-gray-600">3 livraisons en cours</p>
+                            <p className="text-sm text-gray-600">Taux global</p>
+                          </CardContent>
+                        </Card>
+
+                        <Card>
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-lg flex items-center gap-2">
+                              <Euro className="w-5 h-5 text-[#145587]" />
+                              Revenus
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-3xl font-bold text-green-600 mb-1">18.900€</p>
+                            <p className="text-sm text-gray-600">Ce mois-ci</p>
+                            <div className="mt-2 text-xs text-green-600">+24% vs mois dernier</div>
                           </CardContent>
                         </Card>
                       </div>
 
-                      {/* Recent Activity */}
+                      {/* Recent Activity - Updated for Gîtes */}
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <Card>
                           <CardHeader>
-                            <CardTitle className="text-lg">Commandes récentes</CardTitle>
+                            <CardTitle className="text-lg">Prochaines arrivées</CardTitle>
                           </CardHeader>
                           <CardContent>
                             <div className="space-y-4">
                               <div className="flex items-center space-x-3">
                                 <Avatar className="w-8 h-8">
-                                  <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">MC</AvatarFallback>
+                                  <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">FM</AvatarFallback>
                                 </Avatar>
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-medium text-gray-900">Marie Caron</p>
-                                  <p className="text-xs text-gray-500">Le Crotoy - 15 pièces</p>
+                                  <p className="text-sm font-medium text-gray-900">Famille Martin</p>
+                                  <p className="text-xs text-gray-500">Gîte Les Mouettes - 4 pers.</p>
                                 </div>
-                                <CheckCircle className="w-4 h-4 text-green-500" />
+                                <div className="text-right">
+                                  <p className="text-xs font-medium">Aujourd'hui</p>
+                                  <p className="text-xs text-gray-500">15:00</p>
+                                </div>
                               </div>
                               <div className="flex items-center space-x-3">
                                 <Avatar className="w-8 h-8">
-                                  <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">PD</AvatarFallback>
+                                  <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">PL</AvatarFallback>
                                 </Avatar>
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-medium text-gray-900">Pierre Dubois</p>
-                                  <p className="text-xs text-gray-500">Fort-Mahon - 8 pièces</p>
+                                  <p className="text-sm font-medium text-gray-900">Pierre Leclerc</p>
+                                  <p className="text-xs text-gray-500">Maison du Phare - 6 pers.</p>
                                 </div>
-                                <Clock className="w-4 h-4 text-orange-500" />
+                                <div className="text-right">
+                                  <p className="text-xs font-medium">Demain</p>
+                                  <p className="text-xs text-gray-500">16:00</p>
+                                </div>
                               </div>
                               <div className="flex items-center space-x-3">
                                 <Avatar className="w-8 h-8">
-                                  <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">SL</AvatarFallback>
+                                  <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">SD</AvatarFallback>
                                 </Avatar>
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-medium text-gray-900">Sophie Leclerc</p>
-                                  <p className="text-xs text-gray-500">Rue - 22 pièces</p>
+                                  <p className="text-sm font-medium text-gray-900">Sophie Durand</p>
+                                  <p className="text-xs text-gray-500">Studio Vue Mer - 2 pers.</p>
                                 </div>
-                                <Truck className="w-4 h-4 text-blue-500" />
+                                <div className="text-right">
+                                  <p className="text-xs font-medium">Vendredi</p>
+                                  <p className="text-xs text-gray-500">14:30</p>
+                                </div>
                               </div>
                             </div>
                           </CardContent>
@@ -411,30 +426,40 @@ const ComingSoon = () => {
                           <CardHeader>
                             <CardTitle className="text-lg flex items-center gap-2">
                               <Calendar className="w-5 h-5" />
-                              Planning du jour
+                              Mes propriétés
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
                             <div className="space-y-3">
-                              <div className="flex items-center space-x-3 text-sm">
-                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                                <span className="text-gray-500">09:00</span>
-                                <span>Collecte Le Crotoy</span>
+                              <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                                <div>
+                                  <p className="text-sm font-medium">Gîte Les Mouettes</p>
+                                  <p className="text-xs text-gray-600">Le Crotoy - 6 pers.</p>
+                                </div>
+                                <div className="text-right">
+                                  <div className="w-2 h-2 bg-green-500 rounded-full mb-1"></div>
+                                  <p className="text-xs">85%</p>
+                                </div>
                               </div>
-                              <div className="flex items-center space-x-3 text-sm">
-                                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                <span className="text-gray-500">11:30</span>
-                                <span>Livraison Fort-Mahon</span>
+                              <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                                <div>
+                                  <p className="text-sm font-medium">Studio Vue Mer</p>
+                                  <p className="text-xs text-gray-600">Saint-Valery - 2 pers.</p>
+                                </div>
+                                <div className="text-right">
+                                  <div className="w-2 h-2 bg-blue-500 rounded-full mb-1"></div>
+                                  <p className="text-xs">92%</p>
+                                </div>
                               </div>
-                              <div className="flex items-center space-x-3 text-sm">
-                                <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                                <span className="text-gray-500">14:00</span>
-                                <span>Collecte Rue</span>
-                              </div>
-                              <div className="flex items-center space-x-3 text-sm">
-                                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                                <span className="text-gray-500">16:30</span>
-                                <span>Livraison Saint-Valery</span>
+                              <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                                <div>
+                                  <p className="text-sm font-medium">Maison du Phare</p>
+                                  <p className="text-xs text-gray-600">Fort-Mahon - 8 pers.</p>
+                                </div>
+                                <div className="text-right">
+                                  <div className="w-2 h-2 bg-purple-500 rounded-full mb-1"></div>
+                                  <p className="text-xs">78%</p>
+                                </div>
                               </div>
                             </div>
                           </CardContent>
