@@ -150,7 +150,7 @@ const ComingSoon = () => {
       <section className="relative z-10 py-12 sm:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#145587] mb-4">Aperçu de votre futur dashboard</h3>
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#145587] mb-4">Aperçu de votre futur tableau de bord</h3>
             <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
               Découvrez l'interface d'administration que vous utiliserez pour gérer vos commandes et suivre vos livraisons
             </p>
@@ -168,7 +168,7 @@ const ComingSoon = () => {
                 </div>
                 <div className="flex-1 mx-2 sm:mx-4">
                   <div className="bg-gray-700 rounded px-2 sm:px-3 py-1 text-gray-300 text-xs sm:text-sm">
-                    admin.hellowash.fr/dashboard
+                    admin.hellowash.fr/tableau-de-bord
                   </div>
                 </div>
               </div>
@@ -191,7 +191,7 @@ const ComingSoon = () => {
                           alt="Hello Wash" 
                           className="h-6 w-auto"
                         />
-                        <h1 className="text-sm font-bold text-[#145587]">Dashboard</h1>
+                        <h1 className="text-sm font-bold text-[#145587]">Tableau de bord</h1>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Bell className="w-4 h-4 text-gray-400" />
@@ -275,7 +275,7 @@ const ComingSoon = () => {
                           alt="Hello Wash" 
                           className="h-8 w-auto"
                         />
-                        <h1 className="text-xl font-bold text-[#145587]">Dashboard Admin</h1>
+                        <h1 className="text-xl font-bold text-[#145587]">Interface d'administration</h1>
                       </div>
                       <div className="flex items-center space-x-4">
                         <Bell className="w-5 h-5 text-gray-400" />
@@ -292,7 +292,7 @@ const ComingSoon = () => {
                       <nav className="p-4 space-y-2">
                         <div className="flex items-center space-x-3 px-3 py-2 bg-[#145587] text-white rounded-lg">
                           <Home className="w-4 h-4" />
-                          <span className="text-sm font-medium">Dashboard</span>
+                          <span className="text-sm font-medium">Tableau de bord</span>
                         </div>
                         <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
                           <Package className="w-4 h-4" />
@@ -352,7 +352,7 @@ const ComingSoon = () => {
                           <CardHeader className="pb-3">
                             <CardTitle className="text-lg flex items-center gap-2">
                               <Truck className="w-5 h-5 text-[#145587]" />
-                              Suivi livraison
+                              Suivi des livraisons
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
