@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,6 +9,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import AuthGuard from '@/components/AuthGuard';
+import { Database } from '@/types/database';
 import { 
   Users, 
   Crown, 
@@ -24,29 +24,9 @@ import {
   UserPlus
 } from 'lucide-react';
 
-interface MemberProfile {
-  id: string;
-  user_id: string;
-  profile_type: 'gite' | 'grand-compte';
-  number_of_properties: number;
-  total_capacity: number;
-  location: string;
-  description: string | null;
-  delivery_delay: 'j-1' | 'j-2' | 'j-3';
-  services: string[];
-  special_requests: string | null;
-  status: 'pending' | 'validated' | 'priority';
-  position: number | null;
-  registration_date: string;
-  updated_at: string;
-  profiles: {
-    first_name: string;
-    last_name: string;
-    email: string;
-    phone: string | null;
-    company: string | null;
-  };
-}
+type MemberProfile = Database['public']['Tables']['member_profiles']['Row'] & {
+  profiles: Database['public']['Tables']['profiles']['Row'];
+};
 
 const AdminDashboard = () => {
   const { signOut } = useAuth();
