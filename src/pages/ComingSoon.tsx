@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Sparkles, MapPin, Calendar, Building2, Users, TrendingUp, Clock, Mail, Bed, Bath, UtensilsCrossed } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -241,7 +242,7 @@ const ComingSoon = () => {
             Blanchisserie connectée - Baie de Somme
           </p>
           <p className="text-gray-500 text-sm">
-            &copy; 2024 Hello Wash. Tous droits réservés.
+            &copy; 2025 Hello Wash. Tous droits réservés.
           </p>
         </div>
       </footer>
