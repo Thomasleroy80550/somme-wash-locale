@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Sparkles, MapPin, Calendar, Building2, Users, TrendingUp, Clock, Mail, Bed, Bath, UtensilsCrossed, Truck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -390,7 +391,7 @@ const ComingSoon = () => {
           
           <div className="mt-6">
             <a 
-              href="/member"
+              href="/auth"
               className="inline-flex items-center bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold"
             >
               <Sparkles className="h-5 w-5 mr-2" />
