@@ -1,3 +1,4 @@
+
 import { Bed, Bath, UtensilsCrossed, Sparkles, Clock, Shield } from 'lucide-react';
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
@@ -12,6 +13,7 @@ const Services = () => {
       title: "Linge de lit",
       description: "Draps, housses de couette, taies d'oreiller. Linge doux et impeccablement propre pour un confort optimal.",
       features: ["Coton de qualité", "Différentes tailles", "Livraison incluse"],
+      available: true,
       detailedDescription: "Notre service de location de linge de lit comprend une gamme complète de produits en coton de qualité supérieure. Nous proposons des draps housse, draps plats, housses de couette et taies d'oreiller dans toutes les tailles standards.",
       additionalFeatures: [
         "Coton 100% percale pour un confort optimal",
@@ -28,6 +30,7 @@ const Services = () => {
       title: "Linge de toilette",
       description: "Serviettes, peignoirs, tapis de bain. Textiles absorbants et moelleux pour votre bien-être.",
       features: ["Ultra-absorbant", "Hypoallergénique", "Séchage rapide"],
+      available: true,
       detailedDescription: "Notre collection de linge de toilette offre le parfait équilibre entre douceur, absorption et durabilité. Tous nos textiles sont traités avec des produits hypoallergéniques.",
       additionalFeatures: [
         "Serviettes de bain et de toilette en coton éponge",
@@ -44,7 +47,8 @@ const Services = () => {
       title: "Linge de table",
       description: "Nappes, serviettes de table, chemins de table. Élégance et raffinement pour vos réceptions.",
       features: ["Designs variés", "Anti-taches", "Repassage professionnel"],
-      detailedDescription: "Sublimez vos tables avec notre collection de linge de table élégant. Parfait pour les événements professionnels, réceptions ou dîners familiaux.",
+      available: false,
+      detailedDescription: "Sublimez vos tables avec notre collection de linge de table élégant. Parfait pour les événements professionnels, réceptions ou dîners familiaux. Ce service sera disponible très prochainement.",
       additionalFeatures: [
         "Nappes rondes, carrées et rectangulaires",
         "Serviettes de table assorties",
@@ -86,9 +90,14 @@ const Services = () => {
 
         <div className="grid md:grid-cols-3 gap-8 mb-20">
           {services.map((service, index) => (
-            <div key={index} className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-6">
-                <service.icon className="h-8 w-8 text-blue-600" />
+            <div key={index} className={`bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 ${!service.available ? 'opacity-75' : ''}`}>
+              <div className={`flex items-center justify-center w-16 h-16 ${service.available ? 'bg-[#0052CC]/10' : 'bg-gray-200'} rounded-2xl mb-6 relative`}>
+                <service.icon className={`h-8 w-8 ${service.available ? 'text-[#0052CC]' : 'text-gray-400'}`} />
+                {!service.available && (
+                  <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+                    Bientôt
+                  </div>
+                )}
               </div>
               
               <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
@@ -97,7 +106,7 @@ const Services = () => {
               <ul className="space-y-3 mb-6">
                 {service.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center text-gray-700">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                    <div className={`w-2 h-2 ${service.available ? 'bg-[#0052CC]' : 'bg-gray-400'} rounded-full mr-3`}></div>
                     {feature}
                   </li>
                 ))}
@@ -105,9 +114,13 @@ const Services = () => {
               
               <button 
                 onClick={() => setOpenModal(service.id)}
-                className="w-full bg-white border-2 border-blue-600 text-blue-600 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors font-semibold"
+                className={`w-full ${service.available 
+                  ? 'bg-white border-2 border-[#0052CC] text-[#0052CC] hover:bg-[#0052CC] hover:text-white' 
+                  : 'bg-gray-100 border-2 border-gray-300 text-gray-500 cursor-not-allowed'
+                } py-3 rounded-lg transition-colors font-semibold`}
+                disabled={!service.available}
               >
-                En savoir plus
+                {service.available ? 'En savoir plus' : 'Bientôt disponible'}
               </button>
             </div>
           ))}
@@ -119,10 +132,15 @@ const Services = () => {
             <DialogContent className="max-w-2xl">
               <DialogHeader>
                 <DialogTitle className="flex items-center text-2xl">
-                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl mr-4">
-                    <service.icon className="h-6 w-6 text-blue-600" />
+                  <div className={`flex items-center justify-center w-12 h-12 ${service.available ? 'bg-[#0052CC]/10' : 'bg-gray-200'} rounded-xl mr-4`}>
+                    <service.icon className={`h-6 w-6 ${service.available ? 'text-[#0052CC]' : 'text-gray-400'}`} />
                   </div>
                   {service.title}
+                  {!service.available && (
+                    <span className="ml-2 bg-orange-500 text-white text-sm px-3 py-1 rounded-full font-semibold">
+                      Bientôt
+                    </span>
+                  )}
                 </DialogTitle>
                 <DialogDescription className="text-base leading-relaxed mt-4">
                   {service.detailedDescription}
@@ -134,24 +152,29 @@ const Services = () => {
                 <ul className="space-y-3">
                   {service.additionalFeatures.map((feature, idx) => (
                     <li key={idx} className="flex items-start">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                      <div className={`w-2 h-2 ${service.available ? 'bg-[#0052CC]' : 'bg-gray-400'} rounded-full mr-3 mt-2 flex-shrink-0`}></div>
                       <span className="text-gray-700">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
               
-              <div className="mt-8 p-6 bg-blue-50 rounded-lg">
-                <h4 className="font-semibold text-blue-900 mb-2">Contactez-nous pour un devis personnalisé</h4>
-                <p className="text-blue-700">
-                  Nos équipes sont à votre disposition pour établir une offre adaptée à vos besoins spécifiques.
+              <div className={`mt-8 p-6 ${service.available ? 'bg-[#0052CC]/5' : 'bg-orange-50'} rounded-lg`}>
+                <h4 className={`font-semibold ${service.available ? 'text-[#0052CC]' : 'text-orange-900'} mb-2`}>
+                  {service.available ? 'Contactez-nous pour un devis personnalisé' : 'Service bientôt disponible'}
+                </h4>
+                <p className={service.available ? 'text-[#0052CC]/80' : 'text-orange-700'}>
+                  {service.available 
+                    ? 'Nos équipes sont à votre disposition pour établir une offre adaptée à vos besoins spécifiques.'
+                    : 'Ce service sera lancé très prochainement. Contactez-nous pour être informé de la date de lancement.'
+                  }
                 </p>
               </div>
             </DialogContent>
           </Dialog>
         ))}
 
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl p-12 text-white">
+        <div className="bg-gradient-to-r from-[#0052CC] to-[#0052CC]/90 rounded-3xl p-12 text-white">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold mb-4">Pourquoi choisir Hello Wash ?</h3>
             <p className="text-blue-100 text-lg">L'excellence au service de votre confort</p>
