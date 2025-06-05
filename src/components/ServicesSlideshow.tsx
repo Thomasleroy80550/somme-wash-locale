@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight, X, Bed, Bath, UtensilsCrossed } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Bed, Bath, UtensilsCrossed, Sparkles } from 'lucide-react';
 
 interface ServiceSlide {
   id: string;
@@ -78,6 +77,20 @@ const ServicesSlideshow = ({ open, onOpenChange }: ServicesSlideshowProps) => {
       ],
       image: "bg-gradient-to-br from-orange-50 to-orange-100",
       available: false
+    },
+    {
+      id: "conclusion",
+      icon: Sparkles,
+      title: "Prêt à transformer votre expérience linge ?",
+      description: "Rejoignez nos clients satisfaits et découvrez le confort d'un linge impeccable, livré directement chez vous dans la Baie de Somme.",
+      features: [
+        "Plus de lessives à faire !",
+        "Plus de temps pour vous !",
+        "Plus de soucis de repassage !",
+        "Que du plaisir à profiter !"
+      ],
+      image: "bg-gradient-to-br from-[#145587]/10 via-purple-50 to-pink-50",
+      available: true
     }
   ];
 
@@ -94,6 +107,16 @@ const ServicesSlideshow = ({ open, onOpenChange }: ServicesSlideshowProps) => {
   };
 
   const currentSlideData = slides[currentSlide];
+
+  const scrollToContact = () => {
+    onOpenChange(false);
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -148,6 +171,24 @@ const ServicesSlideshow = ({ open, onOpenChange }: ServicesSlideshowProps) => {
                 >
                   Découvrir nos services
                 </Button>
+              )}
+
+              {currentSlide === slides.length - 1 && (
+                <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                  <Button 
+                    onClick={scrollToContact}
+                    className="bg-[#145587] hover:bg-[#145587]/90 text-white px-8 py-3 text-lg"
+                  >
+                    Demander un devis
+                  </Button>
+                  <Button 
+                    onClick={() => onOpenChange(false)}
+                    variant="outline"
+                    className="border-[#145587] text-[#145587] hover:bg-[#145587] hover:text-white px-8 py-3 text-lg"
+                  >
+                    Fermer
+                  </Button>
+                </div>
               )}
             </div>
           </div>
