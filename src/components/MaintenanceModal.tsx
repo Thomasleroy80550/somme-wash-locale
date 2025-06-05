@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Shield, Eye, EyeOff, Wrench } from 'lucide-react';
+import { Shield, Eye, EyeOff, Sparkles } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 
@@ -69,29 +69,32 @@ const MaintenanceModal: React.FC<MaintenanceModalProps> = ({ isActive, onBypass 
   if (!isActive) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md border-[#145587]/20">
+    <div className="fixed inset-0 bg-gradient-to-br from-[#145587] to-[#0a3a5c] backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <Card className="w-full max-w-md border-white/20 bg-white/95 backdrop-blur-md shadow-2xl">
         <CardHeader className="text-center space-y-4">
-          <div className="mx-auto w-16 h-16 bg-[#145587]/10 rounded-full flex items-center justify-center">
-            <Wrench className="w-8 h-8 text-[#145587]" />
+          <div className="mx-auto w-16 h-16 bg-gradient-to-br from-[#145587] to-[#0a3a5c] rounded-full flex items-center justify-center shadow-lg">
+            <Sparkles className="w-8 h-8 text-white animate-pulse" />
           </div>
           <div>
-            <CardTitle className="text-2xl font-bold text-[#145587]">
-              Maintenance en cours
+            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-[#145587] to-[#0a3a5c] bg-clip-text text-transparent">
+              Coming Soon
             </CardTitle>
-            <p className="text-gray-600 mt-2">
-              Hello Wash effectue une maintenance technique pour améliorer nos services
+            <p className="text-gray-600 mt-3 text-lg">
+              Hello Wash arrive bientôt dans la Baie de Somme
             </p>
           </div>
         </CardHeader>
         
         <CardContent className="space-y-6">
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-3">
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="bg-gradient-to-r from-[#145587] to-[#0a3a5c] h-2 rounded-full animate-pulse" style={{width: '75%'}}></div>
+            </div>
             <p className="text-sm text-gray-500">
-              Nous serons de retour très bientôt
+              Nous préparons quelque chose d'extraordinaire pour vous
             </p>
             <p className="text-xs text-gray-400">
-              Merci pour votre patience
+              Service de blanchisserie premium • Livraison à domicile • Baie de Somme
             </p>
           </div>
 
@@ -101,8 +104,8 @@ const MaintenanceModal: React.FC<MaintenanceModalProps> = ({ isActive, onBypass 
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Mot de passe administrateur"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent pr-12"
+                placeholder="Accès administrateur"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent pr-12 bg-white/80"
                 disabled={isLocked}
               />
               <button
@@ -127,7 +130,7 @@ const MaintenanceModal: React.FC<MaintenanceModalProps> = ({ isActive, onBypass 
 
             <Button
               type="submit"
-              className="w-full bg-[#145587] hover:bg-[#145587]/90"
+              className="w-full bg-gradient-to-r from-[#145587] to-[#0a3a5c] hover:from-[#0a3a5c] hover:to-[#145587] text-white shadow-lg"
               disabled={isLocked || !password}
             >
               <Shield className="w-4 h-4 mr-2" />
@@ -137,7 +140,8 @@ const MaintenanceModal: React.FC<MaintenanceModalProps> = ({ isActive, onBypass 
 
           <div className="text-center text-xs text-gray-400 space-y-1">
             <p>Tentatives: {attempts}/3</p>
-            <p>Pour toute urgence: contact@hellowash-bds.fr</p>
+            <p>Pour plus d'informations: contact@hellowash-bds.fr</p>
+            <p className="text-[#145587] font-medium">🌊 Bientôt disponible en Baie de Somme</p>
           </div>
         </CardContent>
       </Card>
