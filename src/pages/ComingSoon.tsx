@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
-import { Shield, Eye, EyeOff, Mail, MapPin, Heart, Droplets, Truck, Activity } from 'lucide-react';
+import { Shield, Eye, EyeOff, Mail, MapPin, Heart, Droplets, Truck, Activity, Bell, User, Home, Package, Users, Settings, TrendingUp, Calendar, Clock, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Services from '@/components/Services';
 import Offers from '@/components/Offers';
 
@@ -145,7 +145,7 @@ const ComingSoon = () => {
         <Offers />
       </div>
 
-      {/* Dashboard Preview */}
+      {/* Dashboard Mockup Preview */}
       <section className="relative z-10 py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -155,59 +155,205 @@ const ComingSoon = () => {
             </p>
           </div>
           
-          {/* Dashboard Preview Container */}
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-lg shadow-2xl border-4 border-[#145587]/20 overflow-hidden">
-              {/* Preview Header */}
-              <div className="bg-gradient-to-r from-[#145587] to-[#1e6b9a] text-white p-6">
-                <h1 className="text-2xl font-bold">Dashboard Admin</h1>
-                <div className="absolute top-4 right-4 px-3 py-1 bg-white/20 rounded-full text-xs">
-                  APERÇU
+          {/* Browser Mockup Frame */}
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-gray-800 rounded-t-lg p-4 shadow-2xl">
+              {/* Browser Bar */}
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="flex space-x-2">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <div className="flex-1 mx-4">
+                  <div className="bg-gray-700 rounded px-3 py-1 text-gray-300 text-sm">
+                    https://admin.hellowash.fr/dashboard
+                  </div>
                 </div>
               </div>
               
               {/* Dashboard Content */}
-              <div className="p-8 bg-gray-50">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Mode Maintenance</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-gray-600 mb-4">
-                        Statut actuel: Inactif
-                      </p>
-                      <Button className="w-full bg-[#145587] hover:bg-[#145587]/90">
-                        Activer la maintenance
-                      </Button>
-                    </CardContent>
-                  </Card>
+              <div className="bg-white rounded-lg overflow-hidden relative">
+                {/* Preview Overlay */}
+                <div className="absolute top-4 right-4 z-20 bg-[#145587] text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                  APERÇU
+                </div>
+                
+                {/* Top Navigation */}
+                <div className="bg-white border-b border-gray-200 px-6 py-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <img 
+                        src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
+                        alt="Hello Wash" 
+                        className="h-8 w-auto"
+                      />
+                      <h1 className="text-xl font-bold text-[#145587]">Dashboard Admin</h1>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <Bell className="w-5 h-5 text-gray-400" />
+                      <Avatar className="w-8 h-8">
+                        <AvatarFallback className="bg-[#145587] text-white text-xs">AD</AvatarFallback>
+                      </Avatar>
+                    </div>
+                  </div>
+                </div>
 
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Statistiques</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-2xl font-bold text-[#145587]">0</p>
-                      <p className="text-sm text-gray-600">Commandes aujourd'hui</p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg flex items-center gap-2">
-                        <Truck className="w-5 h-5" />
-                        Suivi livraison
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-center gap-2 mb-2">
-                        <Activity className="w-4 h-4 text-green-600 animate-pulse" />
-                        <p className="text-2xl font-bold text-green-600">Live</p>
+                <div className="flex">
+                  {/* Sidebar */}
+                  <div className="w-64 bg-gray-50 border-r border-gray-200 min-h-[600px]">
+                    <nav className="p-4 space-y-2">
+                      <div className="flex items-center space-x-3 px-3 py-2 bg-[#145587] text-white rounded-lg">
+                        <Home className="w-4 h-4" />
+                        <span className="text-sm font-medium">Dashboard</span>
                       </div>
-                      <p className="text-sm text-gray-600">Suivi en temps réel</p>
-                    </CardContent>
-                  </Card>
+                      <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <Package className="w-4 h-4" />
+                        <span className="text-sm">Commandes</span>
+                      </div>
+                      <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <Users className="w-4 h-4" />
+                        <span className="text-sm">Clients</span>
+                      </div>
+                      <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <Truck className="w-4 h-4" />
+                        <span className="text-sm">Livraisons</span>
+                      </div>
+                      <div className="flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <Settings className="w-4 h-4" />
+                        <span className="text-sm">Paramètres</span>
+                      </div>
+                    </nav>
+                  </div>
+
+                  {/* Main Content */}
+                  <div className="flex-1 p-6 bg-gray-50">
+                    {/* Stats Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                      <Card>
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            <Shield className="w-5 h-5 text-[#145587]" />
+                            Mode Maintenance
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-gray-600 mb-4">
+                            Statut actuel: <span className="text-green-600 font-medium">Inactif</span>
+                          </p>
+                          <Button className="w-full bg-[#145587] hover:bg-[#145587]/90 text-xs">
+                            Activer la maintenance
+                          </Button>
+                        </CardContent>
+                      </Card>
+
+                      <Card>
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            <TrendingUp className="w-5 h-5 text-[#145587]" />
+                            Statistiques
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-3xl font-bold text-[#145587] mb-1">24</p>
+                          <p className="text-sm text-gray-600">Commandes aujourd'hui</p>
+                          <div className="mt-2 text-xs text-green-600">+12% vs hier</div>
+                        </CardContent>
+                      </Card>
+
+                      <Card>
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            <Truck className="w-5 h-5 text-[#145587]" />
+                            Suivi livraison
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="flex items-center gap-2 mb-2">
+                            <Activity className="w-4 h-4 text-green-600 animate-pulse" />
+                            <p className="text-2xl font-bold text-green-600">Live</p>
+                          </div>
+                          <p className="text-sm text-gray-600">3 livraisons en cours</p>
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    {/* Recent Activity */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-lg">Commandes récentes</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <div className="flex items-center space-x-3">
+                              <Avatar className="w-8 h-8">
+                                <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">MC</AvatarFallback>
+                              </Avatar>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900">Marie Caron</p>
+                                <p className="text-xs text-gray-500">Le Crotoy - 15 pièces</p>
+                              </div>
+                              <CheckCircle className="w-4 h-4 text-green-500" />
+                            </div>
+                            <div className="flex items-center space-x-3">
+                              <Avatar className="w-8 h-8">
+                                <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">PD</AvatarFallback>
+                              </Avatar>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900">Pierre Dubois</p>
+                                <p className="text-xs text-gray-500">Fort-Mahon - 8 pièces</p>
+                              </div>
+                              <Clock className="w-4 h-4 text-orange-500" />
+                            </div>
+                            <div className="flex items-center space-x-3">
+                              <Avatar className="w-8 h-8">
+                                <AvatarFallback className="bg-blue-100 text-[#145587] text-xs">SL</AvatarFallback>
+                              </Avatar>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900">Sophie Leclerc</p>
+                                <p className="text-xs text-gray-500">Rue - 22 pièces</p>
+                              </div>
+                              <Truck className="w-4 h-4 text-blue-500" />
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            <Calendar className="w-5 h-5" />
+                            Planning du jour
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-3">
+                            <div className="flex items-center space-x-3 text-sm">
+                              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                              <span className="text-gray-500">09:00</span>
+                              <span>Collecte Le Crotoy</span>
+                            </div>
+                            <div className="flex items-center space-x-3 text-sm">
+                              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                              <span className="text-gray-500">11:30</span>
+                              <span>Livraison Fort-Mahon</span>
+                            </div>
+                            <div className="flex items-center space-x-3 text-sm">
+                              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                              <span className="text-gray-500">14:00</span>
+                              <span>Collecte Rue</span>
+                            </div>
+                            <div className="flex items-center space-x-3 text-sm">
+                              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                              <span className="text-gray-500">16:30</span>
+                              <span>Livraison Saint-Valery</span>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -236,7 +382,6 @@ const ComingSoon = () => {
                 <span>Fait avec passion en Baie de Somme</span>
               </div>
               
-              {/* Admin Access - Discrete */}
               <Dialog open={adminModalOpen} onOpenChange={setAdminModalOpen}>
                 <DialogTrigger asChild>
                   <button className="text-white/40 hover:text-white/60 transition-colors p-2">
