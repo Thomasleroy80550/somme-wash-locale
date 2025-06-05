@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import AuthGuard from '@/components/AuthGuard';
@@ -20,13 +19,20 @@ const Member = () => {
   useEffect(() => {
     if (user) {
       loadMemberProfile();
+    } else {
+      setIsLoading(false);
     }
   }, [user]);
 
   const loadMemberProfile = async () => {
-    if (!user) return;
+    if (!user) {
+      setIsLoading(false);
+      return;
+    }
 
     try {
+      console.log('Loading member profile for user:', user.id);
+      
       const { data, error } = await supabase
         .from('member_profiles')
         .select(`
@@ -34,12 +40,14 @@ const Member = () => {
           profiles!inner (*)
         `)
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
-      if (error && error.code !== 'PGRST116') {
+      if (error) {
+        console.error('Error loading profile:', error);
         throw error;
       }
 
+      console.log('Profile data loaded:', data);
       setMemberProfile(data);
     } catch (error: any) {
       console.error('Erreur lors du chargement du profil:', error);
@@ -49,6 +57,7 @@ const Member = () => {
   };
 
   const handleRegistrationSuccess = () => {
+    console.log('Registration successful, reloading profile...');
     loadMemberProfile();
   };
 

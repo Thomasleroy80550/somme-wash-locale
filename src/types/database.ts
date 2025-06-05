@@ -38,15 +38,15 @@ export interface Database {
         Row: {
           id: string;
           user_id: string;
-          profile_type: 'gite' | 'grand-compte';
+          profile_type: string;
           number_of_properties: number;
           total_capacity: number;
           location: string;
           description: string | null;
-          delivery_delay: 'j-1' | 'j-2' | 'j-3';
+          delivery_delay: string;
           services: string[];
           special_requests: string | null;
-          status: 'pending' | 'validated' | 'priority';
+          status: string;
           position: number | null;
           registration_date: string;
           updated_at: string;
@@ -54,15 +54,15 @@ export interface Database {
         Insert: {
           id?: string;
           user_id: string;
-          profile_type: 'gite' | 'grand-compte';
+          profile_type: string;
           number_of_properties?: number;
           total_capacity?: number;
           location: string;
           description?: string | null;
-          delivery_delay?: 'j-1' | 'j-2' | 'j-3';
+          delivery_delay?: string;
           services?: string[];
           special_requests?: string | null;
-          status?: 'pending' | 'validated' | 'priority';
+          status?: string;
           position?: number | null;
           registration_date?: string;
           updated_at?: string;
@@ -70,15 +70,15 @@ export interface Database {
         Update: {
           id?: string;
           user_id?: string;
-          profile_type?: 'gite' | 'grand-compte';
+          profile_type?: string;
           number_of_properties?: number;
           total_capacity?: number;
           location?: string;
           description?: string | null;
-          delivery_delay?: 'j-1' | 'j-2' | 'j-3';
+          delivery_delay?: string;
           services?: string[];
           special_requests?: string | null;
-          status?: 'pending' | 'validated' | 'priority';
+          status?: string;
           position?: number | null;
           registration_date?: string;
           updated_at?: string;

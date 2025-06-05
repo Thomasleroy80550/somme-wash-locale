@@ -1,38 +1,31 @@
 
-import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
-import { MemberProfile, WaitingListStats } from '@/types/member';
+import { Database } from '@/types/database';
 import { 
   User, 
   Building2, 
   Clock, 
-  Star, 
   Bell, 
-  Calendar,
   MapPin,
   Phone,
   Mail,
-  Edit,
   Trophy,
   Users
 } from 'lucide-react';
 
+type MemberProfile = Database['public']['Tables']['member_profiles']['Row'] & {
+  profiles: Database['public']['Tables']['profiles']['Row'];
+};
+
 interface MemberDashboardProps {
   profile: MemberProfile;
-  onProfileUpdate: (profile: MemberProfile) => void;
+  onProfileUpdate: () => void;
 }
 
 const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => {
-  const [waitingListStats] = useState<WaitingListStats>({
-    totalMembers: 247,
-    averageWaitTime: '2-3 semaines',
-    nextUpdateDate: '15 janvier 2025',
-  });
-
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'pending':
@@ -48,7 +41,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
 
   const getProgressValue = () => {
     if (!profile.position) return 0;
-    return Math.max(0, 100 - (profile.position / waitingListStats.totalMembers) * 100);
+    return Math.max(0, 100 - (profile.position / 250) * 100);
   };
 
   return (
@@ -64,9 +57,9 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-[#145587] mb-2">
-              #{profile.position}
+              #{profile.position || '?'}
             </div>
-            <p className="text-sm text-gray-600">sur {waitingListStats.totalMembers} membres</p>
+            <p className="text-sm text-gray-600">sur la liste d'attente</p>
             <Progress value={getProgressValue()} className="mt-3" />
           </CardContent>
         </Card>
@@ -83,7 +76,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
               {getStatusBadge(profile.status)}
             </div>
             <p className="text-sm text-green-600">
-              Temps d'attente estimé: {waitingListStats.averageWaitTime}
+              Temps d'attente estimé: 2-3 semaines
             </p>
           </CardContent>
         </Card>
@@ -97,7 +90,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
           </CardHeader>
           <CardContent>
             <div className="text-lg font-semibold text-blue-700 mb-2">
-              {waitingListStats.nextUpdateDate}
+              15 janvier 2025
             </div>
             <p className="text-sm text-blue-600">
               Nouvelles informations sur le lancement
@@ -108,11 +101,10 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
 
       {/* Détails du profil */}
       <Tabs defaultValue="profile" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="profile">Profil</TabsTrigger>
           <TabsTrigger value="business">Activité</TabsTrigger>
           <TabsTrigger value="notifications">Notifications</TabsTrigger>
-          <TabsTrigger value="resources">Ressources</TabsTrigger>
         </TabsList>
 
         <TabsContent value="profile" className="space-y-6">
@@ -121,39 +113,38 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
               <CardTitle className="flex items-center">
                 <User className="h-5 w-5 mr-2" />
                 Informations Personnelles
-                <Button variant="ghost" size="sm" className="ml-auto">
-                  <Edit className="h-4 w-4" />
-                </Button>
               </CardTitle>
             </CardHeader>
             <CardContent className="grid md:grid-cols-2 gap-4">
               <div className="space-y-4">
                 <div>
                   <label className="text-sm font-medium text-gray-500">Nom complet</label>
-                  <p className="text-lg">{profile.personalInfo.firstName} {profile.personalInfo.lastName}</p>
+                  <p className="text-lg">{profile.profiles.first_name} {profile.profiles.last_name}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-500">Email</label>
                   <p className="flex items-center">
                     <Mail className="h-4 w-4 mr-2 text-gray-400" />
-                    {profile.personalInfo.email}
+                    {profile.profiles.email}
                   </p>
                 </div>
               </div>
               <div className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium text-gray-500">Téléphone</label>
-                  <p className="flex items-center">
-                    <Phone className="h-4 w-4 mr-2 text-gray-400" />
-                    {profile.personalInfo.phone}
-                  </p>
-                </div>
-                {profile.personalInfo.company && (
+                {profile.profiles.phone && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-500">Téléphone</label>
+                    <p className="flex items-center">
+                      <Phone className="h-4 w-4 mr-2 text-gray-400" />
+                      {profile.profiles.phone}
+                    </p>
+                  </div>
+                )}
+                {profile.profiles.company && (
                   <div>
                     <label className="text-sm font-medium text-gray-500">Entreprise</label>
                     <p className="flex items-center">
                       <Building2 className="h-4 w-4 mr-2 text-gray-400" />
-                      {profile.personalInfo.company}
+                      {profile.profiles.company}
                     </p>
                   </div>
                 )}
@@ -175,30 +166,30 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
                 <div>
                   <label className="text-sm font-medium text-gray-500">Type de profil</label>
                   <p className="text-lg capitalize">
-                    {profile.businessInfo.profileType === 'gite' ? 'Gîtes Indépendants' : 'Grand Compte'}
+                    {profile.profile_type === 'gite' ? 'Gîtes Indépendants' : 'Grand Compte'}
                   </p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-500">Localisation</label>
                   <p className="flex items-center">
                     <MapPin className="h-4 w-4 mr-2 text-gray-400" />
-                    {profile.businessInfo.location}
+                    {profile.location}
                   </p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-500">Nombre de propriétés</label>
-                  <p className="text-2xl font-bold text-[#145587]">{profile.businessInfo.numberOfProperties}</p>
+                  <p className="text-2xl font-bold text-[#145587]">{profile.number_of_properties}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-500">Capacité totale</label>
-                  <p className="text-2xl font-bold text-[#145587]">{profile.businessInfo.totalCapacity} personnes</p>
+                  <p className="text-2xl font-bold text-[#145587]">{profile.total_capacity} personnes</p>
                 </div>
               </div>
               
               <div>
                 <label className="text-sm font-medium text-gray-500">Services souhaités</label>
                 <div className="flex gap-2 mt-2">
-                  {profile.preferences.services.map((service, index) => (
+                  {profile.services.map((service, index) => (
                     <Badge key={index} variant="outline">
                       {service === 'linge-lit' ? 'Linge de lit' :
                        service === 'linge-toilette' ? 'Linge de toilette' :
@@ -212,9 +203,9 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
                 <label className="text-sm font-medium text-gray-500">Délai de livraison préféré</label>
                 <p className="flex items-center mt-1">
                   <Clock className="h-4 w-4 mr-2 text-gray-400" />
-                  {profile.preferences.deliveryDelay.toUpperCase()} (
-                  {profile.preferences.deliveryDelay === 'j-1' ? 'Veille de l\'arrivée' :
-                   profile.preferences.deliveryDelay === 'j-2' ? '2 jours avant' :
+                  {profile.delivery_delay.toUpperCase()} (
+                  {profile.delivery_delay === 'j-1' ? 'Veille de l\'arrivée' :
+                   profile.delivery_delay === 'j-2' ? '2 jours avant' :
                    '3 jours avant'})
                 </p>
               </div>
@@ -253,69 +244,8 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
                   Nouvelles informations sur le calendrier de lancement et les premières zones desservies.
                 </p>
               </div>
-              
-              <div className="border-l-4 border-green-400 pl-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-semibold">Tests pilotes bientôt disponibles</h4>
-                  <span className="text-sm text-gray-500">Cette semaine</span>
-                </div>
-                <p className="text-gray-600 text-sm mt-1">
-                  Les premiers membres prioritaires seront contactés pour participer aux tests.
-                </p>
-              </div>
             </CardContent>
           </Card>
-        </TabsContent>
-
-        <TabsContent value="resources" className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Guide de Préparation</CardTitle>
-                <CardDescription>
-                  Préparez votre activité pour Hello Wash
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-[#145587] rounded-full mr-3"></div>
-                    Synchronisation des calendriers de réservation
-                  </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-[#145587] rounded-full mr-3"></div>
-                    Optimisation des plannings de ménage
-                  </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-[#145587] rounded-full mr-3"></div>
-                    Formation de vos équipes
-                  </li>
-                </ul>
-                <Button variant="outline" className="w-full mt-4">
-                  Télécharger le guide
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Communauté</CardTitle>
-                <CardDescription>
-                  Échangez avec d'autres propriétaires
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center mb-4">
-                  <div className="text-2xl font-bold text-[#145587]">{waitingListStats.totalMembers}</div>
-                  <p className="text-sm text-gray-600">Membres inscrits</p>
-                </div>
-                <Button variant="outline" className="w-full">
-                  <Users className="h-4 w-4 mr-2" />
-                  Rejoindre le forum
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
         </TabsContent>
       </Tabs>
     </div>

@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -12,18 +12,28 @@ const AuthGuard = ({ children, requireAdmin = false }: AuthGuardProps) => {
   const { user, loading, isAdmin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [hasRedirected, setHasRedirected] = useState(false);
 
   useEffect(() => {
-    if (!loading) {
+    console.log('AuthGuard - user:', !!user, 'loading:', loading, 'isAdmin:', isAdmin, 'requireAdmin:', requireAdmin);
+    
+    if (!loading && !hasRedirected) {
       if (!user) {
-        // Redirect to auth page if not authenticated
-        navigate('/auth', { state: { from: location.pathname } });
+        console.log('AuthGuard - No user, redirecting to auth');
+        setHasRedirected(true);
+        navigate('/auth', { state: { from: location.pathname }, replace: true });
       } else if (requireAdmin && !isAdmin) {
-        // Redirect to member page if not admin but admin required
-        navigate('/member');
+        console.log('AuthGuard - User not admin, redirecting to member');
+        setHasRedirected(true);
+        navigate('/member', { replace: true });
       }
     }
-  }, [user, loading, isAdmin, requireAdmin, navigate, location.pathname]);
+  }, [user, loading, isAdmin, requireAdmin, navigate, location.pathname, hasRedirected]);
+
+  // Reset redirect flag when location changes
+  useEffect(() => {
+    setHasRedirected(false);
+  }, [location.pathname]);
 
   if (loading) {
     return (
