@@ -1,4 +1,3 @@
-
 import { Calendar, Truck, Building2, Clock, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -21,10 +20,27 @@ const Offers = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Offre Gîtes Indépendants */}
-          <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100">
+          {/* Offre Gîtes Indépendants avec animations */}
+          <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden">
+            {/* Éléments de scintillement */}
+            <div className="absolute top-4 right-4 animate-sparkle">
+              <Sparkles className="h-4 w-4 text-yellow-400" />
+            </div>
+            <div className="absolute top-16 right-12 animate-sparkle delay-300">
+              <Sparkles className="h-3 w-3 text-blue-400" />
+            </div>
+            <div className="absolute top-8 right-20 animate-sparkle delay-700">
+              <Sparkles className="h-2 w-2 text-green-400" />
+            </div>
+            <div className="absolute bottom-16 left-4 animate-sparkle delay-500">
+              <Sparkles className="h-3 w-3 text-purple-400" />
+            </div>
+            <div className="absolute bottom-8 left-12 animate-sparkle delay-1000">
+              <Sparkles className="h-2 w-2 text-pink-400" />
+            </div>
+            
             <div className="flex items-center mb-6">
-              <div className="flex items-center justify-center w-16 h-16 bg-[#145587]/10 rounded-2xl mr-4">
+              <div className="flex items-center justify-center w-16 h-16 bg-[#145587]/10 rounded-2xl mr-4 animate-gentle-sway">
                 <Building2 className="h-8 w-8 text-[#145587]" />
               </div>
               <div>
@@ -76,7 +92,7 @@ const Offers = () => {
             
             <Button 
               onClick={scrollToContact}
-              className="w-full bg-[#145587] hover:bg-[#145587]/90 text-white py-3 text-lg"
+              className="w-full bg-[#145587] hover:bg-[#145587]/90 text-white py-3 text-lg animate-fade-in"
             >
               Configurer mon calendrier
             </Button>
