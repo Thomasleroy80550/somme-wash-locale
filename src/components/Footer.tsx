@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Hello Wash - Baie de Somme. Tous droits réservés.</p>
+          <p>&copy; 2025 SAS Hello Wash. Tous droits réservés.</p>
         </div>
       </div>
     </footer>
