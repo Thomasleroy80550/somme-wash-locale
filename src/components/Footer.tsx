@@ -1,4 +1,3 @@
-
 import { Phone, Mail, MapPin, Heart } from 'lucide-react';
 
 const Footer = () => {
@@ -37,7 +36,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Mail className="h-4 w-4 mr-2" />
-                <span>contact@hellowash-bds.fr</span>
+                <span>contact@hellowash.fr</span>
               </li>
               <li className="flex items-center">
                 <MapPin className="h-4 w-4 mr-2" />

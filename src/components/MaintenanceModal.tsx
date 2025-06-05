@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Shield, Eye, EyeOff, Sparkles } from 'lucide-react';
 import { Button } from './ui/button';
@@ -140,7 +139,7 @@ const MaintenanceModal: React.FC<MaintenanceModalProps> = ({ isActive, onBypass 
 
           <div className="text-center text-xs text-gray-400 space-y-1">
             <p>Tentatives: {attempts}/3</p>
-            <p>Pour plus d'informations: contact@hellowash-bds.fr</p>
+            <p>Pour plus d'informations: contact@hellowash.fr</p>
             <p className="text-[#145587] font-medium">🌊 Bientôt disponible en Baie de Somme</p>
           </div>
         </CardContent>
