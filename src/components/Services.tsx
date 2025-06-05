@@ -1,25 +1,58 @@
-
 import { Bed, Bath, UtensilsCrossed, Sparkles, Clock, Shield } from 'lucide-react';
+import { useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 const Services = () => {
+  const [openModal, setOpenModal] = useState<string | null>(null);
+
   const services = [
     {
+      id: "linge-lit",
       icon: Bed,
       title: "Linge de lit",
       description: "Draps, housses de couette, taies d'oreiller. Linge doux et impeccablement propre pour un confort optimal.",
-      features: ["Coton de qualité", "Différentes tailles", "Livraison incluse"]
+      features: ["Coton de qualité", "Différentes tailles", "Livraison incluse"],
+      detailedDescription: "Notre service de location de linge de lit comprend une gamme complète de produits en coton de qualité supérieure. Nous proposons des draps housse, draps plats, housses de couette et taies d'oreiller dans toutes les tailles standards.",
+      additionalFeatures: [
+        "Coton 100% percale pour un confort optimal",
+        "Disponible en blanc classique et couleurs neutres",
+        "Tailles disponibles : 90x190, 140x190, 160x200, 180x200",
+        "Livraison et collecte à domicile incluses",
+        "Entretien professionnel avec produits écologiques",
+        "Rotation hebdomadaire ou selon vos besoins"
+      ]
     },
     {
+      id: "linge-toilette",
       icon: Bath,
       title: "Linge de toilette",
       description: "Serviettes, peignoirs, tapis de bain. Textiles absorbants et moelleux pour votre bien-être.",
-      features: ["Ultra-absorbant", "Hypoallergénique", "Séchage rapide"]
+      features: ["Ultra-absorbant", "Hypoallergénique", "Séchage rapide"],
+      detailedDescription: "Notre collection de linge de toilette offre le parfait équilibre entre douceur, absorption et durabilité. Tous nos textiles sont traités avec des produits hypoallergéniques.",
+      additionalFeatures: [
+        "Serviettes de bain et de toilette en coton éponge",
+        "Peignoirs en coton bouclé ultra-doux",
+        "Tapis de bain antidérapants",
+        "Traitement antibactérien naturel",
+        "Séchage rapide et grande absorption",
+        "Couleurs neutres et élégantes"
+      ]
     },
     {
+      id: "linge-table",
       icon: UtensilsCrossed,
       title: "Linge de table",
       description: "Nappes, serviettes de table, chemins de table. Élégance et raffinement pour vos réceptions.",
-      features: ["Designs variés", "Anti-taches", "Repassage professionnel"]
+      features: ["Designs variés", "Anti-taches", "Repassage professionnel"],
+      detailedDescription: "Sublimez vos tables avec notre collection de linge de table élégant. Parfait pour les événements professionnels, réceptions ou dîners familiaux.",
+      additionalFeatures: [
+        "Nappes rondes, carrées et rectangulaires",
+        "Serviettes de table assorties",
+        "Chemins de table et sets de table",
+        "Traitement anti-taches professionnel",
+        "Repassage impeccable inclus",
+        "Designs classiques et modernes disponibles"
+      ]
     }
   ];
 
@@ -61,7 +94,7 @@ const Services = () => {
               <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
               
-              <ul className="space-y-3">
+              <ul className="space-y-3 mb-6">
                 {service.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center text-gray-700">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
@@ -70,12 +103,53 @@ const Services = () => {
                 ))}
               </ul>
               
-              <button className="mt-6 w-full bg-white border-2 border-blue-600 text-blue-600 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors font-semibold">
+              <button 
+                onClick={() => setOpenModal(service.id)}
+                className="w-full bg-white border-2 border-blue-600 text-blue-600 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors font-semibold"
+              >
                 En savoir plus
               </button>
             </div>
           ))}
         </div>
+
+        {/* Modales pour chaque service */}
+        {services.map((service) => (
+          <Dialog key={service.id} open={openModal === service.id} onOpenChange={() => setOpenModal(null)}>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle className="flex items-center text-2xl">
+                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl mr-4">
+                    <service.icon className="h-6 w-6 text-blue-600" />
+                  </div>
+                  {service.title}
+                </DialogTitle>
+                <DialogDescription className="text-base leading-relaxed mt-4">
+                  {service.detailedDescription}
+                </DialogDescription>
+              </DialogHeader>
+              
+              <div className="mt-6">
+                <h4 className="font-semibold text-lg mb-4">Services inclus :</h4>
+                <ul className="space-y-3">
+                  {service.additionalFeatures.map((feature, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="mt-8 p-6 bg-blue-50 rounded-lg">
+                <h4 className="font-semibold text-blue-900 mb-2">Contactez-nous pour un devis personnalisé</h4>
+                <p className="text-blue-700">
+                  Nos équipes sont à votre disposition pour établir une offre adaptée à vos besoins spécifiques.
+                </p>
+              </div>
+            </DialogContent>
+          </Dialog>
+        ))}
 
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl p-12 text-white">
           <div className="text-center mb-12">
