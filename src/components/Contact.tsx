@@ -34,7 +34,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
-                  <p className="text-gray-600">contact@hellowash-bds.fr</p>
+                  <p className="text-gray-600">contact@hellowash.fr</p>
                   <p className="text-sm text-gray-500">Réponse sous 24h</p>
                 </div>
               </div>
@@ -45,8 +45,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">Adresse</h4>
-                  <p className="text-gray-600">Baie de Somme</p>
-                  <p className="text-sm text-gray-500">Picardie, France</p>
+                  <p className="text-gray-600">38 Route du Crotoy</p>
+                  <p className="text-sm text-gray-500">80120 Rue</p>
                 </div>
               </div>
               
