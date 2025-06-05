@@ -17,8 +17,8 @@ const About = () => {
             
             <div className="grid sm:grid-cols-2 gap-6 mb-8">
               <div className="flex items-start">
-                <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mr-4 flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-blue-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-[#0052CC]/10 rounded-lg mr-4 flex-shrink-0">
+                  <MapPin className="h-6 w-6 text-[#0052CC]" />
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 mb-2">Ancrage local</h4>
@@ -59,7 +59,7 @@ const About = () => {
           </div>
           
           <div className="relative">
-            <div className="bg-gradient-to-br from-blue-100 via-blue-50 to-white rounded-3xl p-8 shadow-xl">
+            <div className="bg-gradient-to-br from-[#0052CC]/10 via-[#0052CC]/5 to-white rounded-3xl p-8 shadow-xl">
               <div className="text-center">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">La Baie de Somme</h3>
                 <p className="text-gray-600 mb-8">
@@ -70,7 +70,7 @@ const About = () => {
                 <div className="bg-white rounded-2xl p-6 shadow-md">
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
-                      <div className="text-3xl font-bold text-blue-600">15+</div>
+                      <div className="text-3xl font-bold text-[#0052CC]">15+</div>
                       <div className="text-sm text-gray-600">Années d'expérience</div>
                     </div>
                     <div>
