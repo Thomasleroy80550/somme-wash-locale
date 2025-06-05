@@ -1,54 +1,66 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useMaintenance } from "@/hooks/useMaintenance";
+import { useState } from "react";
+import DashboardSidebar from "@/components/DashboardSidebar";
+import OverviewSection from "@/components/OverviewSection";
+import OrdersSection from "@/components/OrdersSection";
+import InvoicesSection from "@/components/InvoicesSection";
+import ClientsSection from "@/components/ClientsSection";
 
 const Dashboard = () => {
-  const { isMaintenanceActive, toggleMaintenance } = useMaintenance();
+  const [activeSection, setActiveSection] = useState('overview');
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case 'overview':
+        return <OverviewSection />;
+      case 'orders':
+        return <OrdersSection />;
+      case 'invoices':
+        return <InvoicesSection />;
+      case 'clients':
+        return <ClientsSection />;
+      case 'deliveries':
+        return (
+          <div className="p-8">
+            <h1 className="text-2xl font-bold text-[#145587] mb-4">Gestion des Livraisons</h1>
+            <p className="text-gray-600">Section en cours de développement...</p>
+          </div>
+        );
+      case 'analytics':
+        return (
+          <div className="p-8">
+            <h1 className="text-2xl font-bold text-[#145587] mb-4">Analytics Avancées</h1>
+            <p className="text-gray-600">Section en cours de développement...</p>
+          </div>
+        );
+      case 'calendar':
+        return (
+          <div className="p-8">
+            <h1 className="text-2xl font-bold text-[#145587] mb-4">Planning</h1>
+            <p className="text-gray-600">Section en cours de développement...</p>
+          </div>
+        );
+      case 'settings':
+        return (
+          <div className="p-8">
+            <h1 className="text-2xl font-bold text-[#145587] mb-4">Paramètres</h1>
+            <p className="text-gray-600">Section en cours de développement...</p>
+          </div>
+        );
+      default:
+        return <OverviewSection />;
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-[#145587] mb-8">Dashboard Admin</h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Mode Maintenance</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-gray-600 mb-4">
-                Statut actuel: {isMaintenanceActive ? "Actif" : "Inactif"}
-              </p>
-              <Button 
-                onClick={toggleMaintenance}
-                variant={isMaintenanceActive ? "destructive" : "default"}
-                className="w-full"
-              >
-                {isMaintenanceActive ? "Désactiver" : "Activer"} la maintenance
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Statistiques</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-bold text-[#145587]">0</p>
-              <p className="text-sm text-gray-600">Commandes aujourd'hui</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Revenus</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-bold text-green-600">0€</p>
-              <p className="text-sm text-gray-600">Revenus du mois</p>
-            </CardContent>
-          </Card>
+    <div className="min-h-screen bg-gray-50 flex">
+      <DashboardSidebar 
+        activeSection={activeSection} 
+        onSectionChange={setActiveSection} 
+      />
+      <div className="flex-1 overflow-auto">
+        <div className="p-8">
+          {renderSection()}
         </div>
       </div>
     </div>
