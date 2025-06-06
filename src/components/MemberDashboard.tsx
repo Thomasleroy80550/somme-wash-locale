@@ -173,16 +173,16 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
                 </div>
                 
                 <div className="relative pl-8 before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-200">
-                  <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-blue-600 bg-white">
-                    <span className="h-2 w-2 rounded-full bg-blue-600"></span>
+                  <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-blue-600 bg-blue-100">
+                    <CheckCircle2 className="h-3 w-3 text-blue-600" />
                   </div>
                   <h3 className="font-medium text-gray-900">5 Juin 2025</h3>
                   <p className="mt-1 text-sm text-gray-600">Réception et installation des première commmande de matériel</p>
                 </div>
                 
-                <div className="relative pl-8 before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-200">
-                  <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-gray-300 bg-white">
-                    <span className="h-2 w-2 rounded-full bg-gray-300"></span>
+                 <div className="relative pl-8 before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-200">
+                  <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-blue-600 bg-white">
+                    <span className="h-2 w-2 rounded-full bg-blue-600"></span>
                   </div>
                   <h3 className="font-medium text-gray-900">10 Juin 2025</h3>
                   <p className="mt-1 text-sm text-gray-600">Début des travaux de plomberie et électricité</p>
