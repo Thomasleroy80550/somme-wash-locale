@@ -6,6 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Database } from '@/types/database';
 import MemberRegistrationSecure from '@/components/MemberRegistrationSecure';
 import MemberDashboard from '@/components/MemberDashboard';
+import NotificationCenter from '@/components/NotificationCenter';
 import AuthGuard from '@/components/AuthGuard';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -169,10 +170,16 @@ const Member = () => {
           {!memberProfile ? (
             <MemberRegistrationSecure onSuccess={handleRegistrationSuccess} />
           ) : (
-            <MemberDashboard 
-              profile={memberProfile} 
-              onProfileUpdate={handleProfileUpdate}
-            />
+            <div className="space-y-8">
+              {/* Notifications en haut */}
+              <NotificationCenter userId={user!.id} />
+              
+              {/* Dashboard principal */}
+              <MemberDashboard 
+                profile={memberProfile} 
+                onProfileUpdate={handleProfileUpdate}
+              />
+            </div>
           )}
         </div>
       </div>

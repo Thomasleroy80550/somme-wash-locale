@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import Member from "./pages/Member";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminNotifications from "./pages/AdminNotifications";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/member" element={<Member />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/notifications" element={<AdminNotifications />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,10 +1,10 @@
-
 import { useState } from 'react';
 import { Sparkles, MapPin, Calendar, Building2, Users, TrendingUp, Clock, Mail, Bed, Bath, UtensilsCrossed, Truck, CheckCircle, UserPlus, Package, Home, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import NewsSection from '@/components/NewsSection';
 
 const ComingSoon = () => {
   const [email, setEmail] = useState('');
@@ -152,6 +152,9 @@ const ComingSoon = () => {
           </div>
         </div>
       </section>
+
+      {/* Actualités Section */}
+      <NewsSection />
 
       {/* Services Preview */}
       <section className="py-16 bg-white">
