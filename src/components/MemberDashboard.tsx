@@ -57,9 +57,9 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
     if (profile.position <= 10) {
       return <Badge variant="default" className="bg-[#145587] text-white ml-2">Membre Fondateur</Badge>;
     } else if (profile.position <= 30) {
-      return <Badge variant="default" className="bg-indigo-600 text-white ml-2">Confirmé</Badge>;
+      return <Badge variant="default" className="bg-green-800 text-white ml-2">Confirmé</Badge>;
     } else if (profile.position <= 100) {
-      return <Badge variant="default" className="bg-purple-600 text-white ml-2">En attente</Badge>;
+      return <Badge variant="default" className="bg-[#ff9640] text-white ml-2">En attente</Badge>;
     }
     return null;
   };
@@ -138,7 +138,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
               </CardHeader>
               <CardContent>
                 <div className="text-lg font-semibold text-blue-700 mb-2">
-                  20 Juin 2025
+                  20 Juib 2025
                 </div>
                 <p className="text-sm text-blue-600">
                   Pose des machines
