@@ -42,67 +42,64 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
   };
 
   const getNextPosition = async (): Promise<number> => {
-    const { data, error } = await supabase
-      .from('member_profiles')
-      .select('position')
-      .order('position', { ascending: false })
-      .limit(1);
+    try {
+      console.log('Récupération de la position maximale...');
+      
+      const { data, error } = await supabase
+        .from('member_profiles')
+        .select('position')
+        .not('position', 'is', null)
+        .order('position', { ascending: false })
+        .limit(1);
 
-    if (error) {
-      console.error('Erreur lors de la récupération de la position maximale:', error);
+      if (error) {
+        console.error('Erreur lors de la récupération de la position maximale:', error);
+        throw error;
+      }
+
+      console.log('Données récupérées:', data);
+
+      // Si aucun membre n'existe ou aucune position n'est définie, commencer à 1
+      if (!data || data.length === 0) {
+        console.log('Aucun membre trouvé, position sera 1');
+        return 1;
+      }
+
+      const maxPosition = data[0].position;
+      const nextPosition = maxPosition + 1;
+      console.log('Position maximale trouvée:', maxPosition, 'Prochaine position:', nextPosition);
+      
+      return nextPosition;
+    } catch (error) {
+      console.error('Erreur dans getNextPosition:', error);
       throw error;
     }
-
-    // Si aucun membre existe, la première position est 1
-    if (!data || data.length === 0) {
-      return 1;
-    }
-
-    // Sinon, prendre la position maximale + 1
-    const maxPosition = data[0].position || 0;
-    return maxPosition + 1;
   };
 
-  const insertMemberProfileWithRetry = async (memberData: any, maxRetries = 3): Promise<void> => {
-    for (let attempt = 1; attempt <= maxRetries; attempt++) {
-      try {
-        // Calculer la prochaine position disponible
-        const nextPosition = await getNextPosition();
-        
-        console.log(`Tentative ${attempt}: Insertion avec position ${nextPosition}`);
-        
-        // Insérer avec la position calculée
-        const { error: memberError } = await supabase
-          .from('member_profiles')
-          .insert({
-            ...memberData,
-            position: nextPosition
-          });
+  const insertMemberProfile = async (memberData: any): Promise<void> => {
+    try {
+      // Calculer la prochaine position
+      const nextPosition = await getNextPosition();
+      
+      console.log(`Insertion du profil membre avec position ${nextPosition}`);
+      
+      // Insérer avec la position calculée
+      const { error: memberError } = await supabase
+        .from('member_profiles')
+        .insert({
+          ...memberData,
+          position: nextPosition
+        });
 
-        if (!memberError) {
-          console.log(`Insertion réussie avec position ${nextPosition}`);
-          return; // Succès, sortir de la fonction
-        }
-
-        // Si c'est un conflit de position unique, réessayer
-        if (memberError.code === '23505' && memberError.message.includes('unique_position')) {
-          console.log(`Conflit de position détecté (tentative ${attempt}), retry...`);
-          if (attempt === maxRetries) {
-            throw new Error('Impossible d\'assigner une position après plusieurs tentatives');
-          }
-          // Attendre un peu avant de réessayer
-          await new Promise(resolve => setTimeout(resolve, 100 * attempt));
-          continue;
-        }
-
-        // Pour toute autre erreur, la propager immédiatement
+      if (memberError) {
+        console.error('Erreur lors de l\'insertion:', memberError);
         throw memberError;
-
-      } catch (error) {
-        if (attempt === maxRetries) {
-          throw error;
-        }
       }
+
+      console.log(`Insertion réussie avec position ${nextPosition}`);
+    } catch (error) {
+      console.error('Erreur dans insertMemberProfile:', error);
+      throw error;
     }
   };
 
@@ -130,7 +127,7 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
 
       if (existingProfile) {
         toast.error('Vous êtes déjà inscrit à la liste d\'attente');
-        onSuccess(); // Rediriger vers le dashboard
+        onSuccess();
         return;
       }
 
@@ -145,7 +142,7 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
 
       if (profileError) throw profileError;
 
-      // Préparer les données du membre (sans position, elle sera calculée)
+      // Préparer les données du membre
       const memberData = {
         user_id: user.id,
         profile_type: formData.profileType,
@@ -158,8 +155,8 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
         special_requests: formData.specialRequests || null
       };
 
-      // Insérer le profil membre avec retry en cas de conflit
-      await insertMemberProfileWithRetry(memberData);
+      // Insérer le profil membre
+      await insertMemberProfile(memberData);
 
       // Envoyer une notification de bienvenue
       await supabase.from('notifications').insert({
