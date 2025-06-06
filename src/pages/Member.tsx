@@ -50,13 +50,16 @@ const Member = () => {
       console.log('Profile data loaded:', data);
       
       // Check if data has the correct structure before setting it
-      if (data && data.profiles && typeof data.profiles === 'object') {
+      if (data && data.profiles && typeof data.profiles === 'object' && 
+          'first_name' in data.profiles && 'last_name' in data.profiles) {
         setMemberProfile(data as MemberProfile);
       } else {
-        console.error('Unexpected profile data structure:', data);
+        console.log('No valid profile data found or incomplete structure:', data);
+        setMemberProfile(null);
       }
     } catch (error: any) {
       console.error('Erreur lors du chargement du profil:', error);
+      setMemberProfile(null);
     } finally {
       setIsLoading(false);
     }

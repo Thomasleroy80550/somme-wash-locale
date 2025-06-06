@@ -69,8 +69,8 @@ const AdminDashboard = () => {
       if (data) {
         for (const item of data) {
           if (item && item.profiles && typeof item.profiles === 'object' && 
-              'first_name' in item.profiles && 'last_name' in item.profiles) {
-            validMembers.push(item as MemberProfile);
+              item.profiles !== null && 'first_name' in item.profiles && 'last_name' in item.profiles) {
+            validMembers.push(item as unknown as MemberProfile);
           } else {
             console.error('Invalid member data structure:', item);
           }
