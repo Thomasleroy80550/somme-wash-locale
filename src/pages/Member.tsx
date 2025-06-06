@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
@@ -5,7 +6,6 @@ import { supabase } from '@/integrations/supabase/client';
 import { Database } from '@/types/database';
 import MemberRegistrationSecure from '@/components/MemberRegistrationSecure';
 import MemberDashboard from '@/components/MemberDashboard';
-import NotificationCenter from '@/components/NotificationCenter';
 import AuthGuard from '@/components/AuthGuard';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -144,7 +144,6 @@ const Member = () => {
               </div>
               
               <div className="flex items-center space-x-4">
-                <NotificationCenter />
                 <div className="flex items-center space-x-2">
                   <User className="h-4 w-4 text-gray-400" />
                   <span className="text-sm text-gray-600">
