@@ -50,6 +50,7 @@ const Member = () => {
         console.log('No member profile found for user');
         setMemberProfile(null);
         setIsLoading(false);
+        setIsRegistrationSuccess(false);
         return;
       }
 
@@ -74,11 +75,13 @@ const Member = () => {
         profiles: profileData
       };
 
+      console.log('Setting member profile:', combinedProfile);
       setMemberProfile(combinedProfile);
+      setIsLoading(false);
+      setIsRegistrationSuccess(false);
     } catch (error: any) {
       console.error('Erreur lors du chargement du profil:', error);
       setMemberProfile(null);
-    } finally {
       setIsLoading(false);
       setIsRegistrationSuccess(false);
     }
@@ -89,11 +92,13 @@ const Member = () => {
     setIsRegistrationSuccess(true);
     setIsLoading(true);
     
-    // Add a small delay to ensure the database has been updated
+    // Add a delay to ensure the database has been updated
     setTimeout(() => {
       loadMemberProfile();
-    }, 1000);
+    }, 2000); // Increased delay to 2 seconds
   };
+
+  console.log('Current state - memberProfile:', !!memberProfile, 'isLoading:', isLoading, 'isRegistrationSuccess:', isRegistrationSuccess);
 
   if (isLoading) {
     return (
