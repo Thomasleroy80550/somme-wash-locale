@@ -68,7 +68,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
   const getEstimatedWaitTime = () => {
     if (!profile.position) return "Indéterminé";
     
-    if (profile.position <= 20) return "1-2 semaines";
+    if (profile.position <= 20) return "1-3 semaines";
     if (profile.position <= 50) return "1 mois";
     if (profile.position <= 100) return "2-3 mois";
     return "3+ mois";
