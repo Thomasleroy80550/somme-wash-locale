@@ -68,7 +68,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
   const getEstimatedWaitTime = () => {
     if (!profile.position) return "Indéterminé";
     
-    if (profile.position <= 20) return "1-3 semaines";
+    if (profile.position <= 20) return "1-2 semaines";
     if (profile.position <= 50) return "1 mois";
     if (profile.position <= 100) return "2-3 mois";
     return "3+ mois";
@@ -193,7 +193,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
                     <span className="h-2 w-2 rounded-full bg-gray-300"></span>
                   </div>
                   <h3 className="font-medium text-gray-900">20 Juin 2025</h3>
-                  <p className="mt-1 text-sm text-gray-600">Pose des machine et réception du linge</p>
+                  <p className="mt-1 text-sm text-gray-600">Pose des machines et réception du linge</p>
                 </div>
                 
                 <div className="relative pl-8">
