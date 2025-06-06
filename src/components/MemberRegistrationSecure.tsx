@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -39,6 +38,51 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
         ? [...prev.services, service]
         : prev.services.filter(s => s !== service)
     }));
+  };
+
+  const ensureUserProfileExists = async (userId: string): Promise<void> => {
+    try {
+      console.log('Vérification de l\'existence du profil utilisateur...');
+      
+      // Vérifier si le profil utilisateur existe
+      const { data: existingProfile, error: checkError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('id', userId)
+        .maybeSingle();
+
+      if (checkError) {
+        console.error('Erreur lors de la vérification du profil:', checkError);
+        throw checkError;
+      }
+
+      if (existingProfile) {
+        console.log('Profil utilisateur existe déjà');
+        return;
+      }
+
+      console.log('Création du profil utilisateur...');
+      
+      // Si le profil n'existe pas, le créer
+      const { error: createError } = await supabase
+        .from('profiles')
+        .insert({
+          id: userId,
+          email: user?.email || '',
+          first_name: user?.user_metadata?.first_name || '',
+          last_name: user?.user_metadata?.last_name || ''
+        });
+
+      if (createError) {
+        console.error('Erreur lors de la création du profil:', createError);
+        throw createError;
+      }
+
+      console.log('Profil utilisateur créé avec succès');
+    } catch (error) {
+      console.error('Erreur dans ensureUserProfileExists:', error);
+      throw error;
+    }
   };
 
   const getNextPosition = async (): Promise<number> => {
@@ -113,6 +157,9 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
     setLoading(true);
 
     try {
+      // D'abord, s'assurer que le profil utilisateur existe
+      await ensureUserProfileExists(user.id);
+
       // Vérifier si un profil membre existe déjà
       const { data: existingProfile, error: checkError } = await supabase
         .from('member_profiles')
