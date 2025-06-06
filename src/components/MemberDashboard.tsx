@@ -267,9 +267,6 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
                       <Mail className="h-4 w-4 mr-2 text-gray-500" /> Mises à jour par email
                     </div>
                     <div className="flex items-center text-gray-600 text-sm">
-                      <Users className="h-4 w-4 mr-2 text-gray-500" /> Webinaires exclusifs
-                    </div>
-                    <div className="flex items-center text-gray-600 text-sm">
                       <Bell className="h-4 w-4 mr-2 text-gray-500" /> Notifications sur cette plateforme
                     </div>
                     <div className="flex items-center text-gray-600 text-sm">
