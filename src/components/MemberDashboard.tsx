@@ -138,7 +138,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
               </CardHeader>
               <CardContent>
                 <div className="text-lg font-semibold text-blue-700 mb-2">
-                  20 Juib 2025
+                  20 Juin 2025
                 </div>
                 <p className="text-sm text-blue-600">
                   Pose des machines
@@ -193,7 +193,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
                     <span className="h-2 w-2 rounded-full bg-gray-300"></span>
                   </div>
                   <h3 className="font-medium text-gray-900">20 Juin 2025</h3>
-                  <p className="mt-1 text-sm text-gray-600">Pose des machines et réception du linge</p>
+                  <p className="mt-1 text-sm text-gray-600">Pose des machine et réception du linge</p>
                 </div>
                 
                 <div className="relative pl-8">
