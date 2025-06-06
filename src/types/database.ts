@@ -134,5 +134,11 @@ export interface Database {
         };
       };
     };
+    Functions: {
+      reorganize_waiting_list_positions: {
+        Args: Record<PropertyKey, never>;
+        Returns: undefined;
+      };
+    };
   };
 }

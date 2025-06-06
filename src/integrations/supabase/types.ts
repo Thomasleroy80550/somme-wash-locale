@@ -164,6 +164,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      reorganize_waiting_list_positions: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin" | "member"
