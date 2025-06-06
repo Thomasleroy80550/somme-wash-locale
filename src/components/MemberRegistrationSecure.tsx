@@ -128,33 +128,27 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
 
       if (profileError) throw profileError;
 
-      // Préparer les données du membre (sans position car elle sera assignée automatiquement)
-      const memberData = {
-        user_id: user.id,
-        profile_type: formData.profileType,
-        number_of_properties: formData.numberOfProperties,
-        total_capacity: formData.totalCapacity,
-        location: formData.location,
-        description: formData.description || null,
-        delivery_delay: formData.deliveryDelay,
-        services: formData.services,
-        special_requests: formData.specialRequests || null
-        // La position sera assignée automatiquement par le trigger
-      };
-
-      console.log('Insertion du profil membre...');
+      console.log('Insertion du profil membre avec fonction sécurisée...');
       
-      // Insérer le profil membre - la position sera calculée automatiquement
-      const { error: memberError } = await supabase
-        .from('member_profiles')
-        .insert(memberData);
+      // Utiliser la fonction sécurisée pour insérer avec position automatique
+      const { data: insertResult, error: memberError } = await supabase.rpc('insert_member_with_position', {
+        p_user_id: user.id,
+        p_profile_type: formData.profileType,
+        p_number_of_properties: formData.numberOfProperties,
+        p_total_capacity: formData.totalCapacity,
+        p_location: formData.location,
+        p_description: formData.description || null,
+        p_delivery_delay: formData.deliveryDelay,
+        p_services: formData.services,
+        p_special_requests: formData.specialRequests || null
+      });
 
       if (memberError) {
         console.error('Erreur lors de l\'insertion:', memberError);
         throw memberError;
       }
 
-      console.log('Insertion du profil membre réussie');
+      console.log('Insertion du profil membre réussie:', insertResult);
 
       // Envoyer une notification de bienvenue
       await supabase.from('notifications').insert({

@@ -135,6 +135,23 @@ export interface Database {
       };
     };
     Functions: {
+      insert_member_with_position: {
+        Args: {
+          p_user_id: string;
+          p_profile_type: string;
+          p_number_of_properties: number;
+          p_total_capacity: number;
+          p_location: string;
+          p_description?: string;
+          p_delivery_delay: string;
+          p_services: string[];
+          p_special_requests?: string;
+        };
+        Returns: {
+          id: string;
+          position: number;
+        }[];
+      };
       reorganize_waiting_list_positions: {
         Args: Record<PropertyKey, never>;
         Returns: undefined;
