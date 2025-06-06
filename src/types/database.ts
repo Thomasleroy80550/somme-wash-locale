@@ -1,5 +1,3 @@
-
-
 export interface Database {
   public: {
     Tables: {
@@ -114,6 +112,14 @@ export interface Database {
           message: string;
           read: boolean;
           sent_at: string;
+          message_type: string | null;
+          image_url: string | null;
+          action_url: string | null;
+          status: string | null;
+          scheduled_for: string | null;
+          created_by: string | null;
+          priority: number | null;
+          target_audience: any | null;
         };
         Insert: {
           id?: string;
@@ -123,6 +129,14 @@ export interface Database {
           message: string;
           read?: boolean;
           sent_at?: string;
+          message_type?: string | null;
+          image_url?: string | null;
+          action_url?: string | null;
+          status?: string | null;
+          scheduled_for?: string | null;
+          created_by?: string | null;
+          priority?: number | null;
+          target_audience?: any | null;
         };
         Update: {
           id?: string;
@@ -132,6 +146,14 @@ export interface Database {
           message?: string;
           read?: boolean;
           sent_at?: string;
+          message_type?: string | null;
+          image_url?: string | null;
+          action_url?: string | null;
+          status?: string | null;
+          scheduled_for?: string | null;
+          created_by?: string | null;
+          priority?: number | null;
+          target_audience?: any | null;
         };
       };
     };
@@ -157,7 +179,18 @@ export interface Database {
         Args: Record<PropertyKey, never>;
         Returns: undefined;
       };
+      send_notification_to_audience: {
+        Args: {
+          p_title: string;
+          p_message: string;
+          p_message_type?: string;
+          p_target_audience?: any;
+          p_image_url?: string;
+          p_action_url?: string;
+          p_created_by?: string;
+        };
+        Returns: number;
+      };
     };
   };
 }
-

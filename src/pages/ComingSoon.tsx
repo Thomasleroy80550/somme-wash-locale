@@ -1,560 +1,356 @@
 
-import { useState } from 'react';
-import { Sparkles, MapPin, Calendar, Building2, Users, TrendingUp, Clock, Mail, Bed, Bath, UtensilsCrossed, Truck, CheckCircle, UserPlus, Package, Home, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Calendar, Clock, CheckCircle, ArrowRight, MapPin, Users, Star, Zap, Shield, Leaf, Calendar as CalendarIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import NewsSection from '@/components/NewsSection';
 
 const ComingSoon = () => {
   const [email, setEmail] = useState('');
-  const { toast } = useToast();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleNewsletterSignup = (e: React.FormEvent) => {
+  const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      toast({
-        title: "Merci !",
-        description: "Vous serez notifié du lancement de Hello Wash.",
-      });
+      setIsSubmitted(true);
       setEmail('');
+      setTimeout(() => setIsSubmitted(false), 3000);
     }
   };
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  // Progression du projet (exemple)
+  const projectProgress = {
+    current: 3,
+    total: 5,
+    percentage: 60,
+    currentPhase: "Développement de la plateforme",
+    phases: [
+      { name: "Étude de marché", status: "completed", date: "Jan 2024" },
+      { name: "Conception", status: "completed", date: "Fév 2024" },
+      { name: "Développement", status: "current", date: "Mars 2024" },
+      { name: "Tests pilotes", status: "upcoming", date: "Avr 2024" },
+      { name: "Lancement", status: "upcoming", date: "Mai 2024" }
+    ]
   };
-
-  const services = [
-    {
-      icon: Bed,
-      title: "Linge de lit",
-      description: "Draps, housses de couette, taies d'oreiller de qualité supérieure",
-      available: true
-    },
-    {
-      icon: Bath,
-      title: "Linge de toilette", 
-      description: "Serviettes ultra-absorbantes et moelleuses",
-      available: true
-    },
-    {
-      icon: UtensilsCrossed,
-      title: "Linge de table",
-      description: "Nappes et serviettes élégantes pour vos réceptions",
-      available: false
-    }
-  ];
-
-  const processSteps = [
-    {
-      id: 1,
-      icon: UserPlus,
-      title: "Inscription",
-      description: "Créez votre compte et connectez votre calendrier de réservation",
-      details: [
-        "Inscription rapide en 2 minutes",
-        "Synchronisation automatique des calendriers",
-        "Configuration de vos préférences"
-      ]
-    },
-    {
-      id: 2,
-      icon: Calendar,
-      title: "Planification Automatique",
-      description: "Notre système surveille vos réservations et programme les livraisons",
-      details: [
-        "Détection automatique des nouvelles réservations",
-        "Calcul du délai optimal (J-1, J-2 ou J-3)",
-        "Confirmation par notification"
-      ]
-    },
-    {
-      id: 3,
-      icon: Truck,
-      title: "Livraison",
-      description: "Votre linge propre arrive avant vos hôtes",
-      details: [
-        "Livraison dans le créneau choisi",
-        "Linge emballé et étiquetté par pièce",
-        "Notification de livraison en temps réel"
-      ]
-    },
-    {
-      id: 4,
-      icon: Home,
-      title: "Installation",
-      description: "Installez le linge frais pour accueillir vos voyageurs",
-      details: [
-        "Linge de qualité hôtelière",
-        "Emballage facile à identifier",
-        "Gîte prêt en quelques minutes"
-      ]
-    },
-    {
-      id: 5,
-      icon: Package,
-      title: "Collecte",
-      description: "Nous récupérons le linge sale pour le cycle suivant",
-      details: [
-        "Collecte programmée automatiquement",
-        "Sacs de collecte fournis",
-        "Nettoyage professionnel garanti"
-      ]
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
-                alt="Hello Wash Logo" 
-                className="h-12 w-auto"
-              />
-              <span className="ml-3 text-sm text-gray-600">Baie de Somme</span>
+      {/* Navigation Header */}
+      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-[#145587] rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">HW</span>
+              </div>
+              <span className="text-xl font-bold text-[#145587]">Hello Wash</span>
             </div>
-            <div className="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold">
-              Bientôt disponible
-            </div>
+            <nav className="hidden md:flex items-center space-x-6">
+              <a href="#about" className="text-gray-600 hover:text-[#145587] transition-colors">À propos</a>
+              <a href="#progress" className="text-gray-600 hover:text-[#145587] transition-colors">Avancement</a>
+              <a href="#news" className="text-gray-600 hover:text-[#145587] transition-colors">Actualités</a>
+              <Link to="/auth" className="bg-[#145587] text-white px-4 py-2 rounded-lg hover:bg-[#145587]/90 transition-colors">
+                Connexion
+              </Link>
+            </nav>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center bg-[#145587]/10 text-[#145587] px-6 py-3 rounded-full mb-8 animate-fade-in">
-            <Sparkles className="h-5 w-5 mr-2 animate-sparkle" />
-            <span className="font-semibold">Lancement très prochainement</span>
-          </div>
+      <section className="py-20 px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-4xl mx-auto">
+          <Badge className="mb-6 bg-[#145587] text-white">
+            Bientôt disponible
+          </Badge>
           
-          <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-            Hello Wash
-            <span className="block text-[#145587] animate-gentle-sway">arrive bientôt</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            <span className="text-[#145587]">Hello Wash</span><br />
+            révolutionne le linge<br />
+            pour les gîtes
           </h1>
           
-          <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-            La première blanchisserie connectée de la Baie de Somme. 
-            Location de linge premium avec gestion automatisée pour vos gîtes et hébergements.
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            La première solution de lavage de linge dédiée aux propriétaires de gîtes et locations saisonnières.
+            Service premium, écologique et sur-mesure.
           </p>
 
-          <div className="flex items-center justify-center text-gray-600 mb-12">
-            <MapPin className="h-5 w-5 mr-2" />
-            <span>Baie de Somme, France</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Preview */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Nos Services</h2>
-            <p className="text-gray-600">Location de linge professionnel de qualité</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className={`relative ${!service.available ? 'opacity-75' : ''}`}>
-                <CardHeader>
-                  <div className={`flex items-center justify-center w-16 h-16 ${service.available ? 'bg-[#145587]/10' : 'bg-gray-200'} rounded-2xl mb-4 relative`}>
-                    <service.icon className={`h-8 w-8 ${service.available ? 'text-[#145587]' : 'text-gray-400'}`} />
-                    {!service.available && (
-                      <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
-                        Bientôt
-                      </div>
-                    )}
-                  </div>
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">{service.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Nos Offres Section */}
-      <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Nos Offres sur Mesure</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Des solutions adaptées à chaque type d'hébergement dans la Baie de Somme
-            </p>
-            <div className="inline-flex items-center bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold mt-4">
-              <Clock className="h-4 w-4 mr-2" />
-              Bientôt disponibles
+          {/* Compteur de membres */}
+          <div className="flex justify-center items-center space-x-6 mb-8">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-[#145587]">500+</div>
+              <div className="text-sm text-gray-600">Membres inscrits</div>
+            </div>
+            <div className="w-px h-12 bg-gray-300"></div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-[#145587]">15</div>
+              <div className="text-sm text-gray-600">Villes couvertes</div>
+            </div>
+            <div className="w-px h-12 bg-gray-300"></div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-[#145587]">Mai 2024</div>
+              <div className="text-sm text-gray-600">Lancement prévu</div>
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Offre Gîtes Indépendants */}
-            <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden opacity-90">
-              {/* Éléments de scintillement */}
-              <div className="absolute top-4 right-4 animate-sparkle">
-                <Sparkles className="h-4 w-4 text-yellow-400" />
-              </div>
-              <div className="absolute top-16 right-12 animate-sparkle delay-300">
-                <Sparkles className="h-3 w-3 text-blue-400" />
-              </div>
-              <div className="absolute top-8 right-20 animate-sparkle delay-700">
-                <Sparkles className="h-2 w-2 text-green-400" />
-              </div>
-              <div className="absolute bottom-16 left-4 animate-sparkle delay-500">
-                <Sparkles className="h-3 w-3 text-purple-400" />
-              </div>
-              <div className="absolute bottom-8 left-12 animate-sparkle delay-1000">
-                <Sparkles className="h-2 w-2 text-pink-400" />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Link to="/auth">
+              <Button size="lg" className="bg-[#F97316] hover:bg-[#F97316]/90 text-white px-8">
+                Rejoindre la liste d'attente
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Button variant="outline" size="lg" className="border-[#145587] text-[#145587] hover:bg-[#145587] hover:text-white">
+              En savoir plus
+            </Button>
+          </div>
+
+          <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto flex gap-2">
+            <Input
+              type="email"
+              placeholder="Votre email pour rester informé"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="flex-1"
+              required
+            />
+            <Button type="submit" disabled={isSubmitted}>
+              {isSubmitted ? <CheckCircle className="h-4 w-4" /> : 'Notifier'}
+            </Button>
+          </form>
+          
+          {isSubmitted && (
+            <p className="text-green-600 text-sm mt-2">
+              ✓ Merci ! Nous vous tiendrons informé.
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* Section Avancement */}
+      <section id="progress" className="py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Où en est le projet ?
+            </h2>
+            <p className="text-xl text-gray-600">
+              Suivez l'avancement de Hello Wash en temps réel
+            </p>
+          </div>
+
+          <Card className="max-w-4xl mx-auto mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <Calendar className="h-5 w-5 text-[#145587]" />
+                <span>Phase actuelle : {projectProgress.currentPhase}</span>
+              </CardTitle>
+              <CardDescription>
+                Progression globale du projet
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="mb-6">
+                <div className="flex justify-between text-sm text-gray-600 mb-2">
+                  <span>Avancement</span>
+                  <span>{projectProgress.percentage}%</span>
+                </div>
+                <Progress value={projectProgress.percentage} className="h-3" />
               </div>
               
-              <div className="flex items-center mb-6">
-                <div className="flex items-center justify-center w-16 h-16 bg-[#145587]/10 rounded-2xl mr-4 animate-gentle-sway">
-                  <Building2 className="h-8 w-8 text-[#145587]" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">Gîtes Indépendants</h3>
-                  <p className="text-[#145587] font-semibold">Solution automatisée</p>
-                </div>
-              </div>
-              
-              <p className="text-gray-600 mb-8 text-lg leading-relaxed">
-                Synchronisez votre calendrier et recevez automatiquement le linge propre avant l'arrivée de vos hôtes.
-              </p>
-              
-              <div className="space-y-6 mb-8">
-                <div className="flex items-start">
-                  <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-xl mr-4 flex-shrink-0">
-                    <Calendar className="h-6 w-6 text-green-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Synchronisation calendrier</h4>
-                    <p className="text-gray-600">Connectez votre calendrier de réservation pour une gestion automatique</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl mr-4 flex-shrink-0">
-                    <Truck className="h-6 w-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Livraison programmée</h4>
-                    <p className="text-gray-600">Le linge arrive avant vos hôtes, prêt à être installé</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-xl mr-4 flex-shrink-0">
-                    <Clock className="h-6 w-6 text-purple-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Choix du délai</h4>
-                    <p className="text-gray-600">Sélectionnez J-1, J-2 ou J-3 selon vos préférences</p>
-                    <div className="flex gap-2 mt-3">
-                      <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">J-1</span>
-                      <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">J-2</span>
-                      <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">J-3</span>
+              <div className="space-y-3">
+                {projectProgress.phases.map((phase, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                      phase.status === 'completed' 
+                        ? 'bg-green-500 border-green-500' 
+                        : phase.status === 'current'
+                        ? 'bg-[#145587] border-[#145587]'
+                        : 'bg-white border-gray-300'
+                    }`}>
+                      {phase.status === 'completed' && (
+                        <CheckCircle className="w-3 h-3 text-white" />
+                      )}
+                      {phase.status === 'current' && (
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      )}
+                    </div>
+                    <div className="flex-1 flex justify-between items-center">
+                      <span className={`font-medium ${
+                        phase.status === 'current' ? 'text-[#145587]' : 'text-gray-900'
+                      }`}>
+                        {phase.name}
+                      </span>
+                      <span className="text-sm text-gray-500">{phase.date}</span>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
-              
-              <div className="bg-orange-100 text-orange-800 px-4 py-3 rounded-2xl text-center">
-                <p className="font-semibold">Bientôt disponible</p>
-                <p className="text-sm mt-1">Soyez notifié du lancement</p>
-              </div>
-            </div>
-
-            {/* Offre Grands Comptes */}
-            <div className="bg-gradient-to-br from-[#145587] to-[#145587]/90 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 text-white opacity-90">
-              <div className="flex items-center mb-6">
-                <div className="flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl mr-4">
-                  <Sparkles className="h-8 w-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold">Grands Comptes</h3>
-                  <p className="text-blue-100 font-semibold">Solution industrielle</p>
-                </div>
-              </div>
-              
-              <p className="text-blue-100 mb-8 text-lg leading-relaxed">
-                Livraison en rolls pour les hôtels, résidences et établissements à fort volume.
-              </p>
-              
-              <div className="space-y-6 mb-8">
-                <div className="flex items-start">
-                  <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-xl mr-4 flex-shrink-0">
-                    <Truck className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Livraison en rolls</h4>
-                    <p className="text-blue-100">Transport optimisé pour grandes quantités</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-xl mr-4 flex-shrink-0">
-                    <Calendar className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Planning personnalisé</h4>
-                    <p className="text-blue-100">Fréquence adaptée à votre occupation</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-xl mr-4 flex-shrink-0">
-                    <Sparkles className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Service premium</h4>
-                    <p className="text-blue-100">Gestionnaire dédié et suivi personnalisé</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
-                <p className="text-white/90 text-center font-medium">
-                  💼 Devis personnalisé requis
-                </p>
-                <p className="text-blue-100 text-center text-sm mt-2">
-                  Tarifs préférentiels selon volume
-                </p>
-              </div>
-              
-              <div className="bg-orange-100 text-orange-800 px-4 py-3 rounded-2xl text-center">
-                <p className="font-semibold">Bientôt disponible</p>
-                <p className="text-sm mt-1">Demandez à être contacté</p>
-              </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
-      {/* Dashboard Preview */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Section Actualités */}
+      <section id="news">
+        <NewsSection />
+      </section>
+
+      {/* Comment ça marche ? */}
+      <section id="about" className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Dashboard Propriétaire</h2>
-            <p className="text-gray-600">Gestion automatisée de vos gîtes - Aperçu</p>
-            <div className="inline-flex items-center bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold mt-4">
-              <Clock className="h-4 w-4 mr-2" />
-              Bientôt disponible
-            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Comment ça marche ?
+            </h2>
+            <p className="text-xl text-gray-600">
+              Un service simple et efficace en 3 étapes
+            </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <Card className="bg-gradient-to-br from-blue-50 to-blue-100">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center text-blue-700">
-                    <Calendar className="h-5 w-5 mr-2" />
-                    Réservations
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-3xl font-bold text-blue-700 mb-2">24</div>
-                  <p className="text-blue-600 text-sm">Ce mois-ci</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-green-50 to-green-100">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center text-green-700">
-                    <Building2 className="h-5 w-5 mr-2" />
-                    Mes Gîtes
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-3xl font-bold text-green-700 mb-2">3</div>
-                  <p className="text-green-600 text-sm">Propriétés actives</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-purple-50 to-purple-100">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center text-purple-700">
-                    <Users className="h-5 w-5 mr-2" />
-                    Voyageurs
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-3xl font-bold text-purple-700 mb-2">156</div>
-                  <p className="text-purple-600 text-sm">Total clients</p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <Card className="bg-gradient-to-r from-[#145587]/5 to-[#145587]/10">
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="text-center">
               <CardHeader>
-                <CardTitle className="flex items-center text-[#145587]">
-                  <TrendingUp className="h-5 w-5 mr-2" />
-                  Synchronisation Calendrier
-                </CardTitle>
-                <CardDescription>
-                  Livraison automatique avant l'arrivée de vos hôtes
-                </CardDescription>
+                <div className="w-12 h-12 bg-[#145587] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold text-xl">1</span>
+                </div>
+                <CardTitle>Collecte</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="bg-white rounded-lg p-4">
-                    <div className="text-sm text-gray-600 mb-2">Prochaine livraison</div>
-                    <div className="font-semibold">Demain 14h - Gîte des Mouettes</div>
-                  </div>
-                  <div className="bg-white rounded-lg p-4">
-                    <div className="text-sm text-gray-600 mb-2">Status</div>
-                    <div className="font-semibold text-green-600">✓ Synchronisé Airbnb</div>
-                  </div>
+                <CardDescription>
+                  Nous récupérons votre linge sale directement chez vous selon le planning convenu.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center">
+              <CardHeader>
+                <div className="w-12 h-12 bg-[#145587] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold text-xl">2</span>
                 </div>
+                <CardTitle>Lavage Premium</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Lavage professionnel avec des produits écologiques dans nos installations modernes.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center">
+              <CardHeader>
+                <div className="w-12 h-12 bg-[#145587] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold text-xl">3</span>
+                </div>
+                <CardTitle>Livraison</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Retour de votre linge propre, plié et prêt pour vos prochains voyageurs.
+                </CardDescription>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Comment ça marche - Version Simple et Claire */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Comment ça marche ?</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              Un processus simple en 5 étapes pour gérer automatiquement votre linge
-            </p>
-            <div className="inline-flex items-center bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold">
-              <Clock className="h-4 w-4 mr-2" />
-              Processus entièrement automatisé
-            </div>
+      {/* Nos avantages */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Pourquoi choisir Hello Wash ?
+            </h2>
           </div>
 
-          {/* Steps en ligne claire */}
-          <div className="space-y-12">
-            {processSteps.map((step, index) => (
-              <div key={step.id} className="flex items-start gap-8 group">
-                {/* Numéro et icône */}
-                <div className="flex-shrink-0 text-center">
-                  <div className="w-20 h-20 bg-gradient-to-br from-[#145587] to-[#145587]/80 rounded-3xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <step.icon className="h-10 w-10" />
-                  </div>
-                  <div className="mt-3 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto">
-                    {step.id}
-                  </div>
-                  {/* Ligne de connexion */}
-                  {index < processSteps.length - 1 && (
-                    <div className="w-0.5 h-16 bg-gray-300 mx-auto mt-4"></div>
-                  )}
-                </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="text-center">
+              <CardHeader>
+                <Zap className="h-8 w-8 text-[#F97316] mx-auto mb-2" />
+                <CardTitle className="text-lg">Gain de temps</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Plus de lavage, plus de pliage. Concentrez-vous sur vos hôtes.
+                </CardDescription>
+              </CardContent>
+            </Card>
 
-                {/* Contenu */}
-                <div className="flex-1 pb-8">
-                  <Card className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-100 hover:border-[#145587]/20 transition-all duration-300 hover:shadow-lg">
-                    <CardHeader>
-                      <CardTitle className="text-2xl text-gray-900 mb-2">{step.title}</CardTitle>
-                      <CardDescription className="text-lg text-gray-600">
-                        {step.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid md:grid-cols-3 gap-4">
-                        {step.details.map((detail, idx) => (
-                          <div key={idx} className="flex items-start">
-                            <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
-                            <span className="text-sm text-gray-600">{detail}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            ))}
-          </div>
+            <Card className="text-center">
+              <CardHeader>
+                <Shield className="h-8 w-8 text-[#F97316] mx-auto mb-2" />
+                <CardTitle className="text-lg">Qualité garantie</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Linge impeccable à chaque livraison avec notre garantie qualité.
+                </CardDescription>
+              </CardContent>
+            </Card>
 
-          {/* CTA Section */}
-          <div className="text-center mt-16">
-            <div className="bg-gradient-to-r from-[#145587] to-[#145587]/80 rounded-3xl p-8 text-white">
-              <h3 className="text-2xl font-bold mb-4">Prêt à simplifier la gestion de votre linge ?</h3>
-              <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-                Rejoignez notre liste d'attente et soyez parmi les premiers à découvrir cette révolution.
-              </p>
-              <Button 
-                onClick={() => document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white text-[#145587] hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
-              >
-                <Sparkles className="h-5 w-5 mr-2" />
-                Rejoindre la Liste d'Attente
-              </Button>
-            </div>
+            <Card className="text-center">
+              <CardHeader>
+                <Leaf className="h-8 w-8 text-[#F97316] mx-auto mb-2" />
+                <CardTitle className="text-lg">Éco-responsable</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Produits écologiques et process optimisé pour l'environnement.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center">
+              <CardHeader>
+                <Star className="h-8 w-8 text-[#F97316] mx-auto mb-2" />
+                <CardTitle className="text-lg">Service premium</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Un service haut de gamme adapté aux exigences des locations.
+                </CardDescription>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Newsletter Signup */}
-      <section id="newsletter" className="py-16 bg-[#145587]">
+      {/* Call to Action */}
+      <section className="py-16 bg-[#145587] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Rejoignez notre Liste d'Attente</h2>
-          <p className="text-blue-100 mb-8 text-lg">
-            Soyez les premiers à découvrir Hello Wash et profitez d'offres exclusives de lancement
+          <h2 className="text-3xl font-bold mb-4">
+            Prêt à rejoindre l'aventure ?
+          </h2>
+          <p className="text-xl mb-8 opacity-90">
+            Inscrivez-vous dès maintenant sur notre liste d'attente et bénéficiez d'un tarif préférentiel au lancement.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <form onSubmit={handleNewsletterSignup} className="flex gap-4 flex-1">
-              <Input
-                type="email"
-                placeholder="Votre adresse email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-white flex-1"
-                required
-              />
-              <Button type="submit" className="bg-white text-[#145587] hover:bg-gray-100 whitespace-nowrap">
-                <Mail className="h-4 w-4 mr-2" />
-                S'inscrire
-              </Button>
-            </form>
-          </div>
-          
-          <div className="mt-6">
-            <a 
-              href="/auth"
-              className="inline-flex items-center bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold"
-            >
-              <Sparkles className="h-5 w-5 mr-2" />
-              Inscription Complète - Liste d'Attente Prioritaire
-            </a>
-            <p className="text-blue-100 text-sm mt-2">
-              Accès prioritaire aux tests et lancement exclusif
-            </p>
-          </div>
+          <Link to="/auth">
+            <Button size="lg" className="bg-[#F97316] hover:bg-[#F97316]/90 text-white px-8">
+              Je m'inscris maintenant
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex items-center justify-center mb-6">
-            <img 
-              src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
-              alt="Hello Wash Logo" 
-              className="h-8 w-auto mr-3"
-            />
-            <span className="text-xl font-bold">Hello Wash</span>
+      <footer className="border-t bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex items-center space-x-2 mb-4 md:mb-0">
+              <div className="w-8 h-8 bg-[#145587] rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">HW</span>
+              </div>
+              <span className="text-xl font-bold text-[#145587]">Hello Wash</span>
+            </div>
+            <div className="text-gray-600 text-sm">
+              © 2024 Hello Wash. Tous droits réservés.
+            </div>
           </div>
-          <p className="text-gray-400 mb-4">
-            Blanchisserie connectée - Baie de Somme
-          </p>
-          <p className="text-gray-500 text-sm">
-            &copy; 2025 Hello Wash. Tous droits réservés.
-          </p>
         </div>
       </footer>
     </div>

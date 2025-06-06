@@ -70,28 +70,52 @@ export type Database = {
       }
       notifications: {
         Row: {
+          action_url: string | null
+          created_by: string | null
           id: string
+          image_url: string | null
           message: string
+          message_type: string | null
+          priority: number | null
           read: boolean | null
+          scheduled_for: string | null
           sent_at: string | null
+          status: string | null
+          target_audience: Json | null
           title: string
           type: string
           user_id: string
         }
         Insert: {
+          action_url?: string | null
+          created_by?: string | null
           id?: string
+          image_url?: string | null
           message: string
+          message_type?: string | null
+          priority?: number | null
           read?: boolean | null
+          scheduled_for?: string | null
           sent_at?: string | null
+          status?: string | null
+          target_audience?: Json | null
           title: string
           type: string
           user_id: string
         }
         Update: {
+          action_url?: string | null
+          created_by?: string | null
           id?: string
+          image_url?: string | null
           message?: string
+          message_type?: string | null
+          priority?: number | null
           read?: boolean | null
+          scheduled_for?: string | null
           sent_at?: string | null
+          status?: string | null
+          target_audience?: Json | null
           title?: string
           type?: string
           user_id?: string
@@ -184,6 +208,18 @@ export type Database = {
       reorganize_waiting_list_positions: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      send_notification_to_audience: {
+        Args: {
+          p_title: string
+          p_message: string
+          p_message_type?: string
+          p_target_audience?: Json
+          p_image_url?: string
+          p_action_url?: string
+          p_created_by?: string
+        }
+        Returns: number
       }
     }
     Enums: {
