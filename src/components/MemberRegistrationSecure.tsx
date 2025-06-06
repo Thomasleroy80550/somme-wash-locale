@@ -51,7 +51,25 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
     setLoading(true);
 
     try {
-      // Update profile with additional info
+      // Vérifier si un profil membre existe déjà
+      const { data: existingProfile, error: checkError } = await supabase
+        .from('member_profiles')
+        .select('id')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (checkError) {
+        console.error('Erreur lors de la vérification du profil:', checkError);
+        throw checkError;
+      }
+
+      if (existingProfile) {
+        toast.error('Vous êtes déjà inscrit à la liste d\'attente');
+        onSuccess(); // Rediriger vers le dashboard
+        return;
+      }
+
+      // Mettre à jour le profil avec les informations supplémentaires
       const { error: profileError } = await supabase
         .from('profiles')
         .update({
@@ -62,7 +80,7 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
 
       if (profileError) throw profileError;
 
-      // Create member profile
+      // Créer le profil membre
       const { error: memberError } = await supabase
         .from('member_profiles')
         .insert({
@@ -77,9 +95,12 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
           special_requests: formData.specialRequests || null
         });
 
-      if (memberError) throw memberError;
+      if (memberError) {
+        console.error('Erreur lors de la création du profil membre:', memberError);
+        throw memberError;
+      }
 
-      // Send welcome notification
+      // Envoyer une notification de bienvenue
       await supabase.from('notifications').insert({
         user_id: user.id,
         type: 'welcome',
@@ -90,6 +111,7 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
       toast.success('Inscription réussie ! Bienvenue dans la liste d\'attente Hello Wash.');
       onSuccess();
     } catch (error: any) {
+      console.error('Erreur lors de l\'inscription:', error);
       toast.error('Erreur lors de l\'inscription: ' + error.message);
     } finally {
       setLoading(false);

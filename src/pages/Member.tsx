@@ -15,7 +15,6 @@ const Member = () => {
   const { user, signOut } = useAuth();
   const [memberProfile, setMemberProfile] = useState<MemberProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -34,7 +33,7 @@ const Member = () => {
     try {
       console.log('Loading member profile for user:', user.id);
       
-      // First, get the member profile
+      // Avec la contrainte unique, on peut maintenant utiliser .single() sans risque
       const { data: memberData, error: memberError } = await supabase
         .from('member_profiles')
         .select('*')
@@ -50,11 +49,10 @@ const Member = () => {
         console.log('No member profile found for user');
         setMemberProfile(null);
         setIsLoading(false);
-        setIsRegistrationSuccess(false);
         return;
       }
 
-      // Then, get the user profile
+      // Récupérer le profil utilisateur
       const { data: profileData, error: profileError } = await supabase
         .from('profiles')
         .select('*')
@@ -69,7 +67,7 @@ const Member = () => {
       console.log('Member data loaded:', memberData);
       console.log('Profile data loaded:', profileData);
       
-      // Combine the data
+      // Combiner les données
       const combinedProfile: MemberProfile = {
         ...memberData,
         profiles: profileData
@@ -77,37 +75,30 @@ const Member = () => {
 
       console.log('Setting member profile:', combinedProfile);
       setMemberProfile(combinedProfile);
-      setIsLoading(false);
-      setIsRegistrationSuccess(false);
     } catch (error: any) {
       console.error('Erreur lors du chargement du profil:', error);
       setMemberProfile(null);
+    } finally {
       setIsLoading(false);
-      setIsRegistrationSuccess(false);
     }
   };
 
   const handleRegistrationSuccess = () => {
     console.log('Registration successful, reloading profile...');
-    setIsRegistrationSuccess(true);
     setIsLoading(true);
     
-    // Add a delay to ensure the database has been updated
-    setTimeout(() => {
-      loadMemberProfile();
-    }, 2000); // Increased delay to 2 seconds
+    // Recharger immédiatement le profil
+    loadMemberProfile();
   };
 
-  console.log('Current state - memberProfile:', !!memberProfile, 'isLoading:', isLoading, 'isRegistrationSuccess:', isRegistrationSuccess);
+  console.log('Current state - memberProfile:', !!memberProfile, 'isLoading:', isLoading);
 
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#145587] mx-auto mb-4"></div>
-          <p className="text-gray-600">
-            {isRegistrationSuccess ? 'Finalisation de votre inscription...' : 'Chargement...'}
-          </p>
+          <p className="text-gray-600">Chargement...</p>
         </div>
       </div>
     );
