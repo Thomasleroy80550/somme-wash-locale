@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
 import { Database } from '@/types/database';
 import { 
   User, 
@@ -13,7 +14,12 @@ import {
   Phone,
   Mail,
   Trophy,
-  Users
+  Users,
+  CalendarDays,
+  Check,
+  ArrowRight,
+  Star,
+  CheckCircle2
 } from 'lucide-react';
 
 type MemberProfile = Database['public']['Tables']['member_profiles']['Row'] & {
@@ -44,69 +50,231 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
     return Math.max(0, 100 - (profile.position / 250) * 100);
   };
 
+  // Fonction pour obtenir le badge en fonction de la position
+  const getPositionBadge = () => {
+    if (!profile.position) return null;
+    
+    if (profile.position <= 10) {
+      return <Badge variant="default" className="bg-[#145587] text-white ml-2">Fondateur</Badge>;
+    } else if (profile.position <= 50) {
+      return <Badge variant="default" className="bg-indigo-600 text-white ml-2">Premier Cercle</Badge>;
+    } else if (profile.position <= 100) {
+      return <Badge variant="default" className="bg-purple-600 text-white ml-2">Early Adopter</Badge>;
+    }
+    return null;
+  };
+
+  // Fonction pour estimer le temps d'attente
+  const getEstimatedWaitTime = () => {
+    if (!profile.position) return "Indéterminé";
+    
+    if (profile.position <= 20) return "1-2 semaines";
+    if (profile.position <= 50) return "1 mois";
+    if (profile.position <= 100) return "2-3 mois";
+    return "3+ mois";
+  };
+
   return (
     <div className="space-y-8">
-      {/* Statut et position */}
-      <div className="grid md:grid-cols-3 gap-6">
-        <Card className="bg-gradient-to-br from-[#145587]/10 to-[#145587]/5">
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center text-[#145587]">
-              <Trophy className="h-5 w-5 mr-2" />
-              Votre Position
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-[#145587] mb-2">
-              #{profile.position || '?'}
-            </div>
-            <p className="text-sm text-gray-600">sur la liste d'attente</p>
-            <Progress value={getProgressValue()} className="mt-3" />
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-green-50 to-green-100">
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center text-green-700">
-              <Clock className="h-5 w-5 mr-2" />
-              Statut
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-3">
-              {getStatusBadge(profile.status)}
-            </div>
-            <p className="text-sm text-green-600">
-              Temps d'attente estimé: 2-3 semaines
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-blue-50 to-blue-100">
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center text-blue-700">
-              <Bell className="h-5 w-5 mr-2" />
-              Prochaine Mise à Jour
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-lg font-semibold text-blue-700 mb-2">
-              15 janvier 2025
-            </div>
-            <p className="text-sm text-blue-600">
-              Nouvelles informations sur le lancement
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Détails du profil */}
-      <Tabs defaultValue="profile" className="w-full">
+      <Tabs defaultValue="waitlist" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="waitlist">Liste d'Attente</TabsTrigger>
           <TabsTrigger value="profile">Profil</TabsTrigger>
           <TabsTrigger value="business">Activité</TabsTrigger>
-          <TabsTrigger value="notifications">Notifications</TabsTrigger>
         </TabsList>
 
+        {/* Nouvelle section Liste d'Attente */}
+        <TabsContent value="waitlist" className="space-y-6">
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card className="bg-gradient-to-br from-[#145587]/10 to-[#145587]/5">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center text-[#145587]">
+                  <Trophy className="h-5 w-5 mr-2" />
+                  Votre Position
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center">
+                  <div className="text-3xl font-bold text-[#145587] mb-2">
+                    #{profile.position || '?'}
+                  </div>
+                  {getPositionBadge()}
+                </div>
+                <p className="text-sm text-gray-600">sur la liste d'attente</p>
+                <Progress value={getProgressValue()} className="mt-3" />
+                <p className="text-xs mt-1 text-gray-500">
+                  Plus votre position est basse, plus vite vous serez servi
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-green-50 to-green-100">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center text-green-700">
+                  <Clock className="h-5 w-5 mr-2" />
+                  Temps d'attente
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-xl font-bold text-green-700 mb-2">
+                  {getEstimatedWaitTime()}
+                </div>
+                <p className="text-sm text-green-600">
+                  Estimation basée sur votre position
+                </p>
+                <div className="mt-3 flex items-center text-sm text-gray-600">
+                  <Check className="h-4 w-4 mr-2 text-green-600" />
+                  Nous lançons notre service très bientôt
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-blue-50 to-blue-100">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center text-blue-700">
+                  <CalendarDays className="h-5 w-5 mr-2" />
+                  Prochaine étape
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg font-semibold text-blue-700 mb-2">
+                  15 janvier 2025
+                </div>
+                <p className="text-sm text-blue-600">
+                  Annonce des zones de lancement
+                </p>
+                <div className="mt-3 text-sm text-gray-600">
+                  <Bell className="h-4 w-4 mr-2 inline text-blue-600" />
+                  Vous serez notifié par email
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Calendrier des événements */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <CalendarDays className="h-5 w-5 mr-2" />
+                Calendrier du projet Hello Wash
+              </CardTitle>
+              <CardDescription>
+                Les grandes étapes à venir pour le lancement
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
+                <div className="relative pl-8 before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-200">
+                  <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-blue-600 bg-blue-100">
+                    <CheckCircle2 className="h-3 w-3 text-blue-600" />
+                  </div>
+                  <h3 className="font-medium text-gray-900">Novembre 2024</h3>
+                  <p className="mt-1 text-sm text-gray-600">Ouverture de la liste d'attente aux premiers inscrits</p>
+                </div>
+                
+                <div className="relative pl-8 before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-200">
+                  <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-blue-600 bg-white">
+                    <span className="h-2 w-2 rounded-full bg-blue-600"></span>
+                  </div>
+                  <h3 className="font-medium text-gray-900">15 Janvier 2025</h3>
+                  <p className="mt-1 text-sm text-gray-600">Annonce des zones géographiques de lancement</p>
+                </div>
+                
+                <div className="relative pl-8 before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-200">
+                  <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-gray-300 bg-white">
+                    <span className="h-2 w-2 rounded-full bg-gray-300"></span>
+                  </div>
+                  <h3 className="font-medium text-gray-900">Mars 2025</h3>
+                  <p className="mt-1 text-sm text-gray-600">Début du service pour les 50 premiers membres de la liste</p>
+                </div>
+                
+                <div className="relative pl-8">
+                  <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-gray-300 bg-white">
+                    <span className="h-2 w-2 rounded-full bg-gray-300"></span>
+                  </div>
+                  <h3 className="font-medium text-gray-900">Juin 2025</h3>
+                  <p className="mt-1 text-sm text-gray-600">Extension du service à l'ensemble de la Baie de Somme</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Que se passe-t-il ensuite ? */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <ArrowRight className="h-5 w-5 mr-2" />
+                Que se passe-t-il ensuite ?
+              </CardTitle>
+              <CardDescription>
+                Tout ce que vous devez savoir sur le processus de lancement
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2 flex items-center">
+                  <Check className="h-5 w-5 mr-2 text-[#145587]" />
+                  Processus de lancement
+                </h3>
+                <p className="text-gray-600 pl-7">
+                  Notre service sera lancé progressivement, en commençant par un nombre limité de propriétés dans les zones clés 
+                  de la Baie de Somme. Cela nous permettra d'assurer la qualité optimale de notre service et de recueillir vos retours 
+                  pour nous améliorer constamment.
+                </p>
+              </div>
+              
+              <Separator />
+              
+              <div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2 flex items-center">
+                  <Star className="h-5 w-5 mr-2 text-[#145587]" />
+                  Critères de sélection
+                </h3>
+                <div className="pl-7 space-y-2">
+                  <p className="text-gray-600">
+                    Les membres seront intégrés au service selon ces critères :
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-600 space-y-1">
+                    <li>Votre position dans la liste d'attente</li>
+                    <li>Votre localisation (nous commencerons par certaines zones)</li>
+                    <li>Le type et le nombre de propriétés que vous gérez</li>
+                    <li>Les services spécifiques dont vous avez besoin</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <Separator />
+              
+              <div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2 flex items-center">
+                  <Bell className="h-5 w-5 mr-2 text-[#145587]" />
+                  Communication
+                </h3>
+                <div className="pl-7">
+                  <p className="text-gray-600 mb-2">
+                    Vous serez régulièrement informé de l'avancement du projet et de votre position via :
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <Mail className="h-4 w-4 mr-2 text-gray-500" /> Mises à jour par email
+                    </div>
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <Users className="h-4 w-4 mr-2 text-gray-500" /> Webinaires exclusifs
+                    </div>
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <Bell className="h-4 w-4 mr-2 text-gray-500" /> Notifications sur cette plateforme
+                    </div>
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <Phone className="h-4 w-4 mr-2 text-gray-500" /> Contact personnel (membres prioritaires)
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Contenu existant du profil */}
         <TabsContent value="profile" className="space-y-6">
           <Card>
             <CardHeader>
@@ -153,6 +321,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
           </Card>
         </TabsContent>
 
+        {/* Contenu existant de l'activité */}
         <TabsContent value="business" className="space-y-6">
           <Card>
             <CardHeader>
@@ -207,41 +376,6 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
                   {profile.delivery_delay === 'j-1' ? 'Veille de l\'arrivée' :
                    profile.delivery_delay === 'j-2' ? '2 jours avant' :
                    '3 jours avant'})
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="notifications" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Bell className="h-5 w-5 mr-2" />
-                Dernières Notifications
-              </CardTitle>
-              <CardDescription>
-                Restez informé de l'avancement du projet Hello Wash
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="border-l-4 border-[#145587] pl-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-semibold">Bienvenue dans la liste d'attente !</h4>
-                  <span className="text-sm text-gray-500">Aujourd'hui</span>
-                </div>
-                <p className="text-gray-600 text-sm mt-1">
-                  Votre inscription a été confirmée. Vous êtes en position #{profile.position}.
-                </p>
-              </div>
-              
-              <div className="border-l-4 border-orange-400 pl-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-semibold">Prochaine mise à jour prévue</h4>
-                  <span className="text-sm text-gray-500">Dans 5 jours</span>
-                </div>
-                <p className="text-gray-600 text-sm mt-1">
-                  Nouvelles informations sur le calendrier de lancement et les premières zones desservies.
                 </p>
               </div>
             </CardContent>
