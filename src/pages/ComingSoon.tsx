@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { Sparkles, MapPin, Calendar, Building2, Users, TrendingUp, Clock, Mail, Bed, Bath, UtensilsCrossed, Truck } from 'lucide-react';
+import { Sparkles, MapPin, Calendar, Building2, Users, TrendingUp, Clock, Mail, Bed, Bath, UtensilsCrossed, Truck, CheckCircle, UserPlus, Package, Home, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 
 const ComingSoon = () => {
   const [email, setEmail] = useState('');
+  const [activeStep, setActiveStep] = useState(0);
   const { toast } = useToast();
 
   const handleNewsletterSignup = (e: React.FormEvent) => {
@@ -48,6 +48,85 @@ const ComingSoon = () => {
       available: false
     }
   ];
+
+  const processSteps = [
+    {
+      id: 1,
+      icon: UserPlus,
+      title: "Inscription",
+      subtitle: "Rejoignez Hello Wash",
+      description: "Créez votre compte et connectez votre calendrier de réservation (Airbnb, Booking, etc.)",
+      details: [
+        "Inscription rapide en 2 minutes",
+        "Synchronisation automatique des calendriers",
+        "Configuration de vos préférences de livraison"
+      ],
+      color: "blue"
+    },
+    {
+      id: 2,
+      icon: Calendar,
+      title: "Planification Automatique",
+      subtitle: "On s'occupe de tout",
+      description: "Notre système surveille vos réservations et programme automatiquement les livraisons",
+      details: [
+        "Détection automatique des nouvelles réservations",
+        "Calcul du délai optimal (J-1, J-2 ou J-3)",
+        "Confirmation par notification"
+      ],
+      color: "green"
+    },
+    {
+      id: 3,
+      icon: Truck,
+      title: "Livraison",
+      subtitle: "Linge frais livré",
+      description: "Votre linge propre arrive avant vos hôtes, prêt à être installé",
+      details: [
+        "Livraison dans le créneau choisi",
+        "Linge emballé et étiquetté par pièce",
+        "Notification de livraison en temps réel"
+      ],
+      color: "purple"
+    },
+    {
+      id: 4,
+      icon: Home,
+      title: "Installation",
+      subtitle: "Gîte prêt pour vos hôtes",
+      description: "Installez le linge frais et profitez de l'accueil parfait de vos voyageurs",
+      details: [
+        "Linge de qualité hôtelière",
+        "Emballage facile à identifier",
+        "Gîte prêt en quelques minutes"
+      ],
+      color: "orange"
+    },
+    {
+      id: 5,
+      icon: Package,
+      title: "Collecte",
+      subtitle: "On récupère le sale",
+      description: "Après le départ, nous récupérons le linge sale pour le cycle suivant",
+      details: [
+        "Collecte programmée automatiquement",
+        "Sacs de collecte fournis",
+        "Nettoyage professionnel garanti"
+      ],
+      color: "red"
+    }
+  ];
+
+  const getStepColor = (color: string, variant: 'bg' | 'text' | 'border' = 'bg') => {
+    const colors = {
+      blue: { bg: 'bg-blue-500', text: 'text-blue-500', border: 'border-blue-200' },
+      green: { bg: 'bg-green-500', text: 'text-green-500', border: 'border-green-200' },
+      purple: { bg: 'bg-purple-500', text: 'text-purple-500', border: 'border-purple-200' },
+      orange: { bg: 'bg-orange-500', text: 'text-orange-500', border: 'border-orange-200' },
+      red: { bg: 'bg-red-500', text: 'text-red-500', border: 'border-red-200' }
+    };
+    return colors[color as keyof typeof colors][variant];
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white">
@@ -364,8 +443,116 @@ const ComingSoon = () => {
         </div>
       </section>
 
+      {/* Comment ça marche - Processus Step-by-Step */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Comment ça marche ?</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Un processus simple et automatisé pour transformer la gestion de votre linge
+            </p>
+            <div className="inline-flex items-center bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold">
+              <Clock className="h-4 w-4 mr-2" />
+              Processus entièrement automatisé
+            </div>
+          </div>
+
+          {/* Timeline Steps */}
+          <div className="relative">
+            {/* Progress Line */}
+            <div className="hidden lg:block absolute top-24 left-0 right-0 h-1 bg-gray-200 mx-auto" style={{ width: '80%', marginLeft: '10%' }}>
+              <div 
+                className="h-full bg-gradient-to-r from-blue-500 to-red-500 transition-all duration-1000 ease-out"
+                style={{ width: `${(activeStep / (processSteps.length - 1)) * 100}%` }}
+              />
+            </div>
+
+            {/* Steps Grid */}
+            <div className="grid lg:grid-cols-5 gap-8 lg:gap-4">
+              {processSteps.map((step, index) => (
+                <div key={step.id} className="relative">
+                  {/* Step Card */}
+                  <Card 
+                    className={`cursor-pointer transition-all duration-300 hover:shadow-xl ${
+                      activeStep === index 
+                        ? `ring-2 ${getStepColor(step.color, 'border')} shadow-lg scale-105` 
+                        : 'hover:scale-102'
+                    }`}
+                    onMouseEnter={() => setActiveStep(index)}
+                  >
+                    <CardHeader className="text-center pb-4">
+                      {/* Step Number & Icon */}
+                      <div className="relative mx-auto mb-4">
+                        <div 
+                          className={`w-16 h-16 ${getStepColor(step.color)} rounded-2xl flex items-center justify-center text-white shadow-lg`}
+                        >
+                          <step.icon className="h-8 w-8" />
+                        </div>
+                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                          {step.id}
+                        </div>
+                      </div>
+                      
+                      <CardTitle className="text-lg mb-2">{step.title}</CardTitle>
+                      <p className={`text-sm font-medium ${getStepColor(step.color, 'text')}`}>
+                        {step.subtitle}
+                      </p>
+                    </CardHeader>
+
+                    <CardContent className="pt-0">
+                      <p className="text-gray-600 text-sm mb-4 text-center">
+                        {step.description}
+                      </p>
+
+                      {/* Details List */}
+                      <div className="space-y-2">
+                        {step.details.map((detail, idx) => (
+                          <div key={idx} className="flex items-start text-xs text-gray-500">
+                            <CheckCircle className={`h-3 w-3 ${getStepColor(step.color, 'text')} mt-0.5 mr-2 flex-shrink-0`} />
+                            <span>{detail}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Arrow (Desktop) */}
+                  {index < processSteps.length - 1 && (
+                    <div className="hidden lg:block absolute top-24 -right-4 z-10">
+                      <div className="w-8 h-8 bg-white rounded-full border-2 border-gray-200 flex items-center justify-center shadow-sm">
+                        <ArrowRight className="h-4 w-4 text-gray-400" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="text-center mt-16">
+            <div className="bg-gradient-to-r from-[#145587] to-[#145587]/80 rounded-3xl p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">Prêt à simplifier la gestion de votre linge ?</h3>
+              <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+                Rejoignez notre liste d'attente et soyez parmi les premiers à découvrir cette révolution dans la gestion du linge pour gîtes.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button 
+                  onClick={() => document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-white text-[#145587] hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+                >
+                  <Sparkles className="h-5 w-5 mr-2" />
+                  Rejoindre la Liste d'Attente
+                </Button>
+                <span className="text-blue-100 text-sm">🎯 Position prioritaire garantie</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Newsletter Signup */}
-      <section className="py-16 bg-[#145587]">
+      <section id="newsletter" className="py-16 bg-[#145587]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Rejoignez notre Liste d'Attente</h2>
           <p className="text-blue-100 mb-8 text-lg">
