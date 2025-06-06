@@ -1,4 +1,5 @@
 
+
 export interface Database {
   public: {
     Tables: {
@@ -139,12 +140,12 @@ export interface Database {
         Args: {
           p_user_id: string;
           p_profile_type: string;
-          p_number_of_properties: number;
-          p_total_capacity: number;
           p_location: string;
-          p_description?: string;
           p_delivery_delay: string;
           p_services: string[];
+          p_number_of_properties?: number;
+          p_total_capacity?: number;
+          p_description?: string;
           p_special_requests?: string;
         };
         Returns: {
@@ -159,3 +160,4 @@ export interface Database {
     };
   };
 }
+

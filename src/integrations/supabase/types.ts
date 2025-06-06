@@ -157,16 +157,29 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      get_next_member_position: {
-        Args: Record<PropertyKey, never>
-        Returns: number
-      }
       has_role: {
         Args: {
           _user_id: string
           _role: Database["public"]["Enums"]["app_role"]
         }
         Returns: boolean
+      }
+      insert_member_with_position: {
+        Args: {
+          p_user_id: string
+          p_profile_type: string
+          p_location: string
+          p_delivery_delay: string
+          p_services: string[]
+          p_number_of_properties?: number
+          p_total_capacity?: number
+          p_description?: string
+          p_special_requests?: string
+        }
+        Returns: {
+          id: string
+          position: number
+        }[]
       }
       reorganize_waiting_list_positions: {
         Args: Record<PropertyKey, never>
