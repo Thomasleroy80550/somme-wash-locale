@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Sparkles, MapPin, Calendar, Building2, Users, TrendingUp, Clock, Mail, Bed, Bath, UtensilsCrossed, Truck, CheckCircle, UserPlus, Package, Home, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -61,7 +62,9 @@ const ComingSoon = () => {
         "Synchronisation automatique des calendriers",
         "Configuration de vos préférences de livraison"
       ],
-      color: "blue"
+      color: "from-blue-500 to-blue-600",
+      bgGradient: "from-blue-50 to-blue-100",
+      position: { x: 10, y: 20 }
     },
     {
       id: 2,
@@ -74,7 +77,9 @@ const ComingSoon = () => {
         "Calcul du délai optimal (J-1, J-2 ou J-3)",
         "Confirmation par notification"
       ],
-      color: "green"
+      color: "from-green-500 to-green-600",
+      bgGradient: "from-green-50 to-green-100",
+      position: { x: 30, y: 10 }
     },
     {
       id: 3,
@@ -87,7 +92,9 @@ const ComingSoon = () => {
         "Linge emballé et étiquetté par pièce",
         "Notification de livraison en temps réel"
       ],
-      color: "purple"
+      color: "from-purple-500 to-purple-600",
+      bgGradient: "from-purple-50 to-purple-100",
+      position: { x: 70, y: 10 }
     },
     {
       id: 4,
@@ -100,7 +107,9 @@ const ComingSoon = () => {
         "Emballage facile à identifier",
         "Gîte prêt en quelques minutes"
       ],
-      color: "orange"
+      color: "from-orange-500 to-orange-600",
+      bgGradient: "from-orange-50 to-orange-100",
+      position: { x: 90, y: 20 }
     },
     {
       id: 5,
@@ -113,20 +122,11 @@ const ComingSoon = () => {
         "Sacs de collecte fournis",
         "Nettoyage professionnel garanti"
       ],
-      color: "red"
+      color: "from-red-500 to-red-600",
+      bgGradient: "from-red-50 to-red-100",
+      position: { x: 75, y: 35 }
     }
   ];
-
-  const getStepColor = (color: string, variant: 'bg' | 'text' | 'border' = 'bg') => {
-    const colors = {
-      blue: { bg: 'bg-blue-500', text: 'text-blue-500', border: 'border-blue-200' },
-      green: { bg: 'bg-green-500', text: 'text-green-500', border: 'border-green-200' },
-      purple: { bg: 'bg-purple-500', text: 'text-purple-500', border: 'border-purple-200' },
-      orange: { bg: 'bg-orange-500', text: 'text-orange-500', border: 'border-orange-200' },
-      red: { bg: 'bg-red-500', text: 'text-red-500', border: 'border-red-200' }
-    };
-    return colors[color as keyof typeof colors][variant];
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white">
@@ -443,13 +443,13 @@ const ComingSoon = () => {
         </div>
       </section>
 
-      {/* Comment ça marche - Processus Step-by-Step */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+      {/* Comment ça marche - Parcours Animé */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Comment ça marche ?</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              Un processus simple et automatisé pour transformer la gestion de votre linge
+              Un parcours simple et automatisé pour transformer la gestion de votre linge
             </p>
             <div className="inline-flex items-center bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold">
               <Clock className="h-4 w-4 mr-2" />
@@ -457,81 +457,158 @@ const ComingSoon = () => {
             </div>
           </div>
 
-          {/* Timeline Steps */}
-          <div className="relative">
-            {/* Progress Line */}
-            <div className="hidden lg:block absolute top-24 left-0 right-0 h-1 bg-gray-200 mx-auto" style={{ width: '80%', marginLeft: '10%' }}>
-              <div 
-                className="h-full bg-gradient-to-r from-blue-500 to-red-500 transition-all duration-1000 ease-out"
-                style={{ width: `${(activeStep / (processSteps.length - 1)) * 100}%` }}
+          {/* Parcours Animé */}
+          <div className="relative h-[600px] mx-auto max-w-6xl">
+            {/* Lignes de connexion animées */}
+            <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
+              <defs>
+                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#3b82f6" />
+                  <stop offset="25%" stopColor="#10b981" />
+                  <stop offset="50%" stopColor="#8b5cf6" />
+                  <stop offset="75%" stopColor="#f59e0b" />
+                  <stop offset="100%" stopColor="#ef4444" />
+                </linearGradient>
+              </defs>
+              
+              {/* Chemin principal */}
+              <path
+                d="M 100,150 Q 200,100 300,120 T 500,120 Q 600,100 700,150 Q 750,200 720,250"
+                stroke="url(#pathGradient)"
+                strokeWidth="4"
+                fill="none"
+                strokeDasharray="10,5"
+                className="animate-pulse"
               />
-            </div>
+              
+              {/* Points de progression */}
+              {processSteps.map((step, index) => {
+                const progress = activeStep >= index ? 1 : 0;
+                return (
+                  <circle
+                    key={step.id}
+                    cx={100 + index * 150}
+                    cy={150 + (index % 2) * 50}
+                    r="8"
+                    fill={progress ? "#3b82f6" : "#e5e7eb"}
+                    className="transition-all duration-500"
+                    style={{
+                      transform: progress ? 'scale(1.2)' : 'scale(1)',
+                      filter: progress ? 'drop-shadow(0 0 8px #3b82f6)' : 'none'
+                    }}
+                  />
+                );
+              })}
+            </svg>
 
-            {/* Steps Grid */}
-            <div className="grid lg:grid-cols-5 gap-8 lg:gap-4">
-              {processSteps.map((step, index) => (
-                <div key={step.id} className="relative">
-                  {/* Step Card */}
-                  <Card 
-                    className={`cursor-pointer transition-all duration-300 hover:shadow-xl ${
-                      activeStep === index 
-                        ? `ring-2 ${getStepColor(step.color, 'border')} shadow-lg scale-105` 
-                        : 'hover:scale-102'
-                    }`}
-                    onMouseEnter={() => setActiveStep(index)}
-                  >
-                    <CardHeader className="text-center pb-4">
-                      {/* Step Number & Icon */}
-                      <div className="relative mx-auto mb-4">
-                        <div 
-                          className={`w-16 h-16 ${getStepColor(step.color)} rounded-2xl flex items-center justify-center text-white shadow-lg`}
-                        >
-                          <step.icon className="h-8 w-8" />
-                        </div>
-                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                          {step.id}
-                        </div>
+            {/* Cartes flottantes */}
+            {processSteps.map((step, index) => (
+              <div
+                key={step.id}
+                className={`absolute transform transition-all duration-700 ease-out cursor-pointer group ${
+                  activeStep === index ? 'scale-110 z-20' : 'scale-100 z-10'
+                }`}
+                style={{
+                  left: `${step.position.x}%`,
+                  top: `${step.position.y}%`,
+                  transform: `translate(-50%, -50%) ${activeStep === index ? 'scale(1.1)' : 'scale(1)'}`,
+                }}
+                onMouseEnter={() => setActiveStep(index)}
+              >
+                <Card className={`w-80 shadow-xl bg-gradient-to-br ${step.bgGradient} border-2 transition-all duration-300 ${
+                  activeStep === index 
+                    ? 'border-blue-400 shadow-2xl animate-gentle-sway' 
+                    : 'border-transparent hover:border-blue-200 hover:shadow-xl'
+                }`}>
+                  <CardHeader className="text-center pb-4 relative">
+                    {/* Icône animée */}
+                    <div className="relative mx-auto mb-4">
+                      <div className={`w-20 h-20 bg-gradient-to-r ${step.color} rounded-3xl flex items-center justify-center text-white shadow-lg group-hover:animate-gentle-sway`}>
+                        <step.icon className="h-10 w-10" />
+                      </div>
+                      <div className="absolute -top-2 -right-2 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-bold animate-pulse">
+                        {step.id}
                       </div>
                       
-                      <CardTitle className="text-lg mb-2">{step.title}</CardTitle>
-                      <p className={`text-sm font-medium ${getStepColor(step.color, 'text')}`}>
-                        {step.subtitle}
-                      </p>
-                    </CardHeader>
-
-                    <CardContent className="pt-0">
-                      <p className="text-gray-600 text-sm mb-4 text-center">
-                        {step.description}
-                      </p>
-
-                      {/* Details List */}
-                      <div className="space-y-2">
-                        {step.details.map((detail, idx) => (
-                          <div key={idx} className="flex items-start text-xs text-gray-500">
-                            <CheckCircle className={`h-3 w-3 ${getStepColor(step.color, 'text')} mt-0.5 mr-2 flex-shrink-0`} />
-                            <span>{detail}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Arrow (Desktop) */}
-                  {index < processSteps.length - 1 && (
-                    <div className="hidden lg:block absolute top-24 -right-4 z-10">
-                      <div className="w-8 h-8 bg-white rounded-full border-2 border-gray-200 flex items-center justify-center shadow-sm">
-                        <ArrowRight className="h-4 w-4 text-gray-400" />
-                      </div>
+                      {/* Particules flottantes pour l'étape active */}
+                      {activeStep === index && (
+                        <>
+                          <div className="absolute -top-2 -left-2 w-2 h-2 bg-yellow-400 rounded-full animate-bounce delay-100"></div>
+                          <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-300"></div>
+                          <div className="absolute -top-4 right-4 w-1 h-1 bg-green-400 rounded-full animate-ping delay-500"></div>
+                        </>
+                      )}
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
+                    
+                    <CardTitle className="text-xl mb-2 text-gray-900">{step.title}</CardTitle>
+                    <p className="text-sm font-medium text-blue-600">{step.subtitle}</p>
+                  </CardHeader>
+
+                  <CardContent className="pt-0">
+                    <p className="text-gray-700 text-sm mb-4 text-center">
+                      {step.description}
+                    </p>
+
+                    {/* Liste des détails avec animations */}
+                    <div className="space-y-3">
+                      {step.details.map((detail, idx) => (
+                        <div 
+                          key={idx} 
+                          className={`flex items-start text-xs text-gray-600 transition-all duration-300 ${
+                            activeStep === index ? 'animate-slide-up' : ''
+                          }`}
+                          style={{ animationDelay: `${idx * 100}ms` }}
+                        >
+                          <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+                          <span>{detail}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Barre de progression pour l'étape active */}
+                    {activeStep === index && (
+                      <div className="mt-4 bg-gray-200 rounded-full h-2 overflow-hidden">
+                        <div className="bg-gradient-to-r from-blue-500 to-green-500 h-full rounded-full animate-pulse w-full"></div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+
+            {/* Éléments décoratifs flottants */}
+            <div className="absolute top-20 left-20 w-4 h-4 bg-yellow-400 rounded-full animate-bounce opacity-60"></div>
+            <div className="absolute top-40 right-20 w-3 h-3 bg-blue-400 rounded-full animate-ping opacity-40"></div>
+            <div className="absolute bottom-40 left-40 w-2 h-2 bg-green-400 rounded-full animate-pulse opacity-60"></div>
+            <div className="absolute bottom-20 right-40 w-3 h-3 bg-purple-400 rounded-full animate-bounce delay-700 opacity-40"></div>
+          </div>
+
+          {/* Navigation du parcours */}
+          <div className="flex justify-center mt-12 space-x-4">
+            {processSteps.map((step, index) => (
+              <button
+                key={step.id}
+                onClick={() => setActiveStep(index)}
+                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                  activeStep === index 
+                    ? `bg-gradient-to-r ${step.color} scale-125 shadow-lg` 
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+              />
+            ))}
           </div>
 
           {/* CTA Section */}
           <div className="text-center mt-16">
-            <div className="bg-gradient-to-r from-[#145587] to-[#145587]/80 rounded-3xl p-8 text-white">
+            <div className="bg-gradient-to-r from-[#145587] to-[#145587]/80 rounded-3xl p-8 text-white relative overflow-hidden">
+              {/* Éléments décoratifs */}
+              <div className="absolute top-4 right-4 animate-sparkle">
+                <Sparkles className="h-6 w-6 text-yellow-300" />
+              </div>
+              <div className="absolute bottom-4 left-4 animate-sparkle delay-500">
+                <Sparkles className="h-4 w-4 text-blue-300" />
+              </div>
+              
               <h3 className="text-2xl font-bold mb-4">Prêt à simplifier la gestion de votre linge ?</h3>
               <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
                 Rejoignez notre liste d'attente et soyez parmi les premiers à découvrir cette révolution dans la gestion du linge pour gîtes.
@@ -539,7 +616,7 @@ const ComingSoon = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button 
                   onClick={() => document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-white text-[#145587] hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+                  className="bg-white text-[#145587] hover:bg-gray-100 px-8 py-3 text-lg font-semibold animate-gentle-sway"
                 >
                   <Sparkles className="h-5 w-5 mr-2" />
                   Rejoindre la Liste d'Attente
