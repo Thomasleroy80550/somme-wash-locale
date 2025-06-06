@@ -157,6 +157,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_next_member_position: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
       has_role: {
         Args: {
           _user_id: string

@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -85,68 +86,6 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
     }
   };
 
-  const getNextPosition = async (): Promise<number> => {
-    try {
-      console.log('Récupération de la position maximale...');
-      
-      const { data, error } = await supabase
-        .from('member_profiles')
-        .select('position')
-        .not('position', 'is', null)
-        .order('position', { ascending: false })
-        .limit(1);
-
-      if (error) {
-        console.error('Erreur lors de la récupération de la position maximale:', error);
-        throw error;
-      }
-
-      console.log('Données récupérées:', data);
-
-      // Si aucun membre n'existe ou aucune position n'est définie, commencer à 1
-      if (!data || data.length === 0) {
-        console.log('Aucun membre trouvé, position sera 1');
-        return 1;
-      }
-
-      const maxPosition = data[0].position;
-      const nextPosition = maxPosition + 1;
-      console.log('Position maximale trouvée:', maxPosition, 'Prochaine position:', nextPosition);
-      
-      return nextPosition;
-    } catch (error) {
-      console.error('Erreur dans getNextPosition:', error);
-      throw error;
-    }
-  };
-
-  const insertMemberProfile = async (memberData: any): Promise<void> => {
-    try {
-      // Calculer la prochaine position
-      const nextPosition = await getNextPosition();
-      
-      console.log(`Insertion du profil membre avec position ${nextPosition}`);
-      
-      // Insérer avec la position calculée
-      const { error: memberError } = await supabase
-        .from('member_profiles')
-        .insert({
-          ...memberData,
-          position: nextPosition
-        });
-
-      if (memberError) {
-        console.error('Erreur lors de l\'insertion:', memberError);
-        throw memberError;
-      }
-
-      console.log(`Insertion réussie avec position ${nextPosition}`);
-    } catch (error) {
-      console.error('Erreur dans insertMemberProfile:', error);
-      throw error;
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) {
@@ -189,7 +128,7 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
 
       if (profileError) throw profileError;
 
-      // Préparer les données du membre
+      // Préparer les données du membre (sans position car elle sera assignée automatiquement)
       const memberData = {
         user_id: user.id,
         profile_type: formData.profileType,
@@ -200,10 +139,22 @@ const MemberRegistrationSecure = ({ onSuccess }: MemberRegistrationSecureProps) 
         delivery_delay: formData.deliveryDelay,
         services: formData.services,
         special_requests: formData.specialRequests || null
+        // La position sera assignée automatiquement par le trigger
       };
 
-      // Insérer le profil membre
-      await insertMemberProfile(memberData);
+      console.log('Insertion du profil membre...');
+      
+      // Insérer le profil membre - la position sera calculée automatiquement
+      const { error: memberError } = await supabase
+        .from('member_profiles')
+        .insert(memberData);
+
+      if (memberError) {
+        console.error('Erreur lors de l\'insertion:', memberError);
+        throw memberError;
+      }
+
+      console.log('Insertion du profil membre réussie');
 
       // Envoyer une notification de bienvenue
       await supabase.from('notifications').insert({
