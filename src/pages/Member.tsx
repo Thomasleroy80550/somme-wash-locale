@@ -15,6 +15,7 @@ const Member = () => {
   const { user, signOut } = useAuth();
   const [memberProfile, setMemberProfile] = useState<MemberProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -33,41 +34,65 @@ const Member = () => {
     try {
       console.log('Loading member profile for user:', user.id);
       
-      const { data, error } = await supabase
+      // First, get the member profile
+      const { data: memberData, error: memberError } = await supabase
         .from('member_profiles')
-        .select(`
-          *,
-          profiles!inner (*)
-        `)
+        .select('*')
         .eq('user_id', user.id)
         .maybeSingle();
 
-      if (error) {
-        console.error('Error loading profile:', error);
-        throw error;
+      if (memberError) {
+        console.error('Error loading member profile:', memberError);
+        throw memberError;
       }
 
-      console.log('Profile data loaded:', data);
-      
-      // Check if data has the correct structure before setting it
-      if (data && data.profiles && typeof data.profiles === 'object' && 
-          'first_name' in data.profiles && 'last_name' in data.profiles) {
-        setMemberProfile(data as MemberProfile);
-      } else {
-        console.log('No valid profile data found or incomplete structure:', data);
+      if (!memberData) {
+        console.log('No member profile found for user');
         setMemberProfile(null);
+        setIsLoading(false);
+        return;
       }
+
+      // Then, get the user profile
+      const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (profileError) {
+        console.error('Error loading user profile:', profileError);
+        throw profileError;
+      }
+
+      console.log('Member data loaded:', memberData);
+      console.log('Profile data loaded:', profileData);
+      
+      // Combine the data
+      const combinedProfile: MemberProfile = {
+        ...memberData,
+        profiles: profileData
+      };
+
+      setMemberProfile(combinedProfile);
     } catch (error: any) {
       console.error('Erreur lors du chargement du profil:', error);
       setMemberProfile(null);
     } finally {
       setIsLoading(false);
+      setIsRegistrationSuccess(false);
     }
   };
 
   const handleRegistrationSuccess = () => {
     console.log('Registration successful, reloading profile...');
-    loadMemberProfile();
+    setIsRegistrationSuccess(true);
+    setIsLoading(true);
+    
+    // Add a small delay to ensure the database has been updated
+    setTimeout(() => {
+      loadMemberProfile();
+    }, 1000);
   };
 
   if (isLoading) {
@@ -75,7 +100,9 @@ const Member = () => {
       <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#145587] mx-auto mb-4"></div>
-          <p className="text-gray-600">Chargement...</p>
+          <p className="text-gray-600">
+            {isRegistrationSuccess ? 'Finalisation de votre inscription...' : 'Chargement...'}
+          </p>
         </div>
       </div>
     );
