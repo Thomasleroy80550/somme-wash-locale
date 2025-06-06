@@ -55,11 +55,11 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
     if (!profile.position) return null;
     
     if (profile.position <= 10) {
-      return <Badge variant="default" className="bg-[#145587] text-white ml-2">Fondateur</Badge>;
-    } else if (profile.position <= 50) {
-      return <Badge variant="default" className="bg-indigo-600 text-white ml-2">Premier Cercle</Badge>;
+      return <Badge variant="default" className="bg-[#145587] text-white ml-2">Membre Fondateur</Badge>;
+    } else if (profile.position <= 30) {
+      return <Badge variant="default" className="bg-indigo-600 text-white ml-2">Confirmé</Badge>;
     } else if (profile.position <= 100) {
-      return <Badge variant="default" className="bg-purple-600 text-white ml-2">Early Adopter</Badge>;
+      return <Badge variant="default" className="bg-purple-600 text-white ml-2">En attente</Badge>;
     }
     return null;
   };
@@ -103,7 +103,7 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
                 <p className="text-sm text-gray-600">sur la liste d'attente</p>
                 <Progress value={getProgressValue()} className="mt-3" />
                 <p className="text-xs mt-1 text-gray-500">
-                  Plus votre position est basse, plus vite vous serez servi
+                  Plus votre position est basse, plus vite vous serez client rapidement.
                 </p>
               </CardContent>
             </Card>
@@ -138,10 +138,10 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
               </CardHeader>
               <CardContent>
                 <div className="text-lg font-semibold text-blue-700 mb-2">
-                  15 janvier 2025
+                  20 Juib 2025
                 </div>
                 <p className="text-sm text-blue-600">
-                  Annonce des zones de lancement
+                  Pose des machines
                 </p>
                 <div className="mt-3 text-sm text-gray-600">
                   <Bell className="h-4 w-4 mr-2 inline text-blue-600" />
@@ -168,32 +168,40 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
                   <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-blue-600 bg-blue-100">
                     <CheckCircle2 className="h-3 w-3 text-blue-600" />
                   </div>
-                  <h3 className="font-medium text-gray-900">Novembre 2024</h3>
-                  <p className="mt-1 text-sm text-gray-600">Ouverture de la liste d'attente aux premiers inscrits</p>
+                  <h3 className="font-medium text-gray-900">Mai 2025</h3>
+                  <p className="mt-1 text-sm text-gray-600">Livraison du batiment</p>
                 </div>
                 
                 <div className="relative pl-8 before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-200">
                   <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-blue-600 bg-white">
                     <span className="h-2 w-2 rounded-full bg-blue-600"></span>
                   </div>
-                  <h3 className="font-medium text-gray-900">15 Janvier 2025</h3>
-                  <p className="mt-1 text-sm text-gray-600">Annonce des zones géographiques de lancement</p>
+                  <h3 className="font-medium text-gray-900">5 Juin 2025</h3>
+                  <p className="mt-1 text-sm text-gray-600">Réception et installation des première commmande de matériel</p>
                 </div>
                 
                 <div className="relative pl-8 before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-200">
                   <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-gray-300 bg-white">
                     <span className="h-2 w-2 rounded-full bg-gray-300"></span>
                   </div>
-                  <h3 className="font-medium text-gray-900">Mars 2025</h3>
-                  <p className="mt-1 text-sm text-gray-600">Début du service pour les 50 premiers membres de la liste</p>
+                  <h3 className="font-medium text-gray-900">10 Juin 2025</h3>
+                  <p className="mt-1 text-sm text-gray-600">Début des travaux de plomberie et électricité</p>
+                </div>
+
+                  <div className="relative pl-8 before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-200">
+                  <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-gray-300 bg-white">
+                    <span className="h-2 w-2 rounded-full bg-gray-300"></span>
+                  </div>
+                  <h3 className="font-medium text-gray-900">20 Juin 2025</h3>
+                  <p className="mt-1 text-sm text-gray-600">Pose des machine et réception du linge</p>
                 </div>
                 
                 <div className="relative pl-8">
                   <div className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border border-gray-300 bg-white">
                     <span className="h-2 w-2 rounded-full bg-gray-300"></span>
                   </div>
-                  <h3 className="font-medium text-gray-900">Juin 2025</h3>
-                  <p className="mt-1 text-sm text-gray-600">Extension du service à l'ensemble de la Baie de Somme</p>
+                  <h3 className="font-medium text-gray-900">Juin - Juillet 2025</h3>
+                  <p className="mt-1 text-sm text-gray-600">Ouverture</p>
                 </div>
               </div>
             </CardContent>
