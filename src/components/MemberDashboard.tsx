@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -46,13 +45,13 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
   };
 
   const getProgressValue = () => {
-    if (!profile.position) return 0;
+    if (!profile.position || profile.position === 0) return 0;
     return Math.max(0, 100 - (profile.position / 250) * 100);
   };
 
   // Fonction pour obtenir le badge en fonction de la position
   const getPositionBadge = () => {
-    if (!profile.position) return null;
+    if (!profile.position || profile.position === 0) return null;
     
     if (profile.position <= 10) {
       return <Badge variant="default" className="bg-[#145587] text-white ml-2">Membre Fondateur</Badge>;
@@ -66,13 +65,23 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
 
   // Fonction pour estimer le temps d'attente
   const getEstimatedWaitTime = () => {
-    if (!profile.position) return "Indéterminé";
+    if (!profile.position || profile.position === 0) return "Position en cours d'attribution";
     
     if (profile.position <= 20) return "1-2 semaines";
     if (profile.position <= 50) return "1 mois";
     if (profile.position <= 100) return "2-3 mois";
     return "3+ mois";
   };
+
+  // Fonction pour afficher la position
+  const displayPosition = () => {
+    if (!profile.position || profile.position === 0) {
+      return "Attribution en cours...";
+    }
+    return `#${profile.position}`;
+  };
+
+  console.log('MemberDashboard - Profile position:', profile.position);
 
   return (
     <div className="space-y-8">
@@ -96,15 +105,19 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
               <CardContent>
                 <div className="flex items-center">
                   <div className="text-3xl font-bold text-[#145587] mb-2">
-                    #{profile.position || '?'}
+                    {displayPosition()}
                   </div>
                   {getPositionBadge()}
                 </div>
                 <p className="text-sm text-gray-600">sur la liste d'attente</p>
-                <Progress value={getProgressValue()} className="mt-3" />
-                <p className="text-xs mt-1 text-gray-500">
-                  Plus votre position est basse, plus vite vous serez client rapidement.
-                </p>
+                {profile.position && profile.position > 0 && (
+                  <>
+                    <Progress value={getProgressValue()} className="mt-3" />
+                    <p className="text-xs mt-1 text-gray-500">
+                      Plus votre position est basse, plus vite vous serez client rapidement.
+                    </p>
+                  </>
+                )}
               </CardContent>
             </Card>
 

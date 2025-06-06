@@ -1,11 +1,17 @@
 
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
-import AuthGuard from '@/components/AuthGuard';
+import { Database } from '@/types/database';
 import MemberRegistrationSecure from '@/components/MemberRegistrationSecure';
 import MemberDashboard from '@/components/MemberDashboard';
-import { Database } from '@/types/database';
+import AuthGuard from '@/components/AuthGuard';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { LogOut, User, Building2, MapPin, Clock, Bell } from 'lucide-react';
+import { toast } from 'sonner';
 
 type MemberProfile = Database['public']['Tables']['member_profiles']['Row'] & {
   profiles: Database['public']['Tables']['profiles']['Row'];
@@ -13,156 +19,162 @@ type MemberProfile = Database['public']['Tables']['member_profiles']['Row'] & {
 
 const Member = () => {
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
   const [memberProfile, setMemberProfile] = useState<MemberProfile | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (user) {
-      loadMemberProfile();
-    } else {
-      setIsLoading(false);
+      fetchMemberProfile();
     }
   }, [user]);
 
-  const loadMemberProfile = async () => {
-    if (!user) {
-      setIsLoading(false);
-      return;
-    }
+  const fetchMemberProfile = async () => {
+    if (!user) return;
 
     try {
-      console.log('Loading member profile for user:', user.id);
+      setLoading(true);
+      setError(null);
       
-      // Avec la contrainte unique, on peut maintenant utiliser .single() sans risque
-      const { data: memberData, error: memberError } = await supabase
+      console.log('Fetching member profile for user:', user.id);
+      
+      // Récupérer le profil membre avec les informations du profil utilisateur
+      const { data, error } = await supabase
         .from('member_profiles')
-        .select('*')
+        .select(`
+          *,
+          profiles (*)
+        `)
         .eq('user_id', user.id)
         .maybeSingle();
 
-      if (memberError) {
-        console.error('Error loading member profile:', memberError);
-        throw memberError;
+      if (error) {
+        console.error('Erreur lors de la récupération du profil membre:', error);
+        throw error;
       }
 
-      if (!memberData) {
-        console.log('No member profile found for user');
-        setMemberProfile(null);
-        setIsLoading(false);
-        return;
-      }
-
-      // Récupérer le profil utilisateur
-      const { data: profileData, error: profileError } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      if (profileError) {
-        console.error('Error loading user profile:', profileError);
-        throw profileError;
-      }
-
-      console.log('Member data loaded:', memberData);
-      console.log('Profile data loaded:', profileData);
+      console.log('Member profile data:', data);
       
-      // Combiner les données
-      const combinedProfile: MemberProfile = {
-        ...memberData,
-        profiles: profileData
-      };
-
-      console.log('Setting member profile:', combinedProfile);
-      setMemberProfile(combinedProfile);
+      if (data) {
+        setMemberProfile(data as MemberProfile);
+        console.log('Member profile position:', data.position);
+      }
     } catch (error: any) {
-      console.error('Erreur lors du chargement du profil:', error);
-      setMemberProfile(null);
+      console.error('Erreur:', error);
+      setError(error.message);
+      toast.error('Erreur lors du chargement de votre profil');
     } finally {
-      setIsLoading(false);
+      setLoading(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate('/auth');
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion:', error);
+      toast.error('Erreur lors de la déconnexion');
     }
   };
 
   const handleRegistrationSuccess = () => {
-    console.log('Registration successful, reloading profile...');
-    setIsLoading(true);
-    
-    // Recharger immédiatement le profil
-    loadMemberProfile();
+    console.log('Registration successful, refreshing profile...');
+    fetchMemberProfile();
   };
 
-  console.log('Current state - memberProfile:', !!memberProfile, 'isLoading:', isLoading);
+  const handleProfileUpdate = () => {
+    console.log('Profile update requested, refreshing...');
+    fetchMemberProfile();
+  };
 
-  if (isLoading) {
+  if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#145587] mx-auto mb-4"></div>
-          <p className="text-gray-600">Chargement...</p>
+      <AuthGuard>
+        <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#145587] mx-auto mb-4"></div>
+            <p className="text-gray-600">Chargement de votre profil...</p>
+          </div>
         </div>
-      </div>
+      </AuthGuard>
+    );
+  }
+
+  if (error) {
+    return (
+      <AuthGuard>
+        <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white flex items-center justify-center">
+          <Card className="max-w-md">
+            <CardHeader>
+              <CardTitle className="text-red-600">Erreur</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 mb-4">{error}</p>
+              <Button onClick={fetchMemberProfile} className="w-full">
+                Réessayer
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </AuthGuard>
     );
   }
 
   return (
     <AuthGuard>
       <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white">
-        <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <img 
-                  src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
-                  alt="Hello Wash Logo" 
-                  className="h-12 w-auto"
-                />
-                <span className="ml-3 text-sm text-gray-600">Espace Membre</span>
-              </div>
+        {/* Header */}
+        <div className="bg-white shadow-sm border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center py-4">
               <div className="flex items-center space-x-4">
-                <a href="/" className="text-[#145587] hover:text-[#145587]/80 transition-colors">
-                  ← Retour à l'accueil
-                </a>
-                <button 
-                  onClick={signOut}
-                  className="text-gray-600 hover:text-gray-800 transition-colors"
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-[#145587] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">HW</span>
+                  </div>
+                  <h1 className="text-xl font-bold text-[#145587]">Hello Wash</h1>
+                </div>
+                {memberProfile && (
+                  <Badge variant="outline" className="text-[#145587] border-[#145587]">
+                    Membre #{memberProfile.position || 'En cours'}
+                  </Badge>
+                )}
+              </div>
+              
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
+                  <User className="h-4 w-4 text-gray-400" />
+                  <span className="text-sm text-gray-600">
+                    {memberProfile?.profiles?.first_name} {memberProfile?.profiles?.last_name}
+                  </span>
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={handleSignOut}
+                  className="flex items-center space-x-2"
                 >
-                  Déconnexion
-                </button>
+                  <LogOut className="h-4 w-4" />
+                  <span>Déconnexion</span>
+                </Button>
               </div>
             </div>
           </div>
-        </header>
+        </div>
 
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {!memberProfile ? (
-            <div>
-              <div className="text-center mb-8">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                  Rejoignez la Liste d'Attente
-                </h1>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                  Soyez parmi les premiers à bénéficier des services Hello Wash dans la Baie de Somme
-                </p>
-              </div>
-              <MemberRegistrationSecure onSuccess={handleRegistrationSuccess} />
-            </div>
+            <MemberRegistrationSecure onSuccess={handleRegistrationSuccess} />
           ) : (
-            <div>
-              <div className="text-center mb-8">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                  Bienvenue, {memberProfile.profiles.first_name} !
-                </h1>
-                <p className="text-xl text-gray-600">
-                  Votre espace membre Hello Wash
-                </p>
-              </div>
-              <MemberDashboard 
-                profile={memberProfile} 
-                onProfileUpdate={loadMemberProfile}
-              />
-            </div>
+            <MemberDashboard 
+              profile={memberProfile} 
+              onProfileUpdate={handleProfileUpdate}
+            />
           )}
-        </main>
+        </div>
       </div>
     </AuthGuard>
   );
