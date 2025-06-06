@@ -48,7 +48,13 @@ const Member = () => {
       }
 
       console.log('Profile data loaded:', data);
-      setMemberProfile(data);
+      
+      // Check if data has the correct structure before setting it
+      if (data && data.profiles && typeof data.profiles === 'object') {
+        setMemberProfile(data as MemberProfile);
+      } else {
+        console.error('Unexpected profile data structure:', data);
+      }
     } catch (error: any) {
       console.error('Erreur lors du chargement du profil:', error);
     } finally {

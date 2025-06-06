@@ -63,13 +63,27 @@ const AdminDashboard = () => {
 
       if (error) throw error;
 
-      setMembers(data || []);
+      // Validate that each item in data has the correct structure
+      const validMembers: MemberProfile[] = [];
+      
+      if (data) {
+        for (const item of data) {
+          if (item && item.profiles && typeof item.profiles === 'object' && 
+              'first_name' in item.profiles && 'last_name' in item.profiles) {
+            validMembers.push(item as MemberProfile);
+          } else {
+            console.error('Invalid member data structure:', item);
+          }
+        }
+      }
+      
+      setMembers(validMembers);
       
       // Calculate stats
-      const total = data?.length || 0;
-      const pending = data?.filter(m => m.status === 'pending').length || 0;
-      const validated = data?.filter(m => m.status === 'validated').length || 0;
-      const priority = data?.filter(m => m.status === 'priority').length || 0;
+      const total = validMembers.length || 0;
+      const pending = validMembers.filter(m => m.status === 'pending').length || 0;
+      const validated = validMembers.filter(m => m.status === 'validated').length || 0;
+      const priority = validMembers.filter(m => m.status === 'priority').length || 0;
       
       setStats({ total, pending, validated, priority });
     } catch (error: any) {
