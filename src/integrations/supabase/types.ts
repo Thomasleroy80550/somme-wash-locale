@@ -9,6 +9,104 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      calendar_events: {
+        Row: {
+          all_day: boolean
+          created_at: string
+          description: string | null
+          end_date: string
+          external_id: string
+          id: string
+          integration_id: string
+          location: string | null
+          recurrence_rule: string | null
+          start_date: string
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          all_day?: boolean
+          created_at?: string
+          description?: string | null
+          end_date: string
+          external_id: string
+          id?: string
+          integration_id: string
+          location?: string | null
+          recurrence_rule?: string | null
+          start_date: string
+          status?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          all_day?: boolean
+          created_at?: string
+          description?: string | null
+          end_date?: string
+          external_id?: string
+          id?: string
+          integration_id?: string
+          location?: string | null
+          recurrence_rule?: string | null
+          start_date?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calendar_events_integration_id_fkey"
+            columns: ["integration_id"]
+            isOneToOne: false
+            referencedRelation: "calendar_integrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      calendar_integrations: {
+        Row: {
+          created_at: string
+          ical_url: string
+          id: string
+          last_sync_at: string | null
+          name: string
+          sync_enabled: boolean
+          sync_error: string | null
+          sync_status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          ical_url: string
+          id?: string
+          last_sync_at?: string | null
+          name: string
+          sync_enabled?: boolean
+          sync_error?: string | null
+          sync_status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          ical_url?: string
+          id?: string
+          last_sync_at?: string | null
+          name?: string
+          sync_enabled?: boolean
+          sync_error?: string | null
+          sync_status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       member_profiles: {
         Row: {
           delivery_delay: string
@@ -220,6 +318,10 @@ export type Database = {
           p_created_by?: string
         }
         Returns: number
+      }
+      sync_calendar_integration: {
+        Args: { integration_id: string }
+        Returns: undefined
       }
     }
     Enums: {

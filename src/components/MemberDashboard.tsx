@@ -18,8 +18,10 @@ import {
   Check,
   ArrowRight,
   Star,
-  CheckCircle2
+  CheckCircle2,
+  Calendar
 } from 'lucide-react';
+import CalendarSync from './CalendarSync';
 
 type MemberProfile = Database['public']['Tables']['member_profiles']['Row'] & {
   profiles: Database['public']['Tables']['profiles']['Row'];
@@ -49,7 +51,6 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
     return Math.max(0, 100 - (profile.position / 250) * 100);
   };
 
-  // Fonction pour obtenir le badge en fonction de la position
   const getPositionBadge = () => {
     if (!profile.position || profile.position === 0) return null;
     
@@ -63,7 +64,6 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
     return null;
   };
 
-  // Fonction pour estimer le temps d'attente
   const getEstimatedWaitTime = () => {
     if (!profile.position || profile.position === 0) return "Position en cours d'attribution";
     
@@ -73,7 +73,6 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
     return "3+ mois";
   };
 
-  // Fonction pour afficher la position
   const displayPosition = () => {
     if (!profile.position || profile.position === 0) {
       return "Attribution en cours...";
@@ -86,13 +85,13 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
   return (
     <div className="space-y-8">
       <Tabs defaultValue="waitlist" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="waitlist">Liste d'Attente</TabsTrigger>
+          <TabsTrigger value="calendar">Calendrier</TabsTrigger>
           <TabsTrigger value="profile">Profil</TabsTrigger>
           <TabsTrigger value="business">Activité</TabsTrigger>
         </TabsList>
 
-        {/* Nouvelle section Liste d'Attente */}
         <TabsContent value="waitlist" className="space-y-6">
           <div className="grid md:grid-cols-3 gap-6">
             <Card className="bg-gradient-to-br from-[#145587]/10 to-[#145587]/5">
@@ -164,7 +163,6 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
             </Card>
           </div>
 
-          {/* Calendrier des événements */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
@@ -220,7 +218,6 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
             </CardContent>
           </Card>
 
-          {/* Que se passe-t-il ensuite ? */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
@@ -292,7 +289,10 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
           </Card>
         </TabsContent>
 
-        {/* Contenu existant du profil */}
+        <TabsContent value="calendar" className="space-y-6">
+          <CalendarSync />
+        </TabsContent>
+
         <TabsContent value="profile" className="space-y-6">
           <Card>
             <CardHeader>
@@ -339,7 +339,6 @@ const MemberDashboard = ({ profile, onProfileUpdate }: MemberDashboardProps) => 
           </Card>
         </TabsContent>
 
-        {/* Contenu existant de l'activité */}
         <TabsContent value="business" className="space-y-6">
           <Card>
             <CardHeader>

@@ -157,6 +157,94 @@ export interface Database {
           priority?: number;
         };
       };
+      calendar_integrations: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          ical_url: string;
+          sync_enabled: boolean;
+          last_sync_at: string | null;
+          sync_status: string;
+          sync_error: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          ical_url: string;
+          sync_enabled?: boolean;
+          last_sync_at?: string | null;
+          sync_status?: string;
+          sync_error?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          ical_url?: string;
+          sync_enabled?: boolean;
+          last_sync_at?: string | null;
+          sync_status?: string;
+          sync_error?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      calendar_events: {
+        Row: {
+          id: string;
+          integration_id: string;
+          user_id: string;
+          external_id: string;
+          title: string;
+          description: string | null;
+          start_date: string;
+          end_date: string;
+          location: string | null;
+          all_day: boolean;
+          recurrence_rule: string | null;
+          status: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          integration_id: string;
+          user_id: string;
+          external_id: string;
+          title: string;
+          description?: string | null;
+          start_date: string;
+          end_date: string;
+          location?: string | null;
+          all_day?: boolean;
+          recurrence_rule?: string | null;
+          status?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          integration_id?: string;
+          user_id?: string;
+          external_id?: string;
+          title?: string;
+          description?: string | null;
+          start_date?: string;
+          end_date?: string;
+          location?: string | null;
+          all_day?: boolean;
+          recurrence_rule?: string | null;
+          status?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
     };
     Functions: {
       insert_member_with_position: {
@@ -191,6 +279,10 @@ export interface Database {
           p_created_by?: string;
         };
         Returns: number;
+      };
+      sync_calendar_integration: {
+        Args: { integration_id: string };
+        Returns: undefined;
       };
     };
   };
