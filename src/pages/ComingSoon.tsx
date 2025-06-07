@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Sparkles, MapPin, Calendar, Building2, Users, TrendingUp, Clock, Mail, Bed, Bath, UtensilsCrossed, Truck, CheckCircle, UserPlus, Package, Home, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -121,8 +122,28 @@ const ComingSoon = () => {
               />
               <span className="ml-3 text-sm text-gray-600">Baie de Somme</span>
             </div>
-            <div className="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold">
-              Bientôt disponible
+            
+            <div className="flex items-center space-x-4">
+              <div className="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold">
+                Bientôt disponible
+              </div>
+              
+              <div className="flex items-center space-x-3">
+                <a
+                  href="/auth"
+                  className="text-[#145587] hover:text-[#145587]/80 transition-colors font-medium"
+                >
+                  Connexion
+                </a>
+                
+                <Button 
+                  onClick={() => document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-orange-500 text-white hover:bg-orange-600 px-6 py-2"
+                >
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  Liste d'attente
+                </Button>
+              </div>
             </div>
           </div>
         </div>
