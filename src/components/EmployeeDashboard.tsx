@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -69,9 +68,10 @@ const EmployeeDashboard = () => {
 
       if (schedulesError) throw schedulesError;
 
-      setOrders(ordersData || []);
-      setOrderItems(itemsData || []);
-      setProductionSchedules(schedulesData || []);
+      // Type cast the data to ensure proper types
+      setOrders((ordersData || []) as Order[]);
+      setOrderItems((itemsData || []) as OrderItem[]);
+      setProductionSchedules((schedulesData || []) as ProductionSchedule[]);
     } catch (error) {
       console.error('Erreur lors du chargement des données:', error);
       toast({
