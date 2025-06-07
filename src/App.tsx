@@ -11,6 +11,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminNotifications from "./pages/AdminNotifications";
 import Member from "./pages/Member";
 import EmployeeDashboardPage from "./pages/EmployeeDashboard";
+import GestionCommandes from "./pages/GestionCommandes";
 import NotFound from "./pages/NotFound";
 import ComingSoon from "./pages/ComingSoon";
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/admin/notifications" element={<AdminNotifications />} />
           <Route path="/member" element={<Member />} />
           <Route path="/employee" element={<EmployeeDashboardPage />} />
+          <Route path="/gestion-commandes" element={<GestionCommandes />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

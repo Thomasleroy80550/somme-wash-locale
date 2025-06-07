@@ -11,7 +11,7 @@ import AuthGuard from '@/components/AuthGuard';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { LogOut, User, Building2, MapPin, Clock, Bell } from 'lucide-react';
+import { LogOut, User, Building2, MapPin, Clock, Bell, Settings } from 'lucide-react';
 import { toast } from 'sonner';
 
 type MemberProfile = Database['public']['Tables']['member_profiles']['Row'] & {
@@ -151,6 +151,15 @@ const Member = () => {
                     {memberProfile?.profiles?.first_name} {memberProfile?.profiles?.last_name}
                   </span>
                 </div>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => navigate('/gestion-commandes')}
+                  className="flex items-center space-x-2"
+                >
+                  <Settings className="h-4 w-4" />
+                  <span>Gestion</span>
+                </Button>
                 <Button 
                   variant="outline" 
                   size="sm" 

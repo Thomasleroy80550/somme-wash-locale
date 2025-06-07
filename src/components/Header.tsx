@@ -25,6 +25,9 @@ const Header = () => {
             {user && isAdmin && (
               <a href="/admin" className="text-gray-700 hover:text-[#145587] transition-colors">Admin</a>
             )}
+            {user && (
+              <a href="/gestion-commandes" className="text-gray-700 hover:text-[#145587] transition-colors">Gestion</a>
+            )}
             <a href="#apropos" className="text-gray-700 hover:text-[#145587] transition-colors">À propos</a>
             <a href="#contact" className="text-gray-700 hover:text-[#145587] transition-colors">Contact</a>
           </nav>
@@ -42,6 +45,12 @@ const Header = () => {
                   className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
                 >
                   Mon espace
+                </a>
+                <a
+                  href="/gestion-commandes"
+                  className="bg-[#145587] text-white px-4 py-2 rounded-lg hover:bg-[#145587]/90 transition-colors"
+                >
+                  Gestion
                 </a>
               </div>
             ) : (
