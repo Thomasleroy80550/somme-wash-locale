@@ -1,4 +1,3 @@
-
 import { MapPin, Users, Award, Heart } from 'lucide-react';
 
 const About = () => {
@@ -68,7 +67,7 @@ const About = () => {
               <div className="text-center">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">HelloKeys.fr & Hello Wash</h3>
                 <p className="text-gray-600 mb-8">
-                  Notre expérience dans la conciergerie Airbnb nous a menés naturellement vers 
+                  Notre expérience dans la conciergerie Airbnb nous a menée naturellement vers 
                   l'excellence en gestion du linge professionnel.
                 </p>
                 
@@ -79,7 +78,7 @@ const About = () => {
                       <div className="text-sm text-gray-600">Années d'expérience</div>
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-green-600">+150</div>
+                      <div className="text-3xl font-bold text-green-600">Plus de 150</div>
                       <div className="text-sm text-gray-600">Propriétaires</div>
                     </div>
                     <div>
@@ -88,7 +87,7 @@ const About = () => {
                     </div>
                   </div>
                   <p className="text-sm text-gray-500 mt-4">
-                    + de 150 propriétaires et 30 000 voyageurs font confiance à Hello Keys !
+                    Plus de 150 propriétaires et 30 000 voyageurs font confiance à Hello Keys !
                   </p>
                 </div>
               </div>

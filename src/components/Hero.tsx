@@ -31,7 +31,7 @@ const Hero = () => {
               
               <p className="text-xl text-gray-600 mb-8 leading-relaxed animate-hero-appear-delay-2">
                 Votre partenaire de confiance pour la location de linge de qualité. 
-                Linge de lit, de toilette et de table impeccablement entretenus 
+                Linge de lit, de toilette et de table impeccablement entretenu 
                 au cœur de la magnifique Baie de Somme.
               </p>
               

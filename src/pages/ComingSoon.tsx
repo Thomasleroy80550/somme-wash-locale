@@ -65,7 +65,7 @@ const ComingSoon = () => {
     {
       id: 2,
       icon: Calendar,
-      title: "Planification Automatique",
+      title: "Planification automatique",
       description: "Notre système surveille vos réservations et programme les livraisons",
       details: [
         "Détection automatique des nouvelles réservations",
@@ -181,7 +181,7 @@ const ComingSoon = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Nos Services</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Nos services</h2>
             <p className="text-gray-600">Location de linge professionnel de qualité</p>
           </div>
           
@@ -212,7 +212,7 @@ const ComingSoon = () => {
       <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Nos Offres sur Mesure</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Nos offres sur mesure</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Des solutions adaptées à chaque type d'hébergement dans la Baie de Somme
             </p>
@@ -247,7 +247,7 @@ const ComingSoon = () => {
                   <Building2 className="h-8 w-8 text-[#145587]" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">Gîtes Indépendants</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">Gîtes indépendants</h3>
                   <p className="text-[#145587] font-semibold">Solution automatisée</p>
                 </div>
               </div>
@@ -306,13 +306,13 @@ const ComingSoon = () => {
                   <Sparkles className="h-8 w-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold">Grands Comptes</h3>
+                  <h3 className="text-2xl font-bold">Grands comptes</h3>
                   <p className="text-blue-100 font-semibold">Solution industrielle</p>
                 </div>
               </div>
               
               <p className="text-blue-100 mb-8 text-lg leading-relaxed">
-                Livraison en rolls pour les hôtels, résidences et établissements à fort volume.
+                Livraison en rouleaux pour les hôtels, résidences et établissements à fort volume.
               </p>
               
               <div className="space-y-6 mb-8">
@@ -321,7 +321,7 @@ const ComingSoon = () => {
                     <Truck className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2">Livraison en rolls</h4>
+                    <h4 className="font-semibold mb-2">Livraison en rouleaux</h4>
                     <p className="text-blue-100">Transport optimisé pour grandes quantités</p>
                   </div>
                 </div>
@@ -369,7 +369,7 @@ const ComingSoon = () => {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Dashboard Propriétaire</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Tableau de bord propriétaire</h2>
             <p className="text-gray-600">Gestion automatisée de vos gîtes - Aperçu</p>
             <div className="inline-flex items-center bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold mt-4">
               <Clock className="h-4 w-4 mr-2" />
@@ -525,7 +525,7 @@ const ComingSoon = () => {
       {/* Newsletter Signup */}
       <section id="newsletter" className="py-16 bg-[#145587]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Rejoignez notre Liste d'Attente</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">Rejoignez notre liste d'attente</h2>
           <p className="text-blue-100 mb-8 text-lg">
             Soyez les premiers à découvrir Hello Wash et profitez d'offres exclusives de lancement
           </p>
@@ -553,7 +553,7 @@ const ComingSoon = () => {
               className="inline-flex items-center bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold"
             >
               <Sparkles className="h-5 w-5 mr-2" />
-              Inscription Complète - Liste d'Attente Prioritaire
+              Inscription complète - Liste d'attente prioritaire
             </a>
             <p className="text-blue-100 text-sm mt-2">
               Accès prioritaire aux tests et lancement exclusif
