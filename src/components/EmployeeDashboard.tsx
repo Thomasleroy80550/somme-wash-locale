@@ -1,477 +1,383 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { supabase } from '@/integrations/supabase/client';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import { 
   Package, 
-  Truck, 
   Clock, 
-  TrendingUp,
-  Users,
-  CheckCircle2,
-  AlertCircle,
+  CheckCircle, 
+  AlertCircle, 
+  Truck, 
   Calendar,
-  Activity,
-  BarChart3
+  BarChart3,
+  Filter,
+  Search
 } from 'lucide-react';
-import { Order, OrderItem, ProductionSchedule } from '@/types/employee';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+// Types pour les données Supabase
+interface SupabaseOrder {
+  id: string;
+  order_number: string;
+  customer_id: string;
+  status: string;
+  total_amount: number;
+  pickup_date: string;
+  delivery_date: string;
+  special_instructions: string;
+  assigned_employee: string;
+  created_at: string;
+  updated_at: string;
+  profiles?: any;
+}
+
+interface SupabaseOrderItem {
+  id: string;
+  order_id: string;
+  item_type: string;
+  quantity: number;
+  unit_price: number;
+  description: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface SupabaseProductionSchedule {
+  id: string;
+  order_item_id: string;
+  machine_type: string;
+  scheduled_start: string;
+  scheduled_end: string;
+  actual_start: string;
+  actual_end: string;
+  assigned_employee: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
 
 const EmployeeDashboard = () => {
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
-  const [productionSchedules, setProductionSchedules] = useState<ProductionSchedule[]>([]);
-  const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const [orders, setOrders] = useState<SupabaseOrder[]>([]);
+  const [orderItems, setOrderItems] = useState<SupabaseOrderItem[]>([]);
+  const [productionSchedules, setProductionSchedules] = useState<SupabaseProductionSchedule[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDashboardData();
-  }, []);
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        
+        const { data: ordersData, error: ordersError } = await supabase
+          .from('orders')
+          .select('*, profiles(first_name, last_name, email, company)')
+          .order('created_at', { ascending: false });
 
-  const fetchDashboardData = async () => {
-    try {
-      setLoading(true);
-      
-      // Récupérer les commandes avec les profils clients
-      const { data: ordersData, error: ordersError } = await supabase
-        .from('orders')
-        .select(`
-          *,
-          profiles:customer_id (
-            first_name,
-            last_name,
-            email,
-            company
-          )
-        `)
-        .order('created_at', { ascending: false })
-        .limit(20);
+        const { data: itemsData, error: itemsError } = await supabase
+          .from('order_items')
+          .select('*')
+          .order('created_at', { ascending: false });
 
-      if (ordersError) throw ordersError;
+        const { data: schedulesData, error: schedulesError } = await supabase
+          .from('production_schedules')
+          .select('*')
+          .order('scheduled_start', { ascending: true });
 
-      // Récupérer les articles de commande
-      const { data: itemsData, error: itemsError } = await supabase
-        .from('order_items')
-        .select('*')
-        .order('created_at', { ascending: false });
+        if (ordersError) throw ordersError;
+        if (itemsError) throw itemsError;
+        if (schedulesError) throw schedulesError;
 
-      if (itemsError) throw itemsError;
+        setOrders(ordersData || []);
+        setOrderItems(itemsData || []);
+        setProductionSchedules(schedulesData || []);
+      } catch (error) {
+        console.error('Erreur lors du chargement des données:', error);
+        toast({
+          title: "Erreur",
+          description: "Impossible de charger les données.",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      // Récupérer les plannings de production
-      const { data: schedulesData, error: schedulesError } = await supabase
-        .from('production_schedules')
-        .select('*')
-        .order('scheduled_start', { ascending: true });
+    fetchData();
+  }, [toast]);
 
-      if (schedulesError) throw schedulesError;
+  const totalOrders = orders.length;
+  const pendingOrders = orders.filter(order => order.status === 'pending').length;
+  const inProgressOrders = orders.filter(order => order.status === 'in_progress').length;
+  const completedOrders = orders.filter(order => order.status === 'completed').length;
 
-      // Type cast the data to ensure proper types
-      setOrders((ordersData || []) as Order[]);
-      setOrderItems((itemsData || []) as OrderItem[]);
-      setProductionSchedules((schedulesData || []) as ProductionSchedule[]);
-    } catch (error) {
-      console.error('Erreur lors du chargement des données:', error);
-      toast({
-        title: "Erreur",
-        description: "Impossible de charger les données du tableau de bord",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
+  const getStatusBadge = (status: string) => {
+    const statusConfig = {
+      pending: { label: 'En attente', variant: 'secondary' as const },
+      in_progress: { label: 'En cours', variant: 'default' as const },
+      washing: { label: 'Lavage', variant: 'outline' as const },
+      drying: { label: 'Séchage', variant: 'outline' as const },
+      ironing: { label: 'Repassage', variant: 'outline' as const },
+      ready: { label: 'Prêt', variant: 'default' as const },
+      completed: { label: 'Terminé', variant: 'default' as const },
+    };
+    
+    return statusConfig[status as keyof typeof statusConfig] || { label: status, variant: 'secondary' as const };
   };
 
-  const updateOrderStatus = async (orderId: string, newStatus: string) => {
+  const updateOrderItemStatus = async (itemId: string, newStatus: string) => {
     try {
       const { error } = await supabase
-        .from('orders')
-        .update({ status: newStatus, updated_at: new Date().toISOString() })
-        .eq('id', orderId);
+        .from('order_items')
+        .update({ status: newStatus })
+        .eq('id', itemId);
 
       if (error) throw error;
 
+      setOrderItems(items => 
+        items.map(item => 
+          item.id === itemId ? { ...item, status: newStatus } : item
+        )
+      );
+
       toast({
         title: "Statut mis à jour",
-        description: "Le statut de la commande a été modifié avec succès",
+        description: "Le statut de l'article a été mis à jour avec succès.",
       });
-
-      fetchDashboardData();
     } catch (error) {
       console.error('Erreur lors de la mise à jour:', error);
       toast({
         title: "Erreur",
-        description: "Impossible de mettre à jour le statut",
+        description: "Impossible de mettre à jour le statut.",
         variant: "destructive",
       });
     }
   };
 
-  const getStatusBadge = (status: string) => {
-    const statusConfig = {
-      pending: { label: 'En attente', variant: 'secondary' as const, color: 'bg-orange-100 text-orange-800' },
-      in_progress: { label: 'En cours', variant: 'default' as const, color: 'bg-blue-100 text-blue-800' },
-      washing: { label: 'Lavage', variant: 'default' as const, color: 'bg-blue-100 text-blue-800' },
-      drying: { label: 'Séchage', variant: 'default' as const, color: 'bg-yellow-100 text-yellow-800' },
-      ironing: { label: 'Repassage', variant: 'default' as const, color: 'bg-purple-100 text-purple-800' },
-      ready: { label: 'Prêt', variant: 'default' as const, color: 'bg-green-100 text-green-800' },
-      delivered: { label: 'Livré', variant: 'default' as const, color: 'bg-green-100 text-green-800' },
-      completed: { label: 'Terminé', variant: 'default' as const, color: 'bg-gray-100 text-gray-800' }
-    };
-
-    const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.pending;
-    return <Badge variant={config.variant} className={config.color}>{config.label}</Badge>;
-  };
-
-  const getStats = () => {
-    const todayOrders = orders.filter(order => 
-      new Date(order.created_at).toDateString() === new Date().toDateString()
-    );
-    
-    const pendingOrders = orders.filter(order => order.status === 'pending');
-    const inProgressOrders = orders.filter(order => ['in_progress', 'washing', 'drying', 'ironing'].includes(order.status));
-    const completedToday = orders.filter(order => 
-      order.status === 'completed' && 
-      new Date(order.updated_at).toDateString() === new Date().toDateString()
-    );
-
-    return {
-      todayOrders: todayOrders.length,
-      pendingOrders: pendingOrders.length,
-      inProgressOrders: inProgressOrders.length,
-      completedToday: completedToday.length,
-      totalRevenue: orders.reduce((sum, order) => sum + (order.total_amount || 0), 0)
-    };
-  };
-
-  const stats = getStats();
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#145587] mx-auto mb-4"></div>
-          <p className="text-gray-600">Chargement du tableau de bord...</p>
-        </div>
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#145587]"></div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-[#145587]">Tableau de Bord Employé</h1>
-          <p className="text-gray-600">Suivi des commandes et production en temps réel</p>
-        </div>
-        <Button onClick={fetchDashboardData} variant="outline">
-          <Activity className="h-4 w-4 mr-2" />
-          Actualiser
-        </Button>
-      </div>
-
-      {/* Statistiques rapides */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="bg-gradient-to-br from-blue-50 to-blue-100">
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center text-blue-700">
-              <Package className="h-5 w-5 mr-2" />
-              Commandes Aujourd'hui
-            </CardTitle>
+    <div className="space-y-6">
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Commandes</CardTitle>
+            <Package className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-blue-700">{stats.todayOrders}</div>
+            <div className="text-2xl font-bold">{totalOrders}</div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-50 to-orange-100">
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center text-orange-700">
-              <Clock className="h-5 w-5 mr-2" />
-              En Attente
-            </CardTitle>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">En Attente</CardTitle>
+            <Clock className="h-4 w-4 text-yellow-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-orange-700">{stats.pendingOrders}</div>
+            <div className="text-2xl font-bold text-yellow-600">{pendingOrders}</div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-purple-50 to-purple-100">
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center text-purple-700">
-              <Activity className="h-5 w-5 mr-2" />
-              En Production
-            </CardTitle>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">En Cours</CardTitle>
+            <AlertCircle className="h-4 w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-purple-700">{stats.inProgressOrders}</div>
+            <div className="text-2xl font-bold text-blue-600">{inProgressOrders}</div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-50 to-green-100">
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center text-green-700">
-              <CheckCircle2 className="h-5 w-5 mr-2" />
-              Terminées Aujourd'hui
-            </CardTitle>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Terminées</CardTitle>
+            <CheckCircle className="h-4 w-4 text-green-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-700">{stats.completedToday}</div>
+            <div className="text-2xl font-bold text-green-600">{completedOrders}</div>
           </CardContent>
         </Card>
       </div>
 
-      <Tabs defaultValue="orders" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+      {/* Main Content Tabs */}
+      <Tabs defaultValue="orders" className="space-y-4">
+        <TabsList>
           <TabsTrigger value="orders">Commandes</TabsTrigger>
           <TabsTrigger value="production">Production</TabsTrigger>
-          <TabsTrigger value="analytics">Analytiques</TabsTrigger>
-          <TabsTrigger value="schedule">Planning</TabsTrigger>
+          <TabsTrigger value="analytics">Analyses</TabsTrigger>
+          <TabsTrigger value="planning">Planning</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="orders" className="space-y-6">
+        <TabsContent value="orders" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center">
-                <Package className="h-5 w-5 mr-2" />
-                Commandes Récentes
-              </CardTitle>
+              <CardTitle>Gestion des Commandes</CardTitle>
               <CardDescription>
-                Suivi en temps réel des commandes et de leur statut
+                Suivi en temps réel de toutes les commandes
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {orders.map((order) => (
-                  <div key={order.id} className="border rounded-lg p-4 space-y-3">
+                {/* Filters */}
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <Input placeholder="Rechercher par numéro de commande..." />
+                  </div>
+                  <Select>
+                    <SelectTrigger className="w-48">
+                      <SelectValue placeholder="Filtrer par statut" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Tous les statuts</SelectItem>
+                      <SelectItem value="pending">En attente</SelectItem>
+                      <SelectItem value="in_progress">En cours</SelectItem>
+                      <SelectItem value="completed">Terminé</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Orders List */}
+                <div className="space-y-2">
+                  {orders.map((order) => (
+                    <div key={order.id} className="border rounded-lg p-4 hover:bg-gray-50">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="font-semibold">{order.order_number}</h3>
+                          <p className="text-sm text-gray-600">
+                            Client: {order.customer_id} • Total: {order.total_amount}€
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            Livraison: {order.delivery_date ? new Date(order.delivery_date).toLocaleDateString() : 'Non programmée'}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant={getStatusBadge(order.status).variant}>
+                            {getStatusBadge(order.status).label}
+                          </Badge>
+                          <Button variant="outline" size="sm">
+                            Détails
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="production" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Planning de Production</CardTitle>
+              <CardDescription>
+                Suivi des articles en cours de traitement
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {orderItems.map((item) => (
+                  <div key={item.id} className="border rounded-lg p-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-semibold">Commande #{order.order_number}</h3>
+                        <h3 className="font-semibold">{item.item_type}</h3>
                         <p className="text-sm text-gray-600">
-                          {order.profiles?.first_name} {order.profiles?.last_name} 
-                          {order.profiles?.company && ` - ${order.profiles.company}`}
+                          Quantité: {item.quantity} • {item.description}
                         </p>
                       </div>
                       <div className="flex items-center gap-2">
-                        {getStatusBadge(order.status)}
-                        <select
-                          value={order.status}
-                          onChange={(e) => updateOrderStatus(order.id, e.target.value)}
-                          className="text-sm border rounded px-2 py-1"
+                        <Badge variant={getStatusBadge(item.status).variant}>
+                          {getStatusBadge(item.status).label}
+                        </Badge>
+                        <Select 
+                          value={item.status}
+                          onValueChange={(value) => updateOrderItemStatus(item.id, value)}
                         >
-                          <option value="pending">En attente</option>
-                          <option value="in_progress">En cours</option>
-                          <option value="washing">Lavage</option>
-                          <option value="drying">Séchage</option>
-                          <option value="ironing">Repassage</option>
-                          <option value="ready">Prêt</option>
-                          <option value="delivered">Livré</option>
-                          <option value="completed">Terminé</option>
-                        </select>
+                          <SelectTrigger className="w-32">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="pending">En attente</SelectItem>
+                            <SelectItem value="washing">Lavage</SelectItem>
+                            <SelectItem value="drying">Séchage</SelectItem>
+                            <SelectItem value="ironing">Repassage</SelectItem>
+                            <SelectItem value="ready">Prêt</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                      <div>
-                        <span className="font-medium">Collecte:</span> 
-                        {order.pickup_date ? new Date(order.pickup_date).toLocaleDateString('fr-FR') : 'Non planifiée'}
-                      </div>
-                      <div>
-                        <span className="font-medium">Livraison:</span> 
-                        {order.delivery_date ? new Date(order.delivery_date).toLocaleDateString('fr-FR') : 'Non planifiée'}
-                      </div>
-                      <div>
-                        <span className="font-medium">Montant:</span> 
-                        {order.total_amount ? `${order.total_amount}€` : 'À définir'}
-                      </div>
-                    </div>
-
-                    {order.special_instructions && (
-                      <div className="bg-blue-50 p-3 rounded">
-                        <span className="font-medium text-blue-800">Instructions spéciales:</span>
-                        <p className="text-blue-700">{order.special_instructions}</p>
-                      </div>
-                    )}
                   </div>
                 ))}
-                
-                {orders.length === 0 && (
-                  <div className="text-center py-8 text-gray-500">
-                    Aucune commande trouvée
-                  </div>
-                )}
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="production" className="space-y-6">
+        <TabsContent value="analytics" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center">
-                <Activity className="h-5 w-5 mr-2" />
-                Suivi de Production
-              </CardTitle>
+              <CardTitle>Analyses de Performance</CardTitle>
               <CardDescription>
-                Planification et suivi des tâches de production
+                Statistiques et métriques de production
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {productionSchedules.map((schedule) => (
-                  <div key={schedule.id} className="border rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <div>
-                        <h3 className="font-semibold capitalize">{schedule.machine_type}</h3>
-                        <p className="text-sm text-gray-600">
-                          Planifié: {new Date(schedule.scheduled_start).toLocaleString('fr-FR')} - 
-                          {new Date(schedule.scheduled_end).toLocaleString('fr-FR')}
-                        </p>
-                      </div>
-                      {getStatusBadge(schedule.status)}
-                    </div>
-                    
-                    {schedule.status === 'in_progress' && (
-                      <div className="mt-3">
-                        <div className="flex justify-between text-sm mb-1">
-                          <span>Progression estimée</span>
-                          <span>75%</span>
-                        </div>
-                        <Progress value={75} className="h-2" />
-                      </div>
-                    )}
-                  </div>
-                ))}
-                
-                {productionSchedules.length === 0 && (
-                  <div className="text-center py-8 text-gray-500">
-                    Aucune tâche de production programmée
-                  </div>
-                )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="text-center p-6 border rounded-lg">
+                  <BarChart3 className="h-12 w-12 mx-auto mb-4 text-[#145587]" />
+                  <h3 className="font-semibold">Productivité Journalière</h3>
+                  <p className="text-2xl font-bold text-[#145587]">95%</p>
+                  <p className="text-sm text-gray-600">Objectif atteint</p>
+                </div>
+                <div className="text-center p-6 border rounded-lg">
+                  <Clock className="h-12 w-12 mx-auto mb-4 text-green-600" />
+                  <h3 className="font-semibold">Temps Moyen</h3>
+                  <p className="text-2xl font-bold text-green-600">2.5h</p>
+                  <p className="text-sm text-gray-600">Par commande</p>
+                </div>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="analytics" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <BarChart3 className="h-5 w-5 mr-2" />
-                  Performances Hebdomadaires
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span>Commandes traitées</span>
-                    <span className="font-bold">{orders.length}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Chiffre d'affaires</span>
-                    <span className="font-bold">{stats.totalRevenue.toFixed(2)}€</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Taux de completion</span>
-                    <span className="font-bold">
-                      {orders.length > 0 ? 
-                        ((orders.filter(o => o.status === 'completed').length / orders.length) * 100).toFixed(1) 
-                        : 0}%
-                    </span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <TrendingUp className="h-5 w-5 mr-2" />
-                  Prévisions
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="bg-blue-50 p-3 rounded">
-                    <p className="text-sm font-medium text-blue-800">Demain</p>
-                    <p className="text-lg font-bold text-blue-600">8 commandes prévues</p>
-                  </div>
-                  <div className="bg-green-50 p-3 rounded">
-                    <p className="text-sm font-medium text-green-800">Cette semaine</p>
-                    <p className="text-lg font-bold text-green-600">32 commandes prévues</p>
-                  </div>
-                  <div className="bg-purple-50 p-3 rounded">
-                    <p className="text-sm font-medium text-purple-800">Charge de travail</p>
-                    <p className="text-lg font-bold text-purple-600">Normale</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="schedule" className="space-y-6">
+        <TabsContent value="planning" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center">
-                <Calendar className="h-5 w-5 mr-2" />
-                Planning de la Journée
-              </CardTitle>
+              <CardTitle>Planning des Livraisons</CardTitle>
               <CardDescription>
-                Organisation des tâches et optimisation des ressources
+                Organisation des tournées et livraisons
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="border rounded-lg p-4">
-                    <h3 className="font-semibold text-blue-600 mb-3">Lavage</h3>
-                    <div className="space-y-2">
-                      <div className="text-sm bg-blue-50 p-2 rounded">
-                        <div className="font-medium">9h00 - 11h00</div>
-                        <div>Commande #001 - Linge de lit</div>
-                      </div>
-                      <div className="text-sm bg-blue-50 p-2 rounded">
-                        <div className="font-medium">11h30 - 13h30</div>
-                        <div>Commande #002 - Serviettes</div>
-                      </div>
-                    </div>
+                <div className="flex items-center gap-4 p-4 border rounded-lg">
+                  <Truck className="h-8 w-8 text-[#145587]" />
+                  <div className="flex-1">
+                    <h3 className="font-semibold">Tournée du Matin</h3>
+                    <p className="text-sm text-gray-600">8h00 - 12h00 • 5 livraisons</p>
                   </div>
-
-                  <div className="border rounded-lg p-4">
-                    <h3 className="font-semibold text-yellow-600 mb-3">Séchage</h3>
-                    <div className="space-y-2">
-                      <div className="text-sm bg-yellow-50 p-2 rounded">
-                        <div className="font-medium">10h00 - 12h00</div>
-                        <div>Commande #001 - Linge de lit</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="border rounded-lg p-4">
-                    <h3 className="font-semibold text-purple-600 mb-3">Repassage</h3>
-                    <div className="space-y-2">
-                      <div className="text-sm bg-purple-50 p-2 rounded">
-                        <div className="font-medium">14h00 - 16h00</div>
-                        <div>Commande #001 - Linge de lit</div>
-                      </div>
-                    </div>
-                  </div>
+                  <Badge variant="outline">Programmée</Badge>
                 </div>
-
-                <div className="bg-green-50 p-4 rounded-lg">
-                  <h4 className="font-semibold text-green-800 mb-2">Livraisons Programmées</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    <div className="text-sm">
-                      <span className="font-medium">16h30:</span> Livraison commande #001 - Gîte Les Roses
-                    </div>
-                    <div className="text-sm">
-                      <span className="font-medium">17h00:</span> Livraison commande #002 - Hôtel Belle Vue
-                    </div>
+                <div className="flex items-center gap-4 p-4 border rounded-lg">
+                  <Truck className="h-8 w-8 text-green-600" />
+                  <div className="flex-1">
+                    <h3 className="font-semibold">Tournée de l'Après-midi</h3>
+                    <p className="text-sm text-gray-600">14h00 - 18h00 • 3 livraisons</p>
                   </div>
+                  <Badge variant="default">En cours</Badge>
                 </div>
               </div>
             </CardContent>
