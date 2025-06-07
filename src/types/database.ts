@@ -88,19 +88,19 @@ export interface Database {
         Row: {
           id: string;
           user_id: string;
-          role: 'admin' | 'member';
+          role: 'admin' | 'member' | 'employee';
           created_at: string;
         };
         Insert: {
           id?: string;
           user_id: string;
-          role?: 'admin' | 'member';
+          role?: 'admin' | 'member' | 'employee';
           created_at?: string;
         };
         Update: {
           id?: string;
           user_id?: string;
-          role?: 'admin' | 'member';
+          role?: 'admin' | 'member' | 'employee';
           created_at?: string;
         };
       };
@@ -245,6 +245,184 @@ export interface Database {
           updated_at?: string;
         };
       };
+      orders: {
+        Row: {
+          id: string;
+          order_number: string;
+          customer_id: string;
+          status: string;
+          total_amount: number | null;
+          pickup_date: string | null;
+          delivery_date: string | null;
+          special_instructions: string | null;
+          assigned_employee: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          order_number: string;
+          customer_id: string;
+          status?: string;
+          total_amount?: number | null;
+          pickup_date?: string | null;
+          delivery_date?: string | null;
+          special_instructions?: string | null;
+          assigned_employee?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          order_number?: string;
+          customer_id?: string;
+          status?: string;
+          total_amount?: number | null;
+          pickup_date?: string | null;
+          delivery_date?: string | null;
+          special_instructions?: string | null;
+          assigned_employee?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      order_items: {
+        Row: {
+          id: string;
+          order_id: string;
+          item_type: string;
+          quantity: number;
+          unit_price: number | null;
+          description: string | null;
+          status: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          order_id: string;
+          item_type: string;
+          quantity?: number;
+          unit_price?: number | null;
+          description?: string | null;
+          status?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          order_id?: string;
+          item_type?: string;
+          quantity?: number;
+          unit_price?: number | null;
+          description?: string | null;
+          status?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      delivery_routes: {
+        Row: {
+          id: string;
+          route_name: string;
+          driver_id: string | null;
+          route_date: string;
+          status: string;
+          estimated_duration: string | null;
+          actual_duration: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          route_name: string;
+          driver_id?: string | null;
+          route_date: string;
+          status?: string;
+          estimated_duration?: string | null;
+          actual_duration?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          route_name?: string;
+          driver_id?: string | null;
+          route_date?: string;
+          status?: string;
+          estimated_duration?: string | null;
+          actual_duration?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      route_orders: {
+        Row: {
+          id: string;
+          route_id: string;
+          order_id: string;
+          sequence_order: number;
+          estimated_time: string | null;
+          actual_time: string | null;
+        };
+        Insert: {
+          id?: string;
+          route_id: string;
+          order_id: string;
+          sequence_order: number;
+          estimated_time?: string | null;
+          actual_time?: string | null;
+        };
+        Update: {
+          id?: string;
+          route_id?: string;
+          order_id?: string;
+          sequence_order?: number;
+          estimated_time?: string | null;
+          actual_time?: string | null;
+        };
+      };
+      production_schedules: {
+        Row: {
+          id: string;
+          order_item_id: string;
+          machine_type: string;
+          scheduled_start: string;
+          scheduled_end: string;
+          actual_start: string | null;
+          actual_end: string | null;
+          assigned_employee: string | null;
+          status: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          order_item_id: string;
+          machine_type: string;
+          scheduled_start: string;
+          scheduled_end: string;
+          actual_start?: string | null;
+          actual_end?: string | null;
+          assigned_employee?: string | null;
+          status?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          order_item_id?: string;
+          machine_type?: string;
+          scheduled_start?: string;
+          scheduled_end?: string;
+          actual_start?: string | null;
+          actual_end?: string | null;
+          assigned_employee?: string | null;
+          status?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
     };
     Functions: {
       insert_member_with_position: {
@@ -283,6 +461,13 @@ export interface Database {
       sync_calendar_integration: {
         Args: { integration_id: string };
         Returns: undefined;
+      };
+      has_role: {
+        Args: {
+          _user_id: string;
+          _role: 'admin' | 'member' | 'employee';
+        };
+        Returns: boolean;
       };
     };
   };

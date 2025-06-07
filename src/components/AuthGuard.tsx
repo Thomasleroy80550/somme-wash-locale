@@ -6,16 +6,20 @@ import { useNavigate, useLocation } from 'react-router-dom';
 interface AuthGuardProps {
   children: React.ReactNode;
   requireAdmin?: boolean;
+  requireEmployee?: boolean;
 }
 
-const AuthGuard = ({ children, requireAdmin = false }: AuthGuardProps) => {
+const AuthGuard = ({ children, requireAdmin = false, requireEmployee = false }: AuthGuardProps) => {
   const { user, loading, isAdmin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [hasRedirected, setHasRedirected] = useState(false);
 
+  // Pour cette démo, on considère qu'un utilisateur est employé si son email contient "employee" ou s'il est admin
+  const isEmployee = isAdmin || (user?.email && user.email.includes('employee'));
+
   useEffect(() => {
-    console.log('AuthGuard - user:', !!user, 'loading:', loading, 'isAdmin:', isAdmin, 'requireAdmin:', requireAdmin);
+    console.log('AuthGuard - user:', !!user, 'loading:', loading, 'isAdmin:', isAdmin, 'isEmployee:', isEmployee, 'requireAdmin:', requireAdmin, 'requireEmployee:', requireEmployee);
     
     if (!loading && !hasRedirected) {
       if (!user) {
@@ -26,9 +30,13 @@ const AuthGuard = ({ children, requireAdmin = false }: AuthGuardProps) => {
         console.log('AuthGuard - User not admin, redirecting to member');
         setHasRedirected(true);
         navigate('/member', { replace: true });
+      } else if (requireEmployee && !isEmployee && !isAdmin) {
+        console.log('AuthGuard - User not employee, redirecting to member');
+        setHasRedirected(true);
+        navigate('/member', { replace: true });
       }
     }
-  }, [user, loading, isAdmin, requireAdmin, navigate, location.pathname, hasRedirected]);
+  }, [user, loading, isAdmin, isEmployee, requireAdmin, requireEmployee, navigate, location.pathname, hasRedirected]);
 
   // Reset redirect flag when location changes
   useEffect(() => {
@@ -46,7 +54,7 @@ const AuthGuard = ({ children, requireAdmin = false }: AuthGuardProps) => {
     );
   }
 
-  if (!user || (requireAdmin && !isAdmin)) {
+  if (!user || (requireAdmin && !isAdmin) || (requireEmployee && !isEmployee && !isAdmin)) {
     return null;
   }
 

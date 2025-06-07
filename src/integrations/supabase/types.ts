@@ -107,6 +107,50 @@ export type Database = {
         }
         Relationships: []
       }
+      delivery_routes: {
+        Row: {
+          actual_duration: unknown | null
+          created_at: string
+          driver_id: string | null
+          estimated_duration: unknown | null
+          id: string
+          route_date: string
+          route_name: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          actual_duration?: unknown | null
+          created_at?: string
+          driver_id?: string | null
+          estimated_duration?: unknown | null
+          id?: string
+          route_date: string
+          route_name: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          actual_duration?: unknown | null
+          created_at?: string
+          driver_id?: string | null
+          estimated_duration?: unknown | null
+          id?: string
+          route_date?: string
+          route_name?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "delivery_routes_driver_id_fkey"
+            columns: ["driver_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       member_profiles: {
         Row: {
           delivery_delay: string
@@ -220,6 +264,164 @@ export type Database = {
         }
         Relationships: []
       }
+      order_items: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          item_type: string
+          order_id: string
+          quantity: number
+          status: string
+          unit_price: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          item_type: string
+          order_id: string
+          quantity?: number
+          status?: string
+          unit_price?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          item_type?: string
+          order_id?: string
+          quantity?: number
+          status?: string
+          unit_price?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          assigned_employee: string | null
+          created_at: string
+          customer_id: string
+          delivery_date: string | null
+          id: string
+          order_number: string
+          pickup_date: string | null
+          special_instructions: string | null
+          status: string
+          total_amount: number | null
+          updated_at: string
+        }
+        Insert: {
+          assigned_employee?: string | null
+          created_at?: string
+          customer_id: string
+          delivery_date?: string | null
+          id?: string
+          order_number: string
+          pickup_date?: string | null
+          special_instructions?: string | null
+          status?: string
+          total_amount?: number | null
+          updated_at?: string
+        }
+        Update: {
+          assigned_employee?: string | null
+          created_at?: string
+          customer_id?: string
+          delivery_date?: string | null
+          id?: string
+          order_number?: string
+          pickup_date?: string | null
+          special_instructions?: string | null
+          status?: string
+          total_amount?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_assigned_employee_fkey"
+            columns: ["assigned_employee"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      production_schedules: {
+        Row: {
+          actual_end: string | null
+          actual_start: string | null
+          assigned_employee: string | null
+          created_at: string
+          id: string
+          machine_type: string
+          order_item_id: string
+          scheduled_end: string
+          scheduled_start: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          actual_end?: string | null
+          actual_start?: string | null
+          assigned_employee?: string | null
+          created_at?: string
+          id?: string
+          machine_type: string
+          order_item_id: string
+          scheduled_end: string
+          scheduled_start: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          actual_end?: string | null
+          actual_start?: string | null
+          assigned_employee?: string | null
+          created_at?: string
+          id?: string
+          machine_type?: string
+          order_item_id?: string
+          scheduled_end?: string
+          scheduled_start?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "production_schedules_assigned_employee_fkey"
+            columns: ["assigned_employee"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "production_schedules_order_item_id_fkey"
+            columns: ["order_item_id"]
+            isOneToOne: false
+            referencedRelation: "order_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           company: string | null
@@ -252,6 +454,48 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      route_orders: {
+        Row: {
+          actual_time: unknown | null
+          estimated_time: unknown | null
+          id: string
+          order_id: string
+          route_id: string
+          sequence_order: number
+        }
+        Insert: {
+          actual_time?: unknown | null
+          estimated_time?: unknown | null
+          id?: string
+          order_id: string
+          route_id: string
+          sequence_order: number
+        }
+        Update: {
+          actual_time?: unknown | null
+          estimated_time?: unknown | null
+          id?: string
+          order_id?: string
+          route_id?: string
+          sequence_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "route_orders_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "route_orders_route_id_fkey"
+            columns: ["route_id"]
+            isOneToOne: false
+            referencedRelation: "delivery_routes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -325,7 +569,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "member"
+      app_role: "admin" | "member" | "employee"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -441,7 +685,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "member"],
+      app_role: ["admin", "member", "employee"],
     },
   },
 } as const
