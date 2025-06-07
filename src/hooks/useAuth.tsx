@@ -9,6 +9,7 @@ interface AuthContextType {
   session: Session | null;
   loading: boolean;
   isAdmin: boolean;
+  isEmployee: boolean;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signUp: (email: string, password: string, firstName: string, lastName: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
@@ -21,6 +22,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isEmployee, setIsEmployee] = useState(false);
 
   useEffect(() => {
     // Set up auth state listener
@@ -30,23 +32,31 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          // Check if user is admin
+          // Check user roles
           setTimeout(async () => {
             try {
               const { data: roles } = await supabase
                 .from('user_roles')
                 .select('role')
-                .eq('user_id', session.user.id)
-                .eq('role', 'admin')
-                .single();
+                .eq('user_id', session.user.id);
               
-              setIsAdmin(!!roles);
+              if (roles) {
+                const userRoles = roles.map(r => r.role);
+                setIsAdmin(userRoles.includes('admin'));
+                setIsEmployee(userRoles.includes('employee') || userRoles.includes('admin'));
+              } else {
+                setIsAdmin(false);
+                setIsEmployee(false);
+              }
             } catch (error) {
+              console.error('Error checking user roles:', error);
               setIsAdmin(false);
+              setIsEmployee(false);
             }
           }, 0);
         } else {
           setIsAdmin(false);
+          setIsEmployee(false);
         }
         
         setLoading(false);
@@ -128,6 +138,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     session,
     loading,
     isAdmin,
+    isEmployee,
     signIn,
     signUp,
     signOut,

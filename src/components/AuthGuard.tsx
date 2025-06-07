@@ -10,13 +10,10 @@ interface AuthGuardProps {
 }
 
 const AuthGuard = ({ children, requireAdmin = false, requireEmployee = false }: AuthGuardProps) => {
-  const { user, loading, isAdmin } = useAuth();
+  const { user, loading, isAdmin, isEmployee } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [hasRedirected, setHasRedirected] = useState(false);
-
-  // Pour cette démo, on considère qu'un utilisateur est employé si son email contient "employee" ou s'il est admin
-  const isEmployee = isAdmin || (user?.email && user.email.includes('employee'));
 
   useEffect(() => {
     console.log('AuthGuard - user:', !!user, 'loading:', loading, 'isAdmin:', isAdmin, 'isEmployee:', isEmployee, 'requireAdmin:', requireAdmin, 'requireEmployee:', requireEmployee);
@@ -30,7 +27,7 @@ const AuthGuard = ({ children, requireAdmin = false, requireEmployee = false }: 
         console.log('AuthGuard - User not admin, redirecting to member');
         setHasRedirected(true);
         navigate('/member', { replace: true });
-      } else if (requireEmployee && !isEmployee && !isAdmin) {
+      } else if (requireEmployee && !isEmployee) {
         console.log('AuthGuard - User not employee, redirecting to member');
         setHasRedirected(true);
         navigate('/member', { replace: true });
@@ -54,7 +51,7 @@ const AuthGuard = ({ children, requireAdmin = false, requireEmployee = false }: 
     );
   }
 
-  if (!user || (requireAdmin && !isAdmin) || (requireEmployee && !isEmployee && !isAdmin)) {
+  if (!user || (requireAdmin && !isAdmin) || (requireEmployee && !isEmployee)) {
     return null;
   }
 
