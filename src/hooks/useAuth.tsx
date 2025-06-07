@@ -17,6 +17,26 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Function to clean up all auth-related storage
+const cleanupAuthState = () => {
+  // Remove standard auth tokens
+  localStorage.removeItem('supabase.auth.token');
+  
+  // Remove all Supabase auth keys from localStorage
+  Object.keys(localStorage).forEach((key) => {
+    if (key.startsWith('supabase.auth.') || key.includes('sb-')) {
+      localStorage.removeItem(key);
+    }
+  });
+  
+  // Remove from sessionStorage if in use
+  Object.keys(sessionStorage || {}).forEach((key) => {
+    if (key.startsWith('supabase.auth.') || key.includes('sb-')) {
+      sessionStorage.removeItem(key);
+    }
+  });
+};
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -28,6 +48,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('Auth state change:', event, !!session);
+        
         setSession(session);
         setUser(session?.user ?? null);
         
@@ -75,6 +97,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signIn = async (email: string, password: string) => {
     try {
+      // Clean up existing state before signing in
+      cleanupAuthState();
+      
+      // Attempt global sign out first
+      try {
+        await supabase.auth.signOut({ scope: 'global' });
+      } catch (err) {
+        // Continue even if this fails
+        console.log('Previous signout failed, continuing...');
+      }
+      
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -96,6 +129,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signUp = async (email: string, password: string, firstName: string, lastName: string) => {
     try {
+      // Clean up existing state before signing up
+      cleanupAuthState();
+      
       const redirectUrl = `${window.location.origin}/`;
       
       const { data, error } = await supabase.auth.signUp({
@@ -122,14 +158,36 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signOut = async () => {
     try {
-      await supabase.auth.signOut({ scope: 'global' });
+      console.log('Starting signout process...');
+      
+      // Clean up auth state first
+      cleanupAuthState();
+      
+      // Reset local state immediately
       setUser(null);
       setSession(null);
       setIsAdmin(false);
+      setIsEmployee(false);
+      
+      // Attempt global sign out
+      try {
+        await supabase.auth.signOut({ scope: 'global' });
+        console.log('Supabase signout successful');
+      } catch (err) {
+        console.log('Supabase signout failed, but continuing...', err);
+      }
+      
       toast.success('Déconnexion réussie');
+      
+      // Force complete page reload to ensure clean state
+      console.log('Redirecting to auth page...');
       window.location.href = '/auth';
     } catch (error: any) {
+      console.error('Error during signout:', error);
       toast.error('Erreur de déconnexion');
+      
+      // Even if there's an error, try to redirect
+      window.location.href = '/auth';
     }
   };
 

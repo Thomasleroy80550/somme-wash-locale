@@ -22,7 +22,8 @@ const AuthGuard = ({ children, requireAdmin = false, requireEmployee = false }: 
       if (!user) {
         console.log('AuthGuard - No user, redirecting to auth');
         setHasRedirected(true);
-        navigate('/auth', { state: { from: location.pathname }, replace: true });
+        // Use window.location.href to force a complete page refresh
+        window.location.href = '/auth';
       } else if (requireAdmin && !isAdmin) {
         console.log('AuthGuard - User not admin, redirecting to member');
         setHasRedirected(true);
