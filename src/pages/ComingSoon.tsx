@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Sparkles, MapPin, Calendar, Building2, Users, TrendingUp, Clock, Mail, Bed, Bath, UtensilsCrossed, Truck, CheckCircle, UserPlus, Package, Home, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,120 +5,83 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import NewsSection from '@/components/NewsSection';
-
 const ComingSoon = () => {
   const [email, setEmail] = useState('');
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleNewsletterSignup = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
       toast({
         title: "Merci !",
-        description: "Vous serez notifié du lancement de Hello Wash.",
+        description: "Vous serez notifié du lancement de Hello Wash."
       });
       setEmail('');
     }
   };
-
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      contactSection.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  const services = [
-    {
-      icon: Bed,
-      title: "Linge de lit",
-      description: "Draps, housses de couette, taies d'oreiller de qualité supérieure",
-      available: true
-    },
-    {
-      icon: Bath,
-      title: "Linge de toilette", 
-      description: "Serviettes ultra-absorbantes et moelleuses",
-      available: true
-    },
-    {
-      icon: UtensilsCrossed,
-      title: "Linge de table",
-      description: "Nappes et serviettes élégantes pour vos réceptions",
-      available: false
-    }
-  ];
-
-  const processSteps = [
-    {
-      id: 1,
-      icon: UserPlus,
-      title: "Inscription",
-      description: "Créez votre compte et connectez votre calendrier de réservation",
-      details: [
-        "Inscription rapide en 2 minutes",
-        "Synchronisation automatique des calendriers",
-        "Configuration de vos préférences"
-      ]
-    },
-    {
-      id: 2,
-      icon: Calendar,
-      title: "Planification automatique",
-      description: "Notre système surveille vos réservations et programme les livraisons",
-      details: [
-        "Détection automatique des nouvelles réservations",
-        "Calcul du délai optimal (J-1, J-2 ou J-3)",
-        "Confirmation par notification"
-      ]
-    },
-    {
-      id: 3,
-      icon: Truck,
-      title: "Livraison",
-      description: "Votre linge propre arrive avant vos hôtes",
-      details: [
-        "Livraison dans le créneau choisi",
-        "Linge emballé et étiquetté par pièce",
-        "Notification de livraison en temps réel"
-      ]
-    },
-    {
-      id: 4,
-      icon: Home,
-      title: "Installation",
-      description: "Installez le linge frais pour accueillir vos voyageurs",
-      details: [
-        "Linge de qualité hôtelière",
-        "Emballage facile à identifier",
-        "Gîte prêt en quelques minutes"
-      ]
-    },
-    {
-      id: 5,
-      icon: Package,
-      title: "Collecte",
-      description: "Nous récupérons le linge sale pour le cycle suivant",
-      details: [
-        "Collecte programmée automatiquement",
-        "Sacs de collecte fournis",
-        "Nettoyage professionnel garanti"
-      ]
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white">
+  const services = [{
+    icon: Bed,
+    title: "Linge de lit",
+    description: "Draps, housses de couette, taies d'oreiller de qualité supérieure",
+    available: true
+  }, {
+    icon: Bath,
+    title: "Linge de toilette",
+    description: "Serviettes ultra-absorbantes et moelleuses",
+    available: true
+  }, {
+    icon: UtensilsCrossed,
+    title: "Linge de table",
+    description: "Nappes et serviettes élégantes pour vos réceptions",
+    available: false
+  }];
+  const processSteps = [{
+    id: 1,
+    icon: UserPlus,
+    title: "Inscription",
+    description: "Créez votre compte et connectez votre calendrier de réservation",
+    details: ["Inscription rapide en 2 minutes", "Synchronisation automatique des calendriers", "Configuration de vos préférences"]
+  }, {
+    id: 2,
+    icon: Calendar,
+    title: "Planification automatique",
+    description: "Notre système surveille vos réservations et programme les livraisons",
+    details: ["Détection automatique des nouvelles réservations", "Calcul du délai optimal (J-1, J-2 ou J-3)", "Confirmation par notification"]
+  }, {
+    id: 3,
+    icon: Truck,
+    title: "Livraison",
+    description: "Votre linge propre arrive avant vos hôtes",
+    details: ["Livraison dans le créneau choisi", "Linge emballé et étiquetté par pièce", "Notification de livraison en temps réel"]
+  }, {
+    id: 4,
+    icon: Home,
+    title: "Installation",
+    description: "Installez le linge frais pour accueillir vos voyageurs",
+    details: ["Linge de qualité hôtelière", "Emballage facile à identifier", "Gîte prêt en quelques minutes"]
+  }, {
+    id: 5,
+    icon: Package,
+    title: "Collecte",
+    description: "Nous récupérons le linge sale pour le cycle suivant",
+    details: ["Collecte programmée automatiquement", "Sacs de collecte fournis", "Nettoyage professionnel garanti"]
+  }];
+  return <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white">
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
-                alt="Hello Wash Logo" 
-                className="h-12 w-auto"
-              />
+              <img src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" alt="Hello Wash Logo" className="h-12 w-auto" />
               <span className="ml-3 text-sm text-gray-600">Baie de Somme</span>
             </div>
             
@@ -129,17 +91,13 @@ const ComingSoon = () => {
               </div>
               
               <div className="flex items-center space-x-3">
-                <a
-                  href="/auth"
-                  className="text-[#145587] hover:text-[#145587]/80 transition-colors font-medium"
-                >
+                <a href="/auth" className="text-[#145587] hover:text-[#145587]/80 transition-colors font-medium">
                   Connexion
                 </a>
                 
-                <Button 
-                  onClick={() => document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-orange-500 text-white hover:bg-orange-600 px-6 py-2"
-                >
+                <Button onClick={() => document.getElementById('newsletter')?.scrollIntoView({
+                behavior: 'smooth'
+              })} className="bg-orange-500 text-white hover:bg-orange-600 px-6 py-2">
                   <UserPlus className="h-4 w-4 mr-2" />
                   Liste d'attente
                 </Button>
@@ -186,24 +144,20 @@ const ComingSoon = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className={`relative ${!service.available ? 'opacity-75' : ''}`}>
+            {services.map((service, index) => <Card key={index} className={`relative ${!service.available ? 'opacity-75' : ''}`}>
                 <CardHeader>
                   <div className={`flex items-center justify-center w-16 h-16 ${service.available ? 'bg-[#145587]/10' : 'bg-gray-200'} rounded-2xl mb-4 relative`}>
                     <service.icon className={`h-8 w-8 ${service.available ? 'text-[#145587]' : 'text-gray-400'}`} />
-                    {!service.available && (
-                      <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+                    {!service.available && <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
                         Bientôt
-                      </div>
-                    )}
+                      </div>}
                   </div>
                   <CardTitle className="text-xl">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">{service.description}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -311,9 +265,7 @@ const ComingSoon = () => {
                 </div>
               </div>
               
-              <p className="text-blue-100 mb-8 text-lg leading-relaxed">
-                Livraison en rouleaux pour les hôtels, résidences et établissements à fort volume.
-              </p>
+              <p className="text-blue-100 mb-8 text-lg leading-relaxed">Livraison en rolls pour les hôtels, résidences et établissements à fort volume.</p>
               
               <div className="space-y-6 mb-8">
                 <div className="flex items-start">
@@ -321,7 +273,7 @@ const ComingSoon = () => {
                     <Truck className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2">Livraison en rouleaux</h4>
+                    <h4 className="font-semibold mb-2">Livraison en rolls</h4>
                     <p className="text-blue-100">Transport optimisé pour grandes quantités</p>
                   </div>
                 </div>
@@ -462,8 +414,7 @@ const ComingSoon = () => {
 
           {/* Steps en ligne claire */}
           <div className="space-y-12">
-            {processSteps.map((step, index) => (
-              <div key={step.id} className="flex items-start gap-8 group">
+            {processSteps.map((step, index) => <div key={step.id} className="flex items-start gap-8 group">
                 {/* Numéro et icône */}
                 <div className="flex-shrink-0 text-center">
                   <div className="w-20 h-20 bg-gradient-to-br from-[#145587] to-[#145587]/80 rounded-3xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -473,9 +424,7 @@ const ComingSoon = () => {
                     {step.id}
                   </div>
                   {/* Ligne de connexion */}
-                  {index < processSteps.length - 1 && (
-                    <div className="w-0.5 h-16 bg-gray-300 mx-auto mt-4"></div>
-                  )}
+                  {index < processSteps.length - 1 && <div className="w-0.5 h-16 bg-gray-300 mx-auto mt-4"></div>}
                 </div>
 
                 {/* Contenu */}
@@ -489,18 +438,15 @@ const ComingSoon = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="grid md:grid-cols-3 gap-4">
-                        {step.details.map((detail, idx) => (
-                          <div key={idx} className="flex items-start">
+                        {step.details.map((detail, idx) => <div key={idx} className="flex items-start">
                             <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
                             <span className="text-sm text-gray-600">{detail}</span>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </CardContent>
                   </Card>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
 
           {/* CTA Section */}
@@ -510,10 +456,9 @@ const ComingSoon = () => {
               <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
                 Rejoignez notre liste d'attente et soyez parmi les premiers à découvrir cette révolution.
               </p>
-              <Button 
-                onClick={() => document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white text-[#145587] hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
-              >
+              <Button onClick={() => document.getElementById('newsletter')?.scrollIntoView({
+              behavior: 'smooth'
+            })} className="bg-white text-[#145587] hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
                 <Sparkles className="h-5 w-5 mr-2" />
                 Rejoindre la Liste d'Attente
               </Button>
@@ -532,14 +477,7 @@ const ComingSoon = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <form onSubmit={handleNewsletterSignup} className="flex gap-4 flex-1">
-              <Input
-                type="email"
-                placeholder="Votre adresse email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-white flex-1"
-                required
-              />
+              <Input type="email" placeholder="Votre adresse email" value={email} onChange={e => setEmail(e.target.value)} className="bg-white flex-1" required />
               <Button type="submit" className="bg-white text-[#145587] hover:bg-gray-100 whitespace-nowrap">
                 <Mail className="h-4 w-4 mr-2" />
                 S'inscrire
@@ -548,10 +486,7 @@ const ComingSoon = () => {
           </div>
           
           <div className="mt-6">
-            <a 
-              href="/auth"
-              className="inline-flex items-center bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold"
-            >
+            <a href="/auth" className="inline-flex items-center bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold">
               <Sparkles className="h-5 w-5 mr-2" />
               Inscription complète - Liste d'attente prioritaire
             </a>
@@ -566,11 +501,7 @@ const ComingSoon = () => {
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center mb-6">
-            <img 
-              src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" 
-              alt="Hello Wash Logo" 
-              className="h-8 w-auto mr-3"
-            />
+            <img src="/lovable-uploads/1cfec06e-dc8a-4f97-b6b2-1a5620825ffa.png" alt="Hello Wash Logo" className="h-8 w-auto mr-3" />
             <span className="text-xl font-bold">Hello Wash</span>
           </div>
           <p className="text-gray-400 mb-4">
@@ -581,8 +512,6 @@ const ComingSoon = () => {
           </p>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default ComingSoon;
