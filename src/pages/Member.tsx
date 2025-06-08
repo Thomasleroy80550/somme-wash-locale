@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
@@ -13,50 +12,43 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { LogOut, User, Building2, MapPin, Clock, Bell, Settings } from 'lucide-react';
 import { toast } from 'sonner';
-
 type MemberProfile = Database['public']['Tables']['member_profiles']['Row'] & {
   profiles: Database['public']['Tables']['profiles']['Row'];
 };
-
 const Member = () => {
-  const { user, signOut } = useAuth();
+  const {
+    user,
+    signOut
+  } = useAuth();
   const navigate = useNavigate();
   const [memberProfile, setMemberProfile] = useState<MemberProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     if (user) {
       fetchMemberProfile();
     }
   }, [user]);
-
   const fetchMemberProfile = async () => {
     if (!user) return;
-
     try {
       setLoading(true);
       setError(null);
-      
       console.log('Fetching member profile for user:', user.id);
-      
+
       // Récupérer le profil membre avec les informations du profil utilisateur
-      const { data, error } = await supabase
-        .from('member_profiles')
-        .select(`
+      const {
+        data,
+        error
+      } = await supabase.from('member_profiles').select(`
           *,
           profiles (*)
-        `)
-        .eq('user_id', user.id)
-        .maybeSingle();
-
+        `).eq('user_id', user.id).maybeSingle();
       if (error) {
         console.error('Erreur lors de la récupération du profil membre:', error);
         throw error;
       }
-
       console.log('Member profile data:', data);
-      
       if (data) {
         setMemberProfile(data as MemberProfile);
         console.log('Member profile position:', data.position);
@@ -69,7 +61,6 @@ const Member = () => {
       setLoading(false);
     }
   };
-
   const handleSignOut = async () => {
     try {
       await signOut();
@@ -79,33 +70,26 @@ const Member = () => {
       toast.error('Erreur lors de la déconnexion');
     }
   };
-
   const handleRegistrationSuccess = () => {
     console.log('Registration successful, refreshing profile...');
     fetchMemberProfile();
   };
-
   const handleProfileUpdate = () => {
     console.log('Profile update requested, refreshing...');
     fetchMemberProfile();
   };
-
   if (loading) {
-    return (
-      <AuthGuard>
+    return <AuthGuard>
         <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#145587] mx-auto mb-4"></div>
             <p className="text-gray-600">Chargement de votre profil...</p>
           </div>
         </div>
-      </AuthGuard>
-    );
+      </AuthGuard>;
   }
-
   if (error) {
-    return (
-      <AuthGuard>
+    return <AuthGuard>
         <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white flex items-center justify-center">
           <Card className="max-w-md">
             <CardHeader>
@@ -119,12 +103,9 @@ const Member = () => {
             </CardContent>
           </Card>
         </div>
-      </AuthGuard>
-    );
+      </AuthGuard>;
   }
-
-  return (
-    <AuthGuard>
+  return <AuthGuard>
       <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white">
         {/* Header */}
         <div className="bg-white shadow-sm border-b">
@@ -137,11 +118,9 @@ const Member = () => {
                   </div>
                   <h1 className="text-xl font-bold text-[#145587]">Hello Wash</h1>
                 </div>
-                {memberProfile && (
-                  <Badge variant="outline" className="text-[#145587] border-[#145587]">
+                {memberProfile && <Badge variant="outline" className="text-[#145587] border-[#145587]">
                     Membre #{memberProfile.position || 'En cours'}
-                  </Badge>
-                )}
+                  </Badge>}
               </div>
               
               <div className="flex items-center space-x-4">
@@ -151,21 +130,8 @@ const Member = () => {
                     {memberProfile?.profiles?.first_name} {memberProfile?.profiles?.last_name}
                   </span>
                 </div>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => navigate('/gestion-commandes')}
-                  className="flex items-center space-x-2"
-                >
-                  <Settings className="h-4 w-4" />
-                  <span>Gestion</span>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={handleSignOut}
-                  className="flex items-center space-x-2"
-                >
+                
+                <Button variant="outline" size="sm" onClick={handleSignOut} className="flex items-center space-x-2">
                   <LogOut className="h-4 w-4" />
                   <span>Déconnexion</span>
                 </Button>
@@ -176,24 +142,15 @@ const Member = () => {
 
         {/* Main Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {!memberProfile ? (
-            <MemberRegistrationSecure onSuccess={handleRegistrationSuccess} />
-          ) : (
-            <div className="space-y-8">
+          {!memberProfile ? <MemberRegistrationSecure onSuccess={handleRegistrationSuccess} /> : <div className="space-y-8">
               {/* Notifications en haut */}
               <NotificationCenter userId={user!.id} />
               
               {/* Dashboard principal */}
-              <MemberDashboard 
-                profile={memberProfile} 
-                onProfileUpdate={handleProfileUpdate}
-              />
-            </div>
-          )}
+              <MemberDashboard profile={memberProfile} onProfileUpdate={handleProfileUpdate} />
+            </div>}
         </div>
       </div>
-    </AuthGuard>
-  );
+    </AuthGuard>;
 };
-
 export default Member;
