@@ -5,8 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import NewsSection from '@/components/NewsSection';
+import OpeningAnimation from '@/components/OpeningAnimation';
+
 const ComingSoon = () => {
   const [email, setEmail] = useState('');
+  const [showOpeningAnimation, setShowOpeningAnimation] = useState(true);
   const {
     toast
   } = useToast();
@@ -75,7 +78,12 @@ const ComingSoon = () => {
     description: "Nous récupérons le linge sale pour le cycle suivant",
     details: ["Collecte programmée automatiquement", "Sacs de collecte fournis", "Nettoyage professionnel garanti"]
   }];
-  return <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white">
+  // Show opening animation first
+  if (showOpeningAnimation) {
+    return <OpeningAnimation onComplete={() => setShowOpeningAnimation(false)} />;
+  }
+
+  return <div className="min-h-screen bg-gradient-to-br from-[#145587]/5 to-white animate-fade-in">
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -514,4 +522,5 @@ const ComingSoon = () => {
       </footer>
     </div>;
 };
+
 export default ComingSoon;
