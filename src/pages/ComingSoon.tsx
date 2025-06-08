@@ -6,14 +6,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useToast } from '@/hooks/use-toast';
 import NewsSection from '@/components/NewsSection';
 import OpeningAnimation from '@/components/OpeningAnimation';
-import PartnersSection from '@/components/PartnersSection';
 
 const ComingSoon = () => {
   const [email, setEmail] = useState('');
   const [showOpeningAnimation, setShowOpeningAnimation] = useState(true);
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+
   const handleNewsletterSignup = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
@@ -79,6 +77,7 @@ const ComingSoon = () => {
     description: "Nous récupérons le linge sale pour le cycle suivant",
     details: ["Collecte programmée automatiquement", "Sacs de collecte fournis", "Nettoyage professionnel garanti"]
   }];
+
   // Show opening animation first
   if (showOpeningAnimation) {
     return <OpeningAnimation onComplete={() => setShowOpeningAnimation(false)} />;
@@ -485,9 +484,6 @@ const ComingSoon = () => {
           </div>
         </div>
       </section>
-
-      {/* Section Partenaires - Nouvelle section ajoutée */}
-      <PartnersSection />
 
       {/* Newsletter Signup */}
       <section id="newsletter" className="py-16 bg-[#145587]">
