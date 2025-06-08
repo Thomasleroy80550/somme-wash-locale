@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Sparkles, MapPin } from 'lucide-react';
 import LoadingProgress from './LoadingProgress';

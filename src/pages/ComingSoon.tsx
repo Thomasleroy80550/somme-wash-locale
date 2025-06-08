@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useToast } from '@/hooks/use-toast';
 import NewsSection from '@/components/NewsSection';
 import OpeningAnimation from '@/components/OpeningAnimation';
+import PartnersSection from '@/components/PartnersSection';
 
 const ComingSoon = () => {
   const [email, setEmail] = useState('');
@@ -152,20 +153,24 @@ const ComingSoon = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => <Card key={index} className={`relative ${!service.available ? 'opacity-75' : ''}`}>
+            {services.map((service, index) => (
+              <Card key={index} className={`relative ${!service.available ? 'opacity-75' : ''}`}>
                 <CardHeader>
                   <div className={`flex items-center justify-center w-16 h-16 ${service.available ? 'bg-[#145587]/10' : 'bg-gray-200'} rounded-2xl mb-4 relative`}>
                     <service.icon className={`h-8 w-8 ${service.available ? 'text-[#145587]' : 'text-gray-400'}`} />
-                    {!service.available && <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+                    {!service.available && (
+                      <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
                         Bientôt
-                      </div>}
+                      </div>
+                    )}
                   </div>
                   <CardTitle className="text-xl">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">{service.description}</p>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -422,7 +427,8 @@ const ComingSoon = () => {
 
           {/* Steps en ligne claire */}
           <div className="space-y-12">
-            {processSteps.map((step, index) => <div key={step.id} className="flex items-start gap-8 group">
+            {processSteps.map((step, index) => (
+              <div key={step.id} className="flex items-start gap-8 group">
                 {/* Numéro et icône */}
                 <div className="flex-shrink-0 text-center">
                   <div className="w-20 h-20 bg-gradient-to-br from-[#145587] to-[#145587]/80 rounded-3xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -432,7 +438,9 @@ const ComingSoon = () => {
                     {step.id}
                   </div>
                   {/* Ligne de connexion */}
-                  {index < processSteps.length - 1 && <div className="w-0.5 h-16 bg-gray-300 mx-auto mt-4"></div>}
+                  {index < processSteps.length - 1 && (
+                    <div className="w-0.5 h-16 bg-gray-300 mx-auto mt-4"></div>
+                  )}
                 </div>
 
                 {/* Contenu */}
@@ -446,15 +454,18 @@ const ComingSoon = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="grid md:grid-cols-3 gap-4">
-                        {step.details.map((detail, idx) => <div key={idx} className="flex items-start">
+                        {step.details.map((detail, idx) => (
+                          <div key={idx} className="flex items-start">
                             <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
                             <span className="text-sm text-gray-600">{detail}</span>
-                          </div>)}
+                          </div>
+                        ))}
                       </div>
                     </CardContent>
                   </Card>
                 </div>
-              </div>)}
+              </div>
+            ))}
           </div>
 
           {/* CTA Section */}
@@ -475,6 +486,9 @@ const ComingSoon = () => {
         </div>
       </section>
 
+      {/* Section Partenaires - Nouvelle section ajoutée */}
+      <PartnersSection />
+
       {/* Newsletter Signup */}
       <section id="newsletter" className="py-16 bg-[#145587]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -485,7 +499,14 @@ const ComingSoon = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <form onSubmit={handleNewsletterSignup} className="flex gap-4 flex-1">
-              <Input type="email" placeholder="Votre adresse email" value={email} onChange={e => setEmail(e.target.value)} className="bg-white flex-1" required />
+              <Input 
+                type="email" 
+                placeholder="Votre adresse email" 
+                value={email} 
+                onChange={e => setEmail(e.target.value)} 
+                className="bg-white flex-1" 
+                required 
+              />
               <Button type="submit" className="bg-white text-[#145587] hover:bg-gray-100 whitespace-nowrap">
                 <Mail className="h-4 w-4 mr-2" />
                 S'inscrire
