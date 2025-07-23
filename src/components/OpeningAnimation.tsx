@@ -83,7 +83,7 @@ const OpeningAnimation = ({ onComplete }: OpeningAnimationProps) => {
       </div>
 
       {/* Skip button */}
-      {showSkip && phase !== 'complete' && (
+      {showSkip && (
         <button
           onClick={handleSkip}
           className="absolute top-8 right-8 text-white/70 hover:text-white transition-colors text-sm font-medium animate-fade-in z-10"
