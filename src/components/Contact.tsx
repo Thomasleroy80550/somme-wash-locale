@@ -46,10 +46,10 @@ const Contact = () => {
                 </div>
               </div>
               <a 
-                href="tel:0668124026" 
+                href="tel:+33374475836" 
                 className="group flex items-center justify-between bg-gray-50 hover:bg-green-50 rounded-xl p-4 transition-all duration-300 border-2 border-transparent hover:border-green-200"
               >
-                <span className="text-xl font-semibold text-gray-900">06 68 12 40 26</span>
+                <span className="text-xl font-semibold text-gray-900">+33 3 74 47 58 36</span>
                 <ArrowRight className="h-5 w-5 text-green-600 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>

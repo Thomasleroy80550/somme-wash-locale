@@ -39,7 +39,7 @@ const Header = () => {
             </div>
             
             <a
-              href="tel:+33668124026"
+              href="tel:+33374475836"
               className="bg-[#145587] text-white px-4 py-2 rounded-lg hover:bg-[#145587]/90 transition-colors"
             >
               Nous contacter
