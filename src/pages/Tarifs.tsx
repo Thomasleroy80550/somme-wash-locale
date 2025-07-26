@@ -91,6 +91,31 @@ const Tarifs = () => {
               </div>
             </div>
 
+            {/* Conditions importantes */}
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-[#145587] mb-6 border-b border-gray-200 pb-2">📋 Conditions importantes</h3>
+              <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#145587] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-800"><strong>Livraison incluse</strong> dans tous nos tarifs</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#145587] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-800"><strong>Sac de linge sale inclus</strong> pour le retour</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#145587] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-800"><strong>Linge cautionné :</strong> Si le linge revient abîmé ou non conforme, il sera facturé. Chaque propriétaire est tenu de faire respecter cela à ses locataires.</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#145587] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-800"><strong>Le respect est important</strong> pour maintenir la qualité de notre service</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* CTA */}
             <div className="text-center bg-[#145587]/5 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Prêt à commencer ?</h3>
