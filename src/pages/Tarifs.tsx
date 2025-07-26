@@ -86,7 +86,7 @@ const Tarifs = () => {
                     <p className="text-sm text-gray-600">Tapis en coton blanc</p>
                     <p className="text-xs text-gray-500 mt-1">• 1 tapis 50 x 70 cm</p>
                   </div>
-                  <span className="text-2xl font-bold text-[#145587]">3,50 €</span>
+                  <span className="text-2xl font-bold text-[#145587]">2,80 €</span>
                 </div>
               </div>
             </div>
