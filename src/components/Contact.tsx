@@ -1,7 +1,53 @@
 
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    service: 'Linge de lit',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) throw error;
+
+      toast.success('Votre demande a été envoyée avec succès !');
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        service: 'Linge de lit',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast.error('Erreur lors de l\'envoi. Veuillez réessayer.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,12 +114,16 @@ const Contact = () => {
             <div className="bg-gray-50 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Demander un devis</h3>
               
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
                     <input
                       type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent"
                       placeholder="Votre prénom"
                     />
@@ -82,6 +132,10 @@ const Contact = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Nom</label>
                     <input
                       type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent"
                       placeholder="Votre nom"
                     />
@@ -92,6 +146,10 @@ const Contact = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent"
                     placeholder="votre@email.com"
                   />
@@ -99,17 +157,26 @@ const Contact = () => {
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Service souhaité</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent">
-                    <option>Linge de lit</option>
-                    <option>Linge de toilette</option>
-                    <option>Linge de table</option>
-                    <option>Tous les services</option>
+                  <select 
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent"
+                  >
+                    <option value="Linge de lit">Linge de lit</option>
+                    <option value="Linge de toilette">Linge de toilette</option>
+                    <option value="Linge de table">Linge de table</option>
+                    <option value="Tous les services">Tous les services</option>
                   </select>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
                     rows={4}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145587] focus:border-transparent"
                     placeholder="Décrivez vos besoins..."
@@ -118,9 +185,10 @@ const Contact = () => {
                 
                 <button
                   type="submit"
-                  className="w-full bg-[#145587] text-white py-4 rounded-lg hover:bg-[#145587]/90 transition-colors font-semibold"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#145587] text-white py-4 rounded-lg hover:bg-[#145587]/90 transition-colors font-semibold disabled:opacity-50"
                 >
-                  Envoyer ma demande
+                  {isSubmitting ? 'Envoi en cours...' : 'Envoyer ma demande'}
                 </button>
               </form>
             </div>
