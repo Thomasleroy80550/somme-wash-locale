@@ -75,7 +75,7 @@ const Tarifs = () => {
                   <div>
                     <h4 className="font-semibold text-gray-900">🍽️ Kit cuisine</h4>
                     <p className="text-sm text-gray-600">Torchon de cuisine en coton</p>
-                    <p className="text-xs text-gray-500 mt-1">• 1 torchon</p>
+                    <p className="text-xs text-gray-500 mt-1">• 2 torchons</p>
                   </div>
                   <span className="text-2xl font-bold text-[#145587]">3,20 €</span>
                 </div>
