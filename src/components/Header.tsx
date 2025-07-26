@@ -38,32 +38,6 @@ const Header = () => {
               <span>Baie de Somme</span>
             </div>
             
-            {user ? (
-              <div className="flex items-center space-x-2">
-                <a
-                  href="/member"
-                  className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
-                >
-                  Mon espace
-                </a>
-                <a
-        
-                  className="bg-[#145587] text-white px-4 py-2 rounded-lg hover:bg-[#145587]/90 transition-colors"
-                >
-                  Gestion
-                </a>
-              </div>
-            ) : (
-              <div className="flex items-center space-x-2">
-                <a
-                  href="/auth"
-                  className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
-                >
-                  Connexion
-                </a>
-              </div>
-            )}
-            
             <a
               href="tel:+33668124026"
               className="bg-[#145587] text-white px-4 py-2 rounded-lg hover:bg-[#145587]/90 transition-colors"
