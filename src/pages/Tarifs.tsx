@@ -44,7 +44,7 @@ const Tarifs = () => {
                     <p className="text-sm text-gray-600">Pour un lit 1 place</p>
                     <p className="text-xs text-gray-500 mt-1">• 1 petit drap • 1 petite housse de couette • 1 taie d'oreiller</p>
                   </div>
-                  <span className="text-2xl font-bold text-[#145587]">8,50 €</span>
+                  <span className="text-2xl font-bold text-[#145587]">11,50 €</span>
                 </div>
                 
                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
@@ -53,7 +53,7 @@ const Tarifs = () => {
                     <p className="text-sm text-gray-600">Pour un lit 2 places</p>
                     <p className="text-xs text-gray-500 mt-1">• 1 grand drap • 1 grande housse de couette • 2 taies d'oreiller</p>
                   </div>
-                  <span className="text-2xl font-bold text-[#145587]">10,50 €</span>
+                  <span className="text-2xl font-bold text-[#145587]">14,50 €</span>
                 </div>
               </div>
             </div>
