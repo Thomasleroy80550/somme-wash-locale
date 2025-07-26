@@ -49,7 +49,7 @@ const Tarifs = () => {
                 
                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
                   <div>
-                    <h4 className="font-semibold text-gray-900">Kit lit double standard (140 cm)</h4>
+                    <h4 className="font-semibold text-gray-900">Kit lit double standard (140 cm ou 160cm)</h4>
                     <p className="text-sm text-gray-600">Pour un lit 2 places</p>
                     <p className="text-xs text-gray-500 mt-1">• 1 grand drap • 1 grande housse de couette • 2 taies d'oreiller</p>
                   </div>
