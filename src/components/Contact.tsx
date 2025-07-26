@@ -1,7 +1,7 @@
 
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import emailjs from '@emailjs/browser';
 import { toast } from 'sonner';
 
 const Contact = () => {
@@ -19,11 +19,19 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData
-      });
-
-      if (error) throw error;
+      // Configuration EmailJS - utilisez vos propres IDs
+      await emailjs.send(
+        'service_hellowash', // Service ID à créer sur EmailJS
+        'template_contact', // Template ID à créer sur EmailJS  
+        {
+          to_email: 'contact@hellowash.fr',
+          from_name: `${formData.firstName} ${formData.lastName}`,
+          from_email: formData.email,
+          service: formData.service,
+          message: formData.message,
+        },
+        'YOUR_EMAILJS_PUBLIC_KEY' // Clé publique à remplacer
+      );
 
       toast.success('Votre demande a été envoyée avec succès !');
       setFormData({
