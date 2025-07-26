@@ -19,18 +19,18 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Configuration EmailJS - utilisez vos propres IDs
+      // Configuration EmailJS avec vos vraies valeurs
       await emailjs.send(
-        'service_hellowash', // Service ID à créer sur EmailJS
-        'template_contact', // Template ID à créer sur EmailJS  
+        'service_yd8m6lj', // Remplacez par votre Service ID réel
+        'template_xnb3l4k', // Remplacez par votre Template ID réel
         {
           to_email: 'contact@hellowash.fr',
           from_name: `${formData.firstName} ${formData.lastName}`,
           from_email: formData.email,
-          service: formData.service,
+          service_requested: formData.service,
           message: formData.message,
         },
-        'YOUR_EMAILJS_PUBLIC_KEY' // Clé publique à remplacer
+        'your-public-key-here' // Remplacez par votre clé publique EmailJS réelle
       );
 
       toast.success('Votre demande a été envoyée avec succès !');
