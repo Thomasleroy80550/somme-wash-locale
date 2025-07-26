@@ -79,6 +79,15 @@ const Tarifs = () => {
                   </div>
                   <span className="text-2xl font-bold text-[#145587]">1,20 €</span>
                 </div>
+                
+                <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Tapis de bain</h4>
+                    <p className="text-sm text-gray-600">Tapis en coton blanc</p>
+                    <p className="text-xs text-gray-500 mt-1">• 1 tapis 50 x 70 cm</p>
+                  </div>
+                  <span className="text-2xl font-bold text-[#145587]">1,50 €</span>
+                </div>
               </div>
             </div>
 
