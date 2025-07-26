@@ -14,6 +14,7 @@ import EmployeeDashboardPage from "./pages/EmployeeDashboard";
 import GestionCommandes from "./pages/GestionCommandes";
 import NotFound from "./pages/NotFound";
 import ComingSoon from "./pages/ComingSoon";
+import Tarifs from "./pages/Tarifs";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/employee" element={<EmployeeDashboardPage />} />
           <Route path="/gestion-commandes" element={<GestionCommandes />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
+          <Route path="/tarifs" element={<Tarifs />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -90,94 +90,26 @@ const Offers = () => {
               </div>
             </div>
             
-            {/* Grille de tarifs */}
-            <div className="bg-gray-50 rounded-2xl p-6 mb-6">
-              <h4 className="text-lg font-bold text-gray-900 mb-4 text-center">Grille de tarifs</h4>
-              
-              {/* Parures de lit */}
-              <div className="mb-6">
-                <h5 className="font-semibold text-[#145587] mb-3 text-sm uppercase tracking-wide">Parures de lit</h5>
-                <div className="grid gap-3">
-                  <div className="flex justify-between items-center bg-white rounded-lg p-3 border">
-                    <div>
-                      <span className="font-medium text-gray-900">Kit couette XL</span>
-                      <p className="text-xs text-gray-500">2 places • 1 drap plat • 1 housse de couette • 2 taies</p>
-                    </div>
-                    <span className="font-bold text-[#145587]">21,50 €</span>
-                  </div>
-                  <div className="flex justify-between items-center bg-white rounded-lg p-3 border">
-                    <div>
-                      <span className="font-medium text-gray-900">Kit couette S</span>
-                      <p className="text-xs text-gray-500">1 place • 1 drap plat • 1 housse de couette • 1 taie</p>
-                    </div>
-                    <span className="font-bold text-[#145587]">15,50 €</span>
-                  </div>
-                  <div className="flex justify-between items-center bg-white rounded-lg p-3 border">
-                    <div>
-                      <span className="font-medium text-gray-900">Kit draps XL</span>
-                      <p className="text-xs text-gray-500">2 places • 2 draps plats • 2 taies d'oreiller</p>
-                    </div>
-                    <span className="font-bold text-[#145587]">15,50 €</span>
-                  </div>
-                  <div className="flex justify-between items-center bg-white rounded-lg p-3 border">
-                    <div>
-                      <span className="font-medium text-gray-900">Kit draps S</span>
-                      <p className="text-xs text-gray-500">1 place • 2 draps plats • 1 taie d'oreiller</p>
-                    </div>
-                    <span className="font-bold text-[#145587]">12,00 €</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Linge de bain */}
-              <div className="mb-6">
-                <h5 className="font-semibold text-[#145587] mb-3 text-sm uppercase tracking-wide">Linge de bain</h5>
-                <div className="grid gap-3">
-                  <div className="flex justify-between items-center bg-white rounded-lg p-3 border">
-                    <div>
-                      <span className="font-medium text-gray-900">Kit serviettes</span>
-                      <p className="text-xs text-gray-500">1 serviette de bain • 1 serviette de toilette</p>
-                    </div>
-                    <span className="font-bold text-[#145587]">6,00 €</span>
-                  </div>
-                  <div className="flex justify-between items-center bg-white rounded-lg p-3 border">
-                    <div>
-                      <span className="font-medium text-gray-900">Serviette piscine</span>
-                      <p className="text-xs text-gray-500">Grande serviette 150 x 100 cm</p>
-                    </div>
-                    <span className="font-bold text-[#145587]">5,50 €</span>
-                  </div>
-                  <div className="flex justify-between items-center bg-white rounded-lg p-3 border">
-                    <div>
-                      <span className="font-medium text-gray-900">Tapis de bain</span>
-                      <p className="text-xs text-gray-500">Tapis coton blanc 50 x 70 cm</p>
-                    </div>
-                    <span className="font-bold text-[#145587]">3,00 €</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Compléments */}
-              <div className="mb-4">
-                <h5 className="font-semibold text-[#145587] mb-3 text-sm uppercase tracking-wide">Compléments</h5>
-                <div className="grid gap-3">
-                  <div className="flex justify-between items-center bg-white rounded-lg p-3 border">
-                    <div>
-                      <span className="font-medium text-gray-900">Kit torchons</span>
-                      <p className="text-xs text-gray-500">2 torchons cuisine 40 x 40 cm</p>
-                    </div>
-                    <span className="font-bold text-[#145587]">3,50 €</span>
-                  </div>
-                </div>
-              </div>
+            <div className="bg-[#145587]/10 rounded-2xl p-6 mb-6 text-center">
+              <p className="text-[#145587] font-semibold mb-2">💰 Tarifs transparents</p>
+              <p className="text-gray-600 text-sm">Consultez notre grille complète de prix</p>
             </div>
 
-            <Button 
-              onClick={scrollToContact}
-              className="w-full bg-[#145587] hover:bg-[#145587]/90 text-white py-3 text-lg animate-fade-in"
-            >
-              Configurer mon calendrier
-            </Button>
+            <div className="space-x-3">
+              <Button 
+                onClick={() => window.open('/tarifs', '_blank')}
+                variant="outline"
+                className="border-[#145587] text-[#145587] hover:bg-[#145587]/10"
+              >
+                Voir les prix
+              </Button>
+              <Button 
+                onClick={scrollToContact}
+                className="bg-[#145587] hover:bg-[#145587]/90 text-white"
+              >
+                Configurer mon calendrier
+              </Button>
+            </div>
           </div>
 
           {/* Offre Grands Comptes */}
