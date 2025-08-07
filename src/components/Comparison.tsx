@@ -50,7 +50,7 @@ const Comparison = () => {
             Comparatif qualité
           </div>
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            HelloWash vs <span className="text-gray-600">Géants industriels</span>
+            Hello Wash vs <span className="text-gray-600">Géants industriels</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Découvrez pourquoi choisir un service local et artisanal plutôt qu'une multinationale de location de linge
@@ -65,7 +65,7 @@ const Comparison = () => {
               <div className="bg-[#145587] text-white p-4 rounded-2xl mb-4 mx-auto w-fit">
                 <HandHeart className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold text-[#145587] mb-2">HelloWash</h3>
+              <h3 className="text-2xl font-bold text-[#145587] mb-2">Hello Wash</h3>
               <p className="text-gray-600">Service artisanal premium</p>
             </div>
 
