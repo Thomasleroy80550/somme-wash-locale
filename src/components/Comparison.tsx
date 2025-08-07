@@ -4,32 +4,38 @@ const Comparison = () => {
   const comparisons = [
     {
       feature: "Traitement des taches",
-      ourService: "Chaque tache est traitée individuellement",
-      industrial: "Traitement standard sans attention particulière",
+      ourService: "Chaque tache est relevée et traitée individuellement",
+      industrial: "Aucun prétraitement, lavage standard uniquement",
       ourAdvantage: true
     },
     {
       feature: "Méthode de lavage",
-      ourService: "Lavage artisanal, linge trié en amont",
-      industrial: "Tunnel de lavage industriel automatisé",
+      ourService: "Lavage artisanal soigné, linge trié en amont ET après",
+      industrial: "Tunnel de lavage industriel automatisé sans tri post-lavage",
       ourAdvantage: true
     },
     {
-      feature: "Tri du linge",
-      ourService: "Tri minutieux avant ET après lavage",
-      industrial: "Tri basique avant lavage uniquement",
+      feature: "Contrôle qualité",
+      ourService: "Vérification manuelle de chaque pièce",
+      industrial: "Contrôle automatisé, qualité variable selon les lots",
       ourAdvantage: true
     },
     {
-      feature: "Qualité finale",
-      ourService: "Contrôle qualité sur chaque pièce",
-      industrial: "Contrôle en lot, qualité variable",
+      feature: "Flexibilité des commandes",
+      ourService: "Commandes personnalisées selon vos besoins",
+      industrial: "Packages standardisés, peu de flexibilité",
       ourAdvantage: true
     },
     {
-      feature: "Service personnalisé",
-      ourService: "Relation directe, service sur-mesure",
-      industrial: "Service standardisé, contact limité",
+      feature: "Relation client",
+      ourService: "Contact direct, service personnalisé local",
+      industrial: "Centre d'appels, interlocuteurs multiples",
+      ourAdvantage: true
+    },
+    {
+      feature: "Réactivité",
+      ourService: "Adaptation rapide, gestion des urgences",
+      industrial: "Processus rigides, délais fixes",
       ourAdvantage: true
     }
   ];
@@ -44,10 +50,10 @@ const Comparison = () => {
             Comparatif qualité
           </div>
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Pourquoi choisir <span className="text-[#145587]">HelloWash</span> ?
+            HelloWash vs <span className="text-gray-600">Géants industriels</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Découvrez la différence entre notre approche artisanale et les grosses blanchisseries industrielles
+            Découvrez pourquoi choisir un service local et artisanal plutôt qu'une multinationale de location de linge
           </p>
         </div>
 
@@ -75,8 +81,8 @@ const Comparison = () => {
               <div className="bg-gray-400 text-white p-4 rounded-2xl mb-4 mx-auto w-fit">
                 <Zap className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-2">Blanchisseries</h3>
-              <p className="text-gray-600">Industrielles</p>
+              <h3 className="text-2xl font-bold text-gray-700 mb-2">Multinationales</h3>
+              <p className="text-gray-600">de location de linge</p>
             </div>
           </div>
 
@@ -126,23 +132,23 @@ const Comparison = () => {
               Garantie qualité
             </div>
             <h3 className="text-3xl font-bold mb-4">
-              La différence HelloWash
+              L'avantage du service local et artisanal
             </h3>
             <p className="text-xl text-blue-100 mb-6">
-              Contrairement aux tunnels de lavage industriels, notre approche artisanale garantit un traitement personnalisé de chaque pièce de linge pour une qualité irréprochable.
+              Face aux tunnels de lavage des géants industriels, nous privilégions l'approche humaine : chaque tache relevée, double tri du linge, et un service personnalisé que les multinationales ne peuvent pas offrir.
             </p>
             <div className="grid md:grid-cols-3 gap-6 text-center">
               <div>
                 <div className="text-3xl font-bold mb-2">100%</div>
-                <div className="text-blue-100">Taches traitées</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold mb-2">0</div>
-                <div className="text-blue-100">Tunnel industriel</div>
+                <div className="text-blue-100">Taches relevées</div>
               </div>
               <div>
                 <div className="text-3xl font-bold mb-2">2x</div>
                 <div className="text-blue-100">Tri du linge</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold mb-2">1</div>
+                <div className="text-blue-100">Interlocuteur dédié</div>
               </div>
             </div>
           </div>
