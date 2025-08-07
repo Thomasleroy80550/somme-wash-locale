@@ -44,7 +44,11 @@ const Tarifs = () => {
                     <p className="text-sm text-gray-600">Pour un lit 1 place</p>
                     <p className="text-xs text-gray-500 mt-1">• 1 petit drap • 1 petite housse de couette • 1 taie d'oreiller</p>
                   </div>
-                  <span className="text-2xl font-bold text-[#145587]">14,50 €</span>
+                  <div className="text-right">
+                    <span className="text-lg font-semibold text-[#145587] bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">
+                      Prix sur demande
+                    </span>
+                  </div>
                 </div>
                 
                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
@@ -53,7 +57,11 @@ const Tarifs = () => {
                     <p className="text-sm text-gray-600">Pour un lit 2 places</p>
                     <p className="text-xs text-gray-500 mt-1">• 1 grand drap • 1 grande housse de couette • 2 taies d'oreiller</p>
                   </div>
-                  <span className="text-2xl font-bold text-[#145587]">16,50 €</span>
+                  <div className="text-right">
+                    <span className="text-lg font-semibold text-[#145587] bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">
+                      Prix sur demande
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -68,7 +76,11 @@ const Tarifs = () => {
                     <p className="text-sm text-gray-600">Serviettes de bain en coton blanc</p>
                     <p className="text-xs text-gray-500 mt-1">• 1 petite serviette • 1 drap de bain</p>
                   </div>
-                  <span className="text-2xl font-bold text-[#145587]">5,00 €</span>
+                  <div className="text-right">
+                    <span className="text-lg font-semibold text-[#145587] bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">
+                      Prix sur demande
+                    </span>
+                  </div>
                 </div>
                 
                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
@@ -77,7 +89,11 @@ const Tarifs = () => {
                     <p className="text-sm text-gray-600">Torchon de cuisine en coton</p>
                     <p className="text-xs text-gray-500 mt-1">• 2 torchons</p>
                   </div>
-                  <span className="text-2xl font-bold text-[#145587]">3,20 €</span>
+                  <div className="text-right">
+                    <span className="text-lg font-semibold text-[#145587] bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">
+                      Prix sur demande
+                    </span>
+                  </div>
                 </div>
                 
                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
@@ -86,7 +102,11 @@ const Tarifs = () => {
                     <p className="text-sm text-gray-600">Tapis en coton blanc</p>
                     <p className="text-xs text-gray-500 mt-1">• 1 tapis 50 x 70 cm</p>
                   </div>
-                  <span className="text-2xl font-bold text-[#145587]">2,80 €</span>
+                  <div className="text-right">
+                    <span className="text-lg font-semibold text-[#145587] bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">
+                      Prix sur demande
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
