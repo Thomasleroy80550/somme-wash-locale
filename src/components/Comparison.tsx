@@ -139,7 +139,7 @@ const Comparison = () => {
             </p>
             <div className="grid md:grid-cols-3 gap-6 text-center">
               <div>
-                <div className="text-3xl font-bold mb-2">100%</div>
+                <div className="text-3xl font-bold mb-2">99%</div>
                 <div className="text-blue-100">Taches relevées</div>
               </div>
               <div>
