@@ -139,7 +139,24 @@ const Tarifs = () => {
             {/* CTA */}
             <div className="text-center bg-[#145587]/5 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Prêt à commencer ?</h3>
-              <p className="text-gray-600 mb-4">Contactez-nous pour configurer votre calendrier et automatiser vos commandes</p>
+              <p className="text-gray-600 mb-6">Contactez-nous pour configurer votre calendrier et automatiser vos commandes</p>
+              
+              <div className="space-y-4 mb-6">
+                <div className="flex items-center justify-center gap-3 bg-white rounded-lg p-4 border border-gray-200">
+                  <div className="text-[#145587]">📧</div>
+                  <a href="mailto:contact@hellowash.fr" className="text-lg font-semibold text-[#145587] hover:underline">
+                    contact@hellowash.fr
+                  </a>
+                </div>
+                
+                <div className="flex items-center justify-center gap-3 bg-white rounded-lg p-4 border border-gray-200">
+                  <div className="text-[#145587]">📞</div>
+                  <a href="tel:+33374475836" className="text-lg font-semibold text-[#145587] hover:underline">
+                    03 74 47 58 36
+                  </a>
+                </div>
+              </div>
+              
               <Button 
                 onClick={scrollToContact}
                 className="bg-[#145587] hover:bg-[#145587]/90 text-white px-8 py-3"
