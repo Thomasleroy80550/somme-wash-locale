@@ -9,6 +9,8 @@ import About from '../components/About';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Process from '../components/Process';
+import Testimonials from '../components/Testimonials';
+import WaterDropJourney from '../components/WaterDropJourney';
 
 import FAQ from '../components/FAQ';
 import StickyContactBar from '../components/StickyContactBar';
@@ -16,12 +18,13 @@ import StickyContactBar from '../components/StickyContactBar';
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <WaterDropJourney />
       <Header />
       <Hero />
       <Services />
       <Comparison />
       <Process />
-      
+      <Testimonials />
       <Offers />
       <DeliveryZones />
       <FAQ />

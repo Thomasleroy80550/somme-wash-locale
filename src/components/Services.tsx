@@ -89,7 +89,7 @@ const Services = () => {
 
         <div className="grid md:grid-cols-3 gap-8 mb-20">
           {services.map((service, index) => (
-            <div key={index} className={`bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 ${!service.available ? 'opacity-75' : ''}`}>
+            <div key={index} className={`bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 fabric-card ${!service.available ? 'opacity-75' : ''}`}>
               <div className={`flex items-center justify-center w-16 h-16 ${service.available ? 'bg-[#145587]/10' : 'bg-gray-200'} rounded-2xl mb-6 relative`}>
                 <service.icon className={`h-8 w-8 ${service.available ? 'text-[#145587]' : 'text-gray-400'}`} />
                 {!service.available && (
@@ -114,7 +114,7 @@ const Services = () => {
               <button 
                 onClick={() => setOpenModal(service.id)}
                 className={`w-full ${service.available 
-                  ? 'bg-white border-2 border-[#145587] text-[#145587] hover:bg-[#145587] hover:text-white' 
+                  ? 'bg-white border-2 border-[#145587] text-[#145587] hover:bg-[#145587] hover:text-white liquid-button' 
                   : 'bg-gray-100 border-2 border-gray-300 text-gray-500 cursor-not-allowed'
                 } py-3 rounded-lg transition-colors font-semibold`}
                 disabled={!service.available}
