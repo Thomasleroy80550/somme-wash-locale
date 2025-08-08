@@ -49,19 +49,28 @@ export default function Process() {
           </p>
         </header>
 
-        <ol className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Ligne de connexion visuelle (desktop) */}
+        <div className="relative max-w-4xl mx-auto mb-12 hidden lg:block">
+          <div className="absolute top-6 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/20 via-primary/60 to-primary/20" />
+        </div>
+
+        <ol className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {steps.map((s, i) => (
             <li
               key={i}
-              className="group relative rounded-2xl border bg-card p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="group relative rounded-2xl border bg-card p-6 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300"
             >
-              <div className="flex items-center gap-3 mb-3 text-primary">
-                <span className="grid place-items-center h-9 w-9 rounded-lg bg-primary/10">
+              {/* Numéro d'étape stylisé */}
+              <div className="absolute -top-4 left-6 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                {i + 1}
+              </div>
+              <div className="flex items-center gap-3 mb-4 mt-2 text-primary">
+                <span className="grid place-items-center h-10 w-10 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                   {s.icon}
                 </span>
-                <span className="text-xs font-semibold opacity-80">Étape {i + 1}</span>
+                <span className="text-xs font-semibold opacity-70">Étape {i + 1}</span>
               </div>
-              <h3 className="text-lg font-semibold mb-1">{s.title}</h3>
+              <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{s.title}</h3>
               <p className="text-sm text-muted-foreground">{s.description}</p>
             </li>
           ))}
