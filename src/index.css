@@ -773,7 +773,6 @@
     height: 50%;
   }
 }
-}
 
 .animate-gentle-float {
   animation: gentle-float 3s ease-in-out infinite;
