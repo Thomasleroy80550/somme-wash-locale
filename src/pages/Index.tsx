@@ -9,7 +9,7 @@ import About from '../components/About';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Process from '../components/Process';
-
+import CaseStudies from '../components/CaseStudies';
 import FAQ from '../components/FAQ';
 import StickyContactBar from '../components/StickyContactBar';
 
@@ -21,7 +21,7 @@ const Index = () => {
       <Services />
       <Comparison />
       <Process />
-      
+      <CaseStudies />
       <Offers />
       <DeliveryZones />
       <FAQ />
