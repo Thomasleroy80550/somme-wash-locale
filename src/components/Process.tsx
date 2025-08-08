@@ -1,4 +1,5 @@
 import { CheckCircle2, Eraser, Droplets, Recycle, SearchCheck, PackageCheck } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const steps = [
   {
@@ -34,6 +35,11 @@ const steps = [
 ];
 
 export default function Process() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 50);
+    return () => clearTimeout(t);
+  }, []);
   return (
     <section id="processus" className="py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,9 +55,36 @@ export default function Process() {
           </p>
         </header>
 
+        {/* Indicateur de progression visuelle */}
+        <div aria-hidden className="relative max-w-3xl mx-auto mb-10 hidden md:block">
+          <div className="h-1 bg-muted rounded-full" />
+          <div className="absolute inset-0 flex items-center">
+            <div
+              className="h-1 bg-primary rounded-full transition-all duration-1000"
+              style={{ width: mounted ? "100%" : "0%" }}
+            />
+          </div>
+          <div className="absolute -top-2 left-0 right-0 flex justify-between">
+            {Array.from({ length: steps.length }).map((_, idx) => (
+              <div key={idx} className="grid place-items-center">
+                <div className={`h-5 w-5 rounded-full border bg-background transition-colors duration-700 ${mounted ? "border-primary" : "border-muted"}`}>
+                  <div
+                    className={`m-[6px] h-2 w-2 rounded-full transition-colors duration-700 ${mounted ? "bg-primary" : "bg-muted"}`}
+                    style={{ transitionDelay: `${idx * 120}ms` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <ol className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {steps.map((s, i) => (
-            <li key={i} className="group relative rounded-2xl border bg-card p-6 shadow-sm hover:shadow-md transition-shadow">
+            <li
+              key={i}
+              className={`group relative rounded-2xl border bg-card p-6 shadow-sm transition-all ${mounted ? 'opacity-100 translate-y-0 hover:shadow-md' : 'opacity-0 translate-y-2'}`}
+              style={{ transitionDelay: `${i * 120}ms` }}
+            >
               <div className="flex items-center gap-3 mb-3 text-primary">
                 <span className="grid place-items-center h-9 w-9 rounded-lg bg-primary/10">
                   {s.icon}
