@@ -1,5 +1,5 @@
 import { CheckCircle2, Eraser, Droplets, Recycle, SearchCheck, PackageCheck } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const steps = [
   {
@@ -35,10 +35,25 @@ const steps = [
 ];
 
 export default function Process() {
-  const [mounted, setMounted] = useState(false);
+  const [inView, setInView] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 50);
-    return () => clearTimeout(t);
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setInView(true);
+            obs.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
   return (
     <section id="processus" className="py-24">
@@ -61,15 +76,15 @@ export default function Process() {
           <div className="absolute inset-0 flex items-center">
             <div
               className="h-1 bg-primary rounded-full transition-all duration-1000"
-              style={{ width: mounted ? "100%" : "0%" }}
+              style={{ width: inView ? "100%" : "0%" }}
             />
           </div>
           <div className="absolute -top-2 left-0 right-0 flex justify-between">
             {Array.from({ length: steps.length }).map((_, idx) => (
               <div key={idx} className="grid place-items-center">
-                <div className={`h-5 w-5 rounded-full border bg-background transition-colors duration-700 ${mounted ? "border-primary" : "border-muted"}`}>
+                <div className={`h-5 w-5 rounded-full border bg-background transition-colors duration-700 ${inView ? "border-primary" : "border-muted"}`}>
                   <div
-                    className={`m-[6px] h-2 w-2 rounded-full transition-colors duration-700 ${mounted ? "bg-primary" : "bg-muted"}`}
+                    className={`m-[6px] h-2 w-2 rounded-full transition-colors duration-700 ${inView ? "bg-primary" : "bg-muted"}`}
                     style={{ transitionDelay: `${idx * 120}ms` }}
                   />
                 </div>
@@ -82,7 +97,7 @@ export default function Process() {
           {steps.map((s, i) => (
             <li
               key={i}
-              className={`group relative rounded-2xl border bg-card p-6 shadow-sm transition-all ${mounted ? 'opacity-100 translate-y-0 hover:shadow-md' : 'opacity-0 translate-y-2'}`}
+              className={`group relative rounded-2xl border bg-card p-6 shadow-sm transition-all duration-700 ease-out transform-gpu ${inView ? 'opacity-100 translate-y-0 hover:shadow-md' : 'opacity-0 translate-y-2'}`}
               style={{ transitionDelay: `${i * 120}ms` }}
             >
               <div className="flex items-center gap-3 mb-3 text-primary">
