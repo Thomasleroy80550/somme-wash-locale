@@ -57,7 +57,7 @@ export default function Process() {
   }, []);
   return (
     <section id="processus" className="py-24">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-center mb-14">
           <p className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary/10 text-primary mb-3">
             Parcours qualité
