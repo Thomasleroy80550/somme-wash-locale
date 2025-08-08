@@ -1,177 +1,127 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Hotel, UtensilsCrossed, Heart, Building2, GraduationCap, Briefcase } from "lucide-react";
+import { Hotel, UtensilsCrossed, Home, Briefcase } from "lucide-react";
 
-const caseStudies = {
+const sectors = {
   hotel: {
     icon: Hotel,
     title: "Hôtellerie",
     subtitle: "Excellence & Réactivité",
-    cases: [
-      {
-        name: "Hôtel Les Mouettes ****",
-        location: "Perros-Guirec",
-        challenge: "Gestion de 120 chambres en haute saison avec des standards élevés",
-        solution: "Service quotidien avec tri textile, traitement antitaches et pliage professionnel",
-        results: [
-          "Réduction de 40% du temps de traitement",
-          "Satisfaction client 98%",
-          "Économie de 2h/jour pour le personnel"
-        ],
-        quote: "Grâce à Hello Wash, nous gardons notre standing 4 étoiles même en pleine saison.",
-        author: "Claire D., Responsable hébergement"
-      },
-      {
-        name: "Résidence Le Grand Large",
-        location: "Trégastel",
-        challenge: "Rotation intensive d'appartements touristiques",
-        solution: "Collecte programmée et livraison express 24h",
-        results: [
-          "Disponibilité immédiate des logements",
-          "Zéro retard de livraison",
-          "Textile impeccable garanti"
-        ],
-        quote: "Un partenaire fiable qui nous fait gagner en efficacité.",
-        author: "M. Le Goff, Gérant"
-      }
+    description: "Pour les hôtels, chambres d'hôtes et résidences de tourisme, nous proposons un service adapté aux standards élevés de l'hébergement touristique.",
+    specificities: [
+      "Rotation rapide des draps et serviettes",
+      "Qualité constante pour maintenir les standards",
+      "Flexibilité selon l'occupation saisonnière",
+      "Livraison express en haute saison"
+    ],
+    services: [
+      "Linge de lit et de bain",
+      "Rideaux et voilages",
+      "Tapis et moquettes",
+      "Uniformes du personnel"
+    ],
+    advantages: [
+      "Gain de temps pour vos équipes",
+      "Qualité hôtelière garantie",
+      "Gestion des pics saisonniers",
+      "Image de marque préservée"
     ]
   },
   restaurant: {
     icon: UtensilsCrossed,
     title: "Restauration",
     subtitle: "Hygiène & Praticité",
-    cases: [
-      {
-        name: "Restaurant La Baie",
-        location: "Ploumanac'h",
-        challenge: "Linge de table et vêtements professionnels très sollicités",
-        solution: "Traitement spécialisé anti-taches et entretien quotidien",
-        results: [
-          "Élimination de 95% des taches tenaces",
-          "Durée de vie textile prolongée",
-          "Service continu 7j/7"
-        ],
-        quote: "Plus de stress avec les taches de sauce ! Service irréprochable.",
-        author: "Y. Martin, Chef propriétaire"
-      },
-      {
-        name: "Brasserie du Port",
-        location: "Perros-Guirec",
-        challenge: "Volume important et contraintes d'horaires",
-        solution: "Collecte nocturne et livraison matinale",
-        results: [
-          "Optimisation des flux de travail",
-          "Stock textile réduit de 30%",
-          "Coûts maîtrisés"
-        ],
-        quote: "Ils s'adaptent parfaitement à nos contraintes horaires.",
-        author: "Sophie L., Responsable"
-      }
+    description: "Restaurants, brasseries, bars et cafés bénéficient de notre expertise dans le traitement du linge professionnel et de table.",
+    specificities: [
+      "Traitement anti-taches spécialisé",
+      "Résistance aux lavages intensifs",
+      "Horaires adaptés aux contraintes",
+      "Volume important géré facilement"
+    ],
+    services: [
+      "Linge de table (nappes, serviettes)",
+      "Vêtements de cuisine",
+      "Torchons et essuis professionnels",
+      "Tabliers et uniformes"
+    ],
+    advantages: [
+      "Élimination des taches tenaces",
+      "Hygiène irréprochable",
+      "Durée de vie prolongée",
+      "Coûts maîtrisés"
     ]
   },
-  medical: {
-    icon: Heart,
-    title: "Médical",
-    subtitle: "Hygiène & Conformité",
-    cases: [
-      {
-        name: "Maison Santé Baie",
-        location: "Perros-Guirec",
-        challenge: "Respect strict des normes d'hygiène médicale",
-        solution: "Traitement haute température et désinfection certifiée",
-        results: [
-          "Conformité 100% aux normes",
-          "Traçabilité complète",
-          "Livraison sécurisée"
-        ],
-        quote: "La qualité constante et les délais tenus changent tout.",
-        author: "Dr. L. Bernard"
-      }
+  gite: {
+    icon: Home,
+    title: "Gîtes & Locations",
+    subtitle: "Confort & Simplicité",
+    description: "Pour les propriétaires de gîtes, locations saisonnières et meublés de tourisme, nous facilitons la gestion du linge entre les séjours.",
+    specificities: [
+      "Service de rotation entre locataires",
+      "Collecte et livraison à domicile",
+      "Traitement personnalisé par logement",
+      "Disponibilité 7j/7 en saison"
+    ],
+    services: [
+      "Linge de lit complet",
+      "Linge de toilette",
+      "Linge de cuisine",
+      "Couvertures et plaids"
+    ],
+    advantages: [
+      "Rotation optimisée",
+      "Disponibilité immédiate",
+      "Qualité touristique",
+      "Gestion simplifiée"
     ]
   },
-  office: {
-    icon: Building2,
-    title: "Bureaux",
-    subtitle: "Efficacité & Image",
-    cases: [
-      {
-        name: "Cabinet d'Architectes ADL",
-        location: "Lannion",
-        challenge: "Image professionnelle et uniforme impeccable",
-        solution: "Entretien hebdomadaire avec pressing intégré",
-        results: [
-          "Image de marque valorisée",
-          "Satisfaction équipe 100%",
-          "Simplicité administrative"
-        ],
-        quote: "Notre équipe est toujours impeccable sans effort.",
-        author: "A. Dubois, Directeur"
-      }
-    ]
-  },
-  education: {
-    icon: GraduationCap,
-    title: "Éducation",
-    subtitle: "Volume & Économie",
-    cases: [
-      {
-        name: "Lycée Technologique",
-        location: "Tréguier",
-        challenge: "Gestion de l'internat et des ateliers techniques",
-        solution: "Contrat annuel avec tarifs préférentiels",
-        results: [
-          "Économie de 25% vs prestataires précédents",
-          "Gestion simplifiée",
-          "Qualité constante"
-        ],
-        quote: "Un partenariat qui allège notre gestion quotidienne.",
-        author: "M. Rousseau, Intendant"
-      }
-    ]
-  },
-  services: {
+  conciergerie: {
     icon: Briefcase,
-    title: "Services",
-    subtitle: "Flexibilité & Proximité",
-    cases: [
-      {
-        name: "Entreprise de Nettoyage ProNet",
-        location: "Lannion",
-        challenge: "Équipements et vêtements de travail très sollicités",
-        solution: "Service express et traitement renforcé",
-        results: [
-          "Rotation optimisée des équipements",
-          "Durabilité textile améliorée",
-          "Réactivité exceptionnelle"
-        ],
-        quote: "Ils comprennent nos contraintes terrain.",
-        author: "C. Morvan, Chef d'équipe"
-      }
+    title: "Conciergerie",
+    subtitle: "Service Premium",
+    description: "Services de conciergerie privée et d'entreprise : nous prenons en charge le linge de vos clients avec la discrétion et l'excellence requises.",
+    specificities: [
+      "Service white-glove",
+      "Confidentialité absolue",
+      "Horaires sur mesure",
+      "Traçabilité complète"
+    ],
+    services: [
+      "Pressing haute qualité",
+      "Entretien textile délicat",
+      "Service express",
+      "Livraison personnalisée"
+    ],
+    advantages: [
+      "Expertise haut de gamme",
+      "Flexibilité totale",
+      "Relation privilégiée",
+      "Résultats irréprochables"
     ]
   }
 };
 
-export default function CaseStudies() {
+export default function SectorExpertise() {
   return (
-    <section aria-labelledby="etudes-cas-title" className="py-24 bg-gradient-to-b from-background to-muted/20">
+    <section aria-labelledby="secteurs-title" className="py-24 bg-gradient-to-b from-background to-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-center mb-16">
           <Badge variant="outline" className="mb-4 px-4 py-2">
-            Études de cas
+            Nos secteurs
           </Badge>
-          <h2 id="etudes-cas-title" className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Des solutions sur mesure par secteur
+          <h2 id="secteurs-title" className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Expertise par secteur d'activité
           </h2>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            Découvrez comment Hello Wash s'adapte aux spécificités de chaque secteur d'activité 
-            avec des solutions personnalisées et des résultats mesurables.
+            Chaque secteur a ses spécificités. Découvrez comment nous nous adaptons 
+            aux besoins uniques de votre domaine d'activité.
           </p>
         </header>
 
         <Tabs defaultValue="hotel" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-12">
-            {Object.entries(caseStudies).map(([key, sector]) => {
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-12">
+            {Object.entries(sectors).map(([key, sector]) => {
               const Icon = sector.icon;
               return (
                 <TabsTrigger key={key} value={key} className="flex flex-col gap-2 p-4 h-auto">
@@ -182,7 +132,7 @@ export default function CaseStudies() {
             })}
           </TabsList>
 
-          {Object.entries(caseStudies).map(([key, sector]) => (
+          {Object.entries(sectors).map(([key, sector]) => (
             <TabsContent key={key} value={key} className="mt-8">
               <div className="mb-8">
                 <div className="flex items-center gap-3 mb-4">
@@ -196,58 +146,57 @@ export default function CaseStudies() {
                 </div>
               </div>
 
-              <div className="grid gap-8 lg:grid-cols-2">
-                {sector.cases.map((caseStudy, index) => (
-                  <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    <CardHeader className="bg-muted/30">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <CardTitle className="text-xl mb-2">{caseStudy.name}</CardTitle>
-                          <CardDescription className="text-sm font-medium text-primary">
-                            📍 {caseStudy.location}
-                          </CardDescription>
-                        </div>
-                      </div>
+              <div className="grid gap-8 lg:grid-cols-3">
+                <Card className="col-span-full lg:col-span-2">
+                  <CardHeader>
+                    <CardTitle className="text-lg">Spécificités du secteur</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4">{sector.description}</p>
+                    <ul className="space-y-2">
+                      {sector.specificities.map((spec, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm">
+                          <span className="text-primary font-bold mt-1">•</span>
+                          <span>{spec}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <div className="space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-base">Services proposés</CardTitle>
                     </CardHeader>
-                    
-                    <CardContent className="p-6 space-y-6">
-                      <div>
-                        <h4 className="font-semibold text-sm uppercase tracking-wide text-destructive mb-2">
-                          Défi
-                        </h4>
-                        <p className="text-sm text-muted-foreground">{caseStudy.challenge}</p>
-                      </div>
-
-                      <div>
-                        <h4 className="font-semibold text-sm uppercase tracking-wide text-primary mb-2">
-                          Solution
-                        </h4>
-                        <p className="text-sm">{caseStudy.solution}</p>
-                      </div>
-
-                      <div>
-                        <h4 className="font-semibold text-sm uppercase tracking-wide text-green-600 mb-3">
-                          Résultats
-                        </h4>
-                        <ul className="space-y-2">
-                          {caseStudy.results.map((result, i) => (
-                            <li key={i} className="flex items-start gap-2 text-sm">
-                              <span className="text-green-500 font-bold">✓</span>
-                              <span>{result}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <blockquote className="border-l-4 border-primary pl-4 py-2 bg-muted/20 rounded-r">
-                        <p className="text-sm italic mb-2">"{caseStudy.quote}"</p>
-                        <cite className="text-xs text-muted-foreground font-medium">
-                          — {caseStudy.author}
-                        </cite>
-                      </blockquote>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {sector.services.map((service, i) => (
+                          <li key={i} className="flex items-center gap-2 text-sm">
+                            <span className="w-2 h-2 bg-primary rounded-full"></span>
+                            <span>{service}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </CardContent>
                   </Card>
-                ))}
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-base">Avantages clés</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {sector.advantages.map((advantage, i) => (
+                          <li key={i} className="flex items-center gap-2 text-sm">
+                            <span className="text-green-500 font-bold">✓</span>
+                            <span>{advantage}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </TabsContent>
           ))}
@@ -255,17 +204,17 @@ export default function CaseStudies() {
 
         <div className="mt-16 text-center">
           <div className="bg-primary/5 rounded-2xl p-8 max-w-4xl mx-auto">
-            <h3 className="text-xl font-bold mb-4">Votre secteur n'est pas listé ?</h3>
+            <h3 className="text-xl font-bold mb-4">Votre secteur nécessite une approche spécifique ?</h3>
             <p className="text-muted-foreground mb-6">
-              Nous nous adaptons à tous les métiers. Contactez-nous pour une étude personnalisée 
-              de vos besoins spécifiques.
+              Nous nous adaptons à tous les métiers et contraintes. Contactez-nous pour discuter 
+              de vos besoins particuliers.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="#contact" 
                 className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors duration-200"
               >
-                Étude personnalisée
+                Consultation gratuite
               </a>
               <a 
                 href="tel:0296231234" 
