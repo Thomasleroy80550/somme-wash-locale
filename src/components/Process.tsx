@@ -70,67 +70,39 @@ export default function Process() {
           </p>
         </header>
 
-        {/* Connexions pointillées animées */}
+        {/* Parcours linéaire simple */}
         <div className="relative">
-          {/* SVG pour les connexions */}
+          {/* Ligne de parcours principale */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block" style={{ zIndex: 1 }}>
-            {/* Ligne horizontale entre étapes 1-2 */}
-            <line
-              x1="33%" y1="25%" x2="67%" y2="25%"
+            {/* Parcours en Z : 1→2→3→4→5→6 */}
+            <path
+              d="M 17% 25% L 83% 25% L 83% 50% L 17% 50% L 17% 75% L 83% 75%"
               stroke="hsl(var(--primary))"
-              strokeWidth="2"
-              strokeDasharray="8,4"
-              strokeDashoffset={isVisible ? "0" : "100"}
-              className="transition-all duration-1000 delay-300"
-              opacity="0.6"
+              strokeWidth="3"
+              strokeDasharray="10,5"
+              fill="none"
+              strokeDashoffset={isVisible ? "0" : "500"}
+              className="transition-all duration-2000 ease-in-out"
+              opacity="0.7"
             />
-            {/* Ligne horizontale entre étapes 3-4 */}
-            <line
-              x1="33%" y1="50%" x2="67%" y2="50%"
-              stroke="hsl(var(--primary))"
-              strokeWidth="2"
-              strokeDasharray="8,4"
-              strokeDashoffset={isVisible ? "0" : "100"}
-              className="transition-all duration-1000 delay-700"
-              opacity="0.6"
+            {/* Flèches de direction */}
+            <polygon
+              points="81%,25% 85%,25% 83%,23% 83%,27%"
+              fill="hsl(var(--primary))"
+              opacity={isVisible ? "0.8" : "0"}
+              className="transition-opacity duration-1000 delay-500"
             />
-            {/* Ligne horizontale entre étapes 5-6 */}
-            <line
-              x1="33%" y1="75%" x2="67%" y2="75%"
-              stroke="hsl(var(--primary))"
-              strokeWidth="2"
-              strokeDasharray="8,4"
-              strokeDashoffset={isVisible ? "0" : "100"}
-              className="transition-all duration-1000 delay-1100"
-              opacity="0.6"
+            <polygon
+              points="15%,50% 19%,50% 17%,48% 17%,52%"
+              fill="hsl(var(--primary))"
+              opacity={isVisible ? "0.8" : "0"}
+              className="transition-opacity duration-1000 delay-1000"
             />
-            {/* Lignes verticales de connexion */}
-            <line
-              x1="17%" y1="25%" x2="17%" y2="50%"
-              stroke="hsl(var(--primary))"
-              strokeWidth="2"
-              strokeDasharray="8,4"
-              strokeDashoffset={isVisible ? "0" : "100"}
-              className="transition-all duration-1000 delay-500"
-              opacity="0.4"
-            />
-            <line
-              x1="83%" y1="25%" x2="83%" y2="50%"
-              stroke="hsl(var(--primary))"
-              strokeWidth="2"
-              strokeDasharray="8,4"
-              strokeDashoffset={isVisible ? "0" : "100"}
-              className="transition-all duration-1000 delay-900"
-              opacity="0.4"
-            />
-            <line
-              x1="17%" y1="50%" x2="17%" y2="75%"
-              stroke="hsl(var(--primary))"
-              strokeWidth="2"
-              strokeDasharray="8,4"
-              strokeDashoffset={isVisible ? "0" : "100"}
-              className="transition-all duration-1000 delay-1300"
-              opacity="0.4"
+            <polygon
+              points="81%,75% 85%,75% 83%,73% 83%,77%"
+              fill="hsl(var(--primary))"
+              opacity={isVisible ? "0.8" : "0"}
+              className="transition-opacity duration-1000 delay-1500"
             />
           </svg>
 
