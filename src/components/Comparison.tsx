@@ -137,7 +137,7 @@ const Comparison = () => {
             <p className="text-xl text-blue-100 mb-6">
               Face aux tunnels de lavage des géants industriels, nous privilégions l'approche humaine : chaque tache relevée, double tri du linge, et un service personnalisé que les multinationales ne peuvent pas offrir.
             </p>
-            <div className="grid md:grid-cols-3 gap-6 text-center">
+            <div className="grid md:grid-cols-4 gap-6 text-center">
               <div>
                 <div className="text-3xl font-bold mb-2">99%</div>
                 <div className="text-blue-100">Taches relevées</div>
@@ -149,6 +149,10 @@ const Comparison = () => {
               <div>
                 <div className="text-3xl font-bold mb-2">1</div>
                 <div className="text-blue-100">Interlocuteur dédié</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold mb-2">0</div>
+                <div className="text-blue-100">Tunnel de lavage</div>
               </div>
             </div>
           </div>
