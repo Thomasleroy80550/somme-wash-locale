@@ -12,12 +12,14 @@ import Process from '../components/Process';
 import SectorExpertise from '../components/CaseStudies';
 import FAQ from '../components/FAQ';
 import StickyContactBar from '../components/StickyContactBar';
+import FreeTrialCTA from '../components/FreeTrialCTA';
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
       <Hero />
+      <FreeTrialCTA />
       <Services />
       <Comparison />
       <Process />
