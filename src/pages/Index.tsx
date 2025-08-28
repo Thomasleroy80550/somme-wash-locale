@@ -8,7 +8,6 @@ import DeliveryZones from '../components/DeliveryZones';
 import About from '../components/About';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import Process from '../components/Process';
 import FAQ from '../components/FAQ';
 import StickyContactBar from '../components/StickyContactBar';
 import FreeTrialCTA from '../components/FreeTrialCTA';
@@ -21,7 +20,6 @@ const Index = () => {
       <FreeTrialCTA />
       <Services />
       <Comparison />
-      <Process />
       <Offers />
       <DeliveryZones />
       <FAQ />
