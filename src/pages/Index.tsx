@@ -9,7 +9,6 @@ import About from '../components/About';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Process from '../components/Process';
-import SectorExpertise from '../components/CaseStudies';
 import FAQ from '../components/FAQ';
 import StickyContactBar from '../components/StickyContactBar';
 import FreeTrialCTA from '../components/FreeTrialCTA';
@@ -23,7 +22,6 @@ const Index = () => {
       <Services />
       <Comparison />
       <Process />
-      <SectorExpertise />
       <Offers />
       <DeliveryZones />
       <FAQ />
