@@ -3,16 +3,12 @@ import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-
 const Tarifs = () => {
   const navigate = useNavigate();
-
   const scrollToContact = () => {
     navigate('/#contact');
   };
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Header />
       
       {/* Hero section avec titre */}
@@ -121,13 +117,7 @@ const Tarifs = () => {
             <div className="mb-8">
               <h3 className="text-xl font-bold text-[#145587] mb-6 border-b border-gray-200 pb-2">Tarifs location à l'unité</h3>
               <div className="grid gap-3">
-                <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
-                  <div>
-                    <h4 className="font-medium text-gray-900">Couette</h4>
-                    <p className="text-xs text-gray-500">1 couette 220x240</p>
-                  </div>
-                  <span className="text-lg font-bold text-[#145587]">14,00 €</span>
-                </div>
+                
 
                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
                   <div>
@@ -241,10 +231,7 @@ const Tarifs = () => {
                 </div>
               </div>
               
-              <Button 
-                onClick={scrollToContact}
-                className="bg-[#145587] hover:bg-[#145587]/90 text-white px-8 py-3"
-              >
+              <Button onClick={scrollToContact} className="bg-[#145587] hover:bg-[#145587]/90 text-white px-8 py-3">
                 Nous contacter
               </Button>
             </div>
@@ -253,8 +240,6 @@ const Tarifs = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Tarifs;
