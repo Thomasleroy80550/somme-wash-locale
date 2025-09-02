@@ -28,6 +28,7 @@ const Tarifs = () => {
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Forfaits location de linge</h2>
               <p className="text-gray-600">Tarifs transparents pour tous nos services</p>
+              <p className="text-sm text-gray-500 mt-2"><em>Nos prix sont HT</em></p>
             </div>
 
             {/* Forfaits location de linge */}
