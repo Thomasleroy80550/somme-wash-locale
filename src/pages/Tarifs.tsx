@@ -210,79 +210,79 @@ const Tarifs = () => {
               </div>
             </div>
 
-            {/* Prix HT */}
+            {/* Prix TTC */}
             <div className="mb-8">
-              <h3 className="text-xl font-bold text-[#145587] mb-6 border-b border-gray-200 pb-2">💰 Prix HT (TVA 20%)</h3>
+              <h3 className="text-xl font-bold text-[#145587] mb-6 border-b border-gray-200 pb-2">💰 Prix TTC (TVA 20%)</h3>
               <div className="bg-amber-50 rounded-lg p-6 border border-amber-200">
-                <p className="text-sm text-gray-600 mb-4">Tous les prix affichés ci-dessus sont TTC. Voici les prix HT correspondants :</p>
+                <p className="text-sm text-gray-600 mb-4">Tous les prix affichés ci-dessus sont HT. Voici les prix TTC correspondants :</p>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-3">Forfaits HT</h4>
+                    <h4 className="font-semibold text-gray-900 mb-3">Forfaits TTC</h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span>Kit Duo</span>
-                        <span className="font-medium">20,83 €</span>
+                        <span className="font-medium">30,00 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Kit grand lit</span>
-                        <span className="font-medium">15,83 €</span>
+                        <span className="font-medium">22,80 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Kit petit lit</span>
-                        <span className="font-medium">11,67 €</span>
+                        <span className="font-medium">16,80 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Kit bain 2 personnes</span>
-                        <span className="font-medium">7,08 €</span>
+                        <span className="font-medium">10,20 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Kit bain 1 personne</span>
-                        <span className="font-medium">4,17 €</span>
+                        <span className="font-medium">6,00 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Kit torchons</span>
-                        <span className="font-medium">1,50 €</span>
+                        <span className="font-medium">2,16 €</span>
                       </div>
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-3">À l'unité HT</h4>
+                    <h4 className="font-semibold text-gray-900 mb-3">À l'unité TTC</h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span>Couette</span>
-                        <span className="font-medium">11,67 €</span>
+                        <span className="font-medium">16,80 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Housse couette grand lit</span>
-                        <span className="font-medium">7,50 €</span>
+                        <span className="font-medium">10,80 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Housse couette petit lit</span>
-                        <span className="font-medium">5,83 €</span>
+                        <span className="font-medium">8,40 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Drap grand lit</span>
-                        <span className="font-medium">5,00 €</span>
+                        <span className="font-medium">7,20 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Drap petit lit</span>
-                        <span className="font-medium">4,17 €</span>
+                        <span className="font-medium">6,00 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Serviette de bain</span>
-                        <span className="font-medium">2,92 €</span>
+                        <span className="font-medium">4,20 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Tapis salle de bain</span>
-                        <span className="font-medium">2,50 €</span>
+                        <span className="font-medium">3,60 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Taie d'oreiller</span>
-                        <span className="font-medium">1,67 €</span>
+                        <span className="font-medium">2,40 €</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Torchon</span>
-                        <span className="font-medium">1,25 €</span>
+                        <span className="font-medium">1,80 €</span>
                       </div>
                     </div>
                   </div>
