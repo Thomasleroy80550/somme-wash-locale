@@ -210,6 +210,86 @@ const Tarifs = () => {
               </div>
             </div>
 
+            {/* Prix HT */}
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-[#145587] mb-6 border-b border-gray-200 pb-2">💰 Prix HT (TVA 20%)</h3>
+              <div className="bg-amber-50 rounded-lg p-6 border border-amber-200">
+                <p className="text-sm text-gray-600 mb-4">Tous les prix affichés ci-dessus sont TTC. Voici les prix HT correspondants :</p>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-3">Forfaits HT</h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span>Kit Duo</span>
+                        <span className="font-medium">20,83 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Kit grand lit</span>
+                        <span className="font-medium">15,83 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Kit petit lit</span>
+                        <span className="font-medium">11,67 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Kit bain 2 personnes</span>
+                        <span className="font-medium">7,08 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Kit bain 1 personne</span>
+                        <span className="font-medium">4,17 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Kit torchons</span>
+                        <span className="font-medium">1,50 €</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-3">À l'unité HT</h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span>Couette</span>
+                        <span className="font-medium">11,67 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Housse couette grand lit</span>
+                        <span className="font-medium">7,50 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Housse couette petit lit</span>
+                        <span className="font-medium">5,83 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Drap grand lit</span>
+                        <span className="font-medium">5,00 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Drap petit lit</span>
+                        <span className="font-medium">4,17 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Serviette de bain</span>
+                        <span className="font-medium">2,92 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Tapis salle de bain</span>
+                        <span className="font-medium">2,50 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Taie d'oreiller</span>
+                        <span className="font-medium">1,67 €</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Torchon</span>
+                        <span className="font-medium">1,25 €</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* CTA */}
             <div className="text-center bg-[#145587]/5 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Prêt à commencer ?</h3>
