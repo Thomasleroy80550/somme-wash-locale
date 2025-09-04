@@ -43,110 +43,93 @@ const Tarifs = () => {
             {/* Forfaits location de linge */}
             <div className="mb-8">
               <div className="grid gap-4">
-                <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors relative">
-                  <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                    POPULAIRE
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Kit Duo</h4>
-                    <p className="text-sm text-gray-600">Location kit complet</p>
-                    <p className="text-xs text-gray-500 mt-1">1 drap plat, 1 housse de couette, 2 taies d'oreiller, 2 serviettes de bain, 2 serviettes à main, 1 tapis de bain, 1 torchon</p>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-sm text-gray-400 line-through">30,00 €</div>
-                    <span className="text-2xl font-bold text-[#145587]">
-                      25,00 €
-                    </span>
-                    <div className="text-xs text-green-600 font-semibold">Économisez 5€</div>
-                  </div>
-                </div>
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors relative">
+                   <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                     POPULAIRE
+                   </div>
+                   <div>
+                     <h4 className="font-semibold text-gray-900">Kit Duo</h4>
+                     <p className="text-sm text-gray-600">Location kit complet</p>
+                     <p className="text-xs text-gray-500 mt-1">1 drap plat, 1 housse de couette, 2 taies d'oreiller, 2 serviettes de bain, 2 serviettes à main, 1 tapis de bain, 1 torchon</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-sm text-gray-400 line-through">25,00 €</div>
+                     <span className="text-2xl font-bold text-[#145587]">
+                       21,25 €
+                     </span>
+                     <div className="text-xs text-green-600 font-semibold">-15% appliqué</div>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Kit grand lit</h4>
-                    <p className="text-sm text-gray-600">Location pour 1 lit 2 places en 140, 160 ou 180 cm</p>
-                    <p className="text-xs text-gray-500 mt-1">1 drap, 1 housse de couette, 2 taies d'oreiller</p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold text-[#145587]">
-                      19,00 €
-                    </span>
-                  </div>
-                </div>
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                   <div>
+                     <h4 className="font-semibold text-gray-900">Kit grand lit</h4>
+                     <p className="text-sm text-gray-600">Location pour 1 lit 2 places en 140, 160 ou 180 cm</p>
+                     <p className="text-xs text-gray-500 mt-1">1 drap, 1 housse de couette, 2 taies d'oreiller</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-sm text-gray-400 line-through">19,00 €</div>
+                     <span className="text-2xl font-bold text-[#145587]">
+                       16,15 €
+                     </span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Kit petit lit</h4>
-                    <p className="text-sm text-gray-600">Location pour un lit 1 place en 80 ou 90 cm</p>
-                    <p className="text-xs text-gray-500 mt-1">1 drap, 1 housse de couette, 1 taie d'oreiller</p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold text-[#145587]">
-                      14,00 €
-                    </span>
-                  </div>
-                </div>
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                   <div>
+                     <h4 className="font-semibold text-gray-900">Kit petit lit</h4>
+                     <p className="text-sm text-gray-600">Location pour un lit 1 place en 80 ou 90 cm</p>
+                     <p className="text-xs text-gray-500 mt-1">1 drap, 1 housse de couette, 1 taie d'oreiller</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-sm text-gray-400 line-through">14,00 €</div>
+                     <span className="text-2xl font-bold text-[#145587]">
+                       11,90 €
+                     </span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Kit bain 2 personnes</h4>
-                    <p className="text-sm text-gray-600">Pour 2 personnes</p>
-                    <p className="text-xs text-gray-500 mt-1">2 serviettes de bain, 2 serviettes à main</p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold text-[#145587]">
-                      8,50 €
-                    </span>
-                  </div>
-                </div>
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                   <div>
+                     <h4 className="font-semibold text-gray-900">Kit bain 2 personnes</h4>
+                     <p className="text-sm text-gray-600">Pour 2 personnes</p>
+                     <p className="text-xs text-gray-500 mt-1">2 serviettes de bain, 2 serviettes à main</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-sm text-gray-400 line-through">8,50 €</div>
+                     <span className="text-2xl font-bold text-[#145587]">
+                       7,25 €
+                     </span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Kit bain 1 personne</h4>
-                    <p className="text-sm text-gray-600">Pour 1 personne</p>
-                    <p className="text-xs text-gray-500 mt-1">1 serviette de bain, 1 serviette à main</p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold text-[#145587]">
-                      5,00 €
-                    </span>
-                  </div>
-                </div>
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                   <div>
+                     <h4 className="font-semibold text-gray-900">Kit bain 1 personne</h4>
+                     <p className="text-sm text-gray-600">Pour 1 personne</p>
+                     <p className="text-xs text-gray-500 mt-1">1 serviette de bain, 1 serviette à main</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-sm text-gray-400 line-through">5,00 €</div>
+                     <span className="text-2xl font-bold text-[#145587]">
+                       4,25 €
+                     </span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Kit torchons</h4>
-                    <p className="text-sm text-gray-600">Torchons de cuisine</p>
-                    <p className="text-xs text-gray-500 mt-1">2 torchons 40x40 cm</p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold text-[#145587]">
-                      1,80 €
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Remises en volume */}
-            <div className="mb-8">
-              <h3 className="text-xl font-bold text-[#145587] mb-6 border-b border-gray-200 pb-2">💰 Remises en volume</h3>
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-orange-50 rounded-lg p-4 border border-orange-200 text-center">
-                  <div className="text-2xl font-bold text-orange-600 mb-2">-10%</div>
-                  <div className="text-sm font-semibold text-gray-700">À partir de 5 kits</div>
-                  <div className="text-xs text-gray-500">par commande</div>
-                </div>
-                <div className="bg-orange-50 rounded-lg p-4 border border-orange-200 text-center">
-                  <div className="text-2xl font-bold text-orange-600 mb-2">-15%</div>
-                  <div className="text-sm font-semibold text-gray-700">À partir de 10 kits</div>
-                  <div className="text-xs text-gray-500">par commande</div>
-                </div>
-                <div className="bg-orange-50 rounded-lg p-4 border border-orange-200 text-center">
-                  <div className="text-2xl font-bold text-orange-600 mb-2">-20%</div>
-                  <div className="text-sm font-semibold text-gray-700">Contrat annuel</div>
-                  <div className="text-xs text-gray-500">engagement 12 mois</div>
-                </div>
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                   <div>
+                     <h4 className="font-semibold text-gray-900">Kit torchons</h4>
+                     <p className="text-sm text-gray-600">Torchons de cuisine</p>
+                     <p className="text-xs text-gray-500 mt-1">2 torchons 40x40 cm</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-sm text-gray-400 line-through">1,80 €</div>
+                     <span className="text-2xl font-bold text-[#145587]">
+                       1,55 €
+                     </span>
+                   </div>
+                 </div>
               </div>
             </div>
 
@@ -156,69 +139,93 @@ const Tarifs = () => {
               <div className="grid gap-3">
                 
 
-                <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
-                  <div>
-                    <h4 className="font-medium text-gray-900">Housse de couette grand lit</h4>
-                    <p className="text-xs text-gray-500">1 housse de couette 220x240 ou 240x260</p>
-                  </div>
-                  <span className="text-lg font-bold text-[#145587]">9,00 €</span>
-                </div>
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                   <div>
+                     <h4 className="font-medium text-gray-900">Housse de couette grand lit</h4>
+                     <p className="text-xs text-gray-500">1 housse de couette 220x240 ou 240x260</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-xs text-gray-400 line-through">9,00 €</div>
+                     <span className="text-lg font-bold text-[#145587]">7,65 €</span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
-                  <div>
-                    <h4 className="font-medium text-gray-900">Housse de couette petit lit</h4>
-                    <p className="text-xs text-gray-500">1 housse de couette</p>
-                  </div>
-                  <span className="text-lg font-bold text-[#145587]">7,00 €</span>
-                </div>
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                   <div>
+                     <h4 className="font-medium text-gray-900">Housse de couette petit lit</h4>
+                     <p className="text-xs text-gray-500">1 housse de couette</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-xs text-gray-400 line-through">7,00 €</div>
+                     <span className="text-lg font-bold text-[#145587]">5,95 €</span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
-                  <div>
-                    <h4 className="font-medium text-gray-900">Drap plat / Drap grand lit</h4>
-                    <p className="text-xs text-gray-500">1 drap plat ou plat de 140, 160 ou 180 cm</p>
-                  </div>
-                  <span className="text-lg font-bold text-[#145587]">6,00 €</span>
-                </div>
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                   <div>
+                     <h4 className="font-medium text-gray-900">Drap plat / Drap grand lit</h4>
+                     <p className="text-xs text-gray-500">1 drap plat ou plat de 140, 160 ou 180 cm</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-xs text-gray-400 line-through">6,00 €</div>
+                     <span className="text-lg font-bold text-[#145587]">5,10 €</span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
-                  <div>
-                    <h4 className="font-medium text-gray-900">Drap plat / Drap petit lit</h4>
-                    <p className="text-xs text-gray-500">1 drap plat 80x200 ou 90x200</p>
-                  </div>
-                  <span className="text-lg font-bold text-[#145587]">5,00 €</span>
-                </div>
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                   <div>
+                     <h4 className="font-medium text-gray-900">Drap plat / Drap petit lit</h4>
+                     <p className="text-xs text-gray-500">1 drap plat 80x200 ou 90x200</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-xs text-gray-400 line-through">5,00 €</div>
+                     <span className="text-lg font-bold text-[#145587]">4,25 €</span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
-                  <div>
-                    <h4 className="font-medium text-gray-900">Draps de bain</h4>
-                    <p className="text-xs text-gray-500">1 serviette de bain</p>
-                  </div>
-                  <span className="text-lg font-bold text-[#145587]">3,50 €</span>
-                </div>
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                   <div>
+                     <h4 className="font-medium text-gray-900">Draps de bain</h4>
+                     <p className="text-xs text-gray-500">1 serviette de bain</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-xs text-gray-400 line-through">3,50 €</div>
+                     <span className="text-lg font-bold text-[#145587]">3,00 €</span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
-                  <div>
-                    <h4 className="font-medium text-gray-900">Tapis salle de bain</h4>
-                    <p className="text-xs text-gray-500">1 tapis de salle de bain</p>
-                  </div>
-                  <span className="text-lg font-bold text-[#145587]">3,00 €</span>
-                </div>
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                   <div>
+                     <h4 className="font-medium text-gray-900">Tapis salle de bain</h4>
+                     <p className="text-xs text-gray-500">1 tapis de salle de bain</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-xs text-gray-400 line-through">3,00 €</div>
+                     <span className="text-lg font-bold text-[#145587]">2,55 €</span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
-                  <div>
-                    <h4 className="font-medium text-gray-900">Taie d'oreiller</h4>
-                    <p className="text-xs text-gray-500">1 taie d'oreiller 50x70cm ou 65x65cm</p>
-                  </div>
-                  <span className="text-lg font-bold text-[#145587]">2,00 €</span>
-                </div>
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                   <div>
+                     <h4 className="font-medium text-gray-900">Taie d'oreiller</h4>
+                     <p className="text-xs text-gray-500">1 taie d'oreiller 50x70cm ou 65x65cm</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-xs text-gray-400 line-through">2,00 €</div>
+                     <span className="text-lg font-bold text-[#145587]">1,70 €</span>
+                   </div>
+                 </div>
 
-                <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
-                  <div>
-                    <h4 className="font-medium text-gray-900">Torchon</h4>
-                    <p className="text-xs text-gray-500">1 torchon</p>
-                  </div>
-                  <span className="text-lg font-bold text-[#145587]">1,50 €</span>
-                </div>
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                   <div>
+                     <h4 className="font-medium text-gray-900">Torchon</h4>
+                     <p className="text-xs text-gray-500">1 torchon</p>
+                   </div>
+                   <div className="text-right">
+                     <div className="text-xs text-gray-400 line-through">1,50 €</div>
+                     <span className="text-lg font-bold text-[#145587]">1,30 €</span>
+                   </div>
+                 </div>
               </div>
             </div>
 
