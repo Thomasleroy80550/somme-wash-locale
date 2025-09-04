@@ -31,19 +31,33 @@ const Tarifs = () => {
               <p className="text-sm text-gray-500 mt-2"><em>Nos prix sont HT</em></p>
             </div>
 
+            {/* Offre spéciale nouveaux clients */}
+            <div className="mb-6">
+              <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-6 text-center">
+                <div className="text-lg font-bold mb-2">🎉 OFFRE NOUVEAUX CLIENTS</div>
+                <div className="text-2xl font-bold mb-2">-20% sur votre première commande</div>
+                <div className="text-sm opacity-90">Valable jusqu'au 31 décembre 2024</div>
+              </div>
+            </div>
+
             {/* Forfaits location de linge */}
             <div className="mb-8">
               <div className="grid gap-4">
-                <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors relative">
+                  <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    POPULAIRE
+                  </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Kit Duo</h4>
                     <p className="text-sm text-gray-600">Location kit complet</p>
                     <p className="text-xs text-gray-500 mt-1">1 drap plat, 1 housse de couette, 2 taies d'oreiller, 2 serviettes de bain, 2 serviettes à main, 1 tapis de bain, 1 torchon</p>
                   </div>
                   <div className="text-right">
+                    <div className="text-sm text-gray-400 line-through">30,00 €</div>
                     <span className="text-2xl font-bold text-[#145587]">
                       25,00 €
                     </span>
+                    <div className="text-xs text-green-600 font-semibold">Économisez 5€</div>
                   </div>
                 </div>
 
@@ -110,6 +124,28 @@ const Tarifs = () => {
                       1,80 €
                     </span>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Remises en volume */}
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-[#145587] mb-6 border-b border-gray-200 pb-2">💰 Remises en volume</h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="bg-orange-50 rounded-lg p-4 border border-orange-200 text-center">
+                  <div className="text-2xl font-bold text-orange-600 mb-2">-10%</div>
+                  <div className="text-sm font-semibold text-gray-700">À partir de 5 kits</div>
+                  <div className="text-xs text-gray-500">par commande</div>
+                </div>
+                <div className="bg-orange-50 rounded-lg p-4 border border-orange-200 text-center">
+                  <div className="text-2xl font-bold text-orange-600 mb-2">-15%</div>
+                  <div className="text-sm font-semibold text-gray-700">À partir de 10 kits</div>
+                  <div className="text-xs text-gray-500">par commande</div>
+                </div>
+                <div className="bg-orange-50 rounded-lg p-4 border border-orange-200 text-center">
+                  <div className="text-2xl font-bold text-orange-600 mb-2">-20%</div>
+                  <div className="text-sm font-semibold text-gray-700">Contrat annuel</div>
+                  <div className="text-xs text-gray-500">engagement 12 mois</div>
                 </div>
               </div>
             </div>
