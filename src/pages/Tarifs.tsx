@@ -33,11 +33,7 @@ const Tarifs = () => {
 
             {/* Offre spéciale nouveaux clients */}
             <div className="mb-6">
-              <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-6 text-center">
-                <div className="text-lg font-bold mb-2">🎉 OFFRE NOUVEAUX CLIENTS</div>
-                <div className="text-2xl font-bold mb-2">-20% sur votre première commande</div>
-                <div className="text-sm opacity-90">Valable jusqu'au 31 décembre 2024</div>
-              </div>
+              
             </div>
 
             {/* Forfaits location de linge */}
