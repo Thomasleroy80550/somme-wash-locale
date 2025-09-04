@@ -47,6 +47,9 @@ const Tarifs = () => {
                    <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                      POPULAIRE
                    </div>
+                   <div className="absolute -top-2 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                     🏷️ PROMO -15%
+                   </div>
                    <div>
                      <h4 className="font-semibold text-gray-900">Kit Duo</h4>
                      <p className="text-sm text-gray-600">Location kit complet</p>
@@ -61,7 +64,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors relative">
+                   <div className="absolute -top-2 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                     🏷️ PROMO -15%
+                   </div>
                    <div>
                      <h4 className="font-semibold text-gray-900">Kit grand lit</h4>
                      <p className="text-sm text-gray-600">Location pour 1 lit 2 places en 140, 160 ou 180 cm</p>
@@ -75,7 +81,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors relative">
+                   <div className="absolute -top-2 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                     🏷️ PROMO -15%
+                   </div>
                    <div>
                      <h4 className="font-semibold text-gray-900">Kit petit lit</h4>
                      <p className="text-sm text-gray-600">Location pour un lit 1 place en 80 ou 90 cm</p>
@@ -89,7 +98,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors relative">
+                   <div className="absolute -top-2 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                     🏷️ PROMO -15%
+                   </div>
                    <div>
                      <h4 className="font-semibold text-gray-900">Kit bain 2 personnes</h4>
                      <p className="text-sm text-gray-600">Pour 2 personnes</p>
@@ -103,7 +115,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors relative">
+                   <div className="absolute -top-2 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                     🏷️ PROMO -15%
+                   </div>
                    <div>
                      <h4 className="font-semibold text-gray-900">Kit bain 1 personne</h4>
                      <p className="text-sm text-gray-600">Pour 1 personne</p>
@@ -117,7 +132,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors">
+                 <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 border hover:bg-gray-100 transition-colors relative">
+                   <div className="absolute -top-2 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                     🏷️ PROMO -15%
+                   </div>
                    <div>
                      <h4 className="font-semibold text-gray-900">Kit torchons</h4>
                      <p className="text-sm text-gray-600">Torchons de cuisine</p>
@@ -139,7 +157,10 @@ const Tarifs = () => {
               <div className="grid gap-3">
                 
 
-                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200 relative">
+                   <div className="absolute -top-1 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                     🏷️ -15%
+                   </div>
                    <div>
                      <h4 className="font-medium text-gray-900">Housse de couette grand lit</h4>
                      <p className="text-xs text-gray-500">1 housse de couette 220x240 ou 240x260</p>
@@ -150,7 +171,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200 relative">
+                   <div className="absolute -top-1 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                     🏷️ -15%
+                   </div>
                    <div>
                      <h4 className="font-medium text-gray-900">Housse de couette petit lit</h4>
                      <p className="text-xs text-gray-500">1 housse de couette</p>
@@ -161,7 +185,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200 relative">
+                   <div className="absolute -top-1 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                     🏷️ -15%
+                   </div>
                    <div>
                      <h4 className="font-medium text-gray-900">Drap plat / Drap grand lit</h4>
                      <p className="text-xs text-gray-500">1 drap plat ou plat de 140, 160 ou 180 cm</p>
@@ -172,7 +199,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200 relative">
+                   <div className="absolute -top-1 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                     🏷️ -15%
+                   </div>
                    <div>
                      <h4 className="font-medium text-gray-900">Drap plat / Drap petit lit</h4>
                      <p className="text-xs text-gray-500">1 drap plat 80x200 ou 90x200</p>
@@ -183,7 +213,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200 relative">
+                   <div className="absolute -top-1 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                     🏷️ -15%
+                   </div>
                    <div>
                      <h4 className="font-medium text-gray-900">Draps de bain</h4>
                      <p className="text-xs text-gray-500">1 serviette de bain</p>
@@ -194,7 +227,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200 relative">
+                   <div className="absolute -top-1 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                     🏷️ -15%
+                   </div>
                    <div>
                      <h4 className="font-medium text-gray-900">Tapis salle de bain</h4>
                      <p className="text-xs text-gray-500">1 tapis de salle de bain</p>
@@ -205,7 +241,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200 relative">
+                   <div className="absolute -top-1 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                     🏷️ -15%
+                   </div>
                    <div>
                      <h4 className="font-medium text-gray-900">Taie d'oreiller</h4>
                      <p className="text-xs text-gray-500">1 taie d'oreiller 50x70cm ou 65x65cm</p>
@@ -216,7 +255,10 @@ const Tarifs = () => {
                    </div>
                  </div>
 
-                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200">
+                 <div className="flex justify-between items-center bg-blue-50 rounded-lg p-3 border border-blue-200 relative">
+                   <div className="absolute -top-1 -left-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                     🏷️ -15%
+                   </div>
                    <div>
                      <h4 className="font-medium text-gray-900">Torchon</h4>
                      <p className="text-xs text-gray-500">1 torchon</p>
